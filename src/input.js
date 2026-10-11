@@ -1,7 +1,7 @@
 // Pointer and keyboard input on the battlefield.
 import { cv, tile } from './render/canvas.js';
 import { S } from './core/state.js';
-import { TYPES } from './data/towers.js';
+import { TYPES } from './data/towers.ts';
 import { tcost, towerAt } from './core/stats.js';
 import { initAudio } from './audio/sfx.js';
 import { toast } from './ui/comms.js';

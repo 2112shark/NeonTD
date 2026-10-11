@@ -1,10 +1,10 @@
 // Player actions on the field: build, upgrade, sell.
-import { COLS, ROWS } from './util.js';
+import { COLS, ROWS } from './util.ts';
 import { PROG } from '../meta/progress.js';
 import { saveProg } from '../meta/net.js';
 import { S } from './state.js';
 import { unlock } from '../meta/achievements.js';
-import { TD, TW_UNLOCK, TYPES } from '../data/towers.js';
+import { TD, TW_UNLOCK, TYPES } from '../data/towers.ts';
 import { skinFor } from '../meta/mastery.js';
 import { recomputeSyn, sellRate, stats, tcost, towerAt, ucost } from './stats.js';
 import { snd } from '../audio/sfx.js';

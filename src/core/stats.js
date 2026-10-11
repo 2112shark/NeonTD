@@ -2,7 +2,7 @@
 import { S } from './state.js';
 import { lab } from '../meta/lab.js';
 import { unlock } from '../meta/achievements.js';
-import { SYN, TD } from '../data/towers.js';
+import { SYN, TD } from '../data/towers.ts';
 import { mastB, vetB } from '../meta/mastery.js';
 
 export const towerAt=(c,r)=>S.towers.find(t=>t.c===c&&t.r===r);

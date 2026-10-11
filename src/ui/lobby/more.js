@@ -1,10 +1,10 @@
 // Lobby: settings and codex.
-import { r1 } from '../../core/util.js';
+import { r1 } from '../../core/util.ts';
 import { PROG } from '../../meta/progress.js';
-import { MAPS } from '../../data/maps.js';
-import { SYN, TD, TW_UNLOCK, TYPES } from '../../data/towers.js';
-import { ED, MODS } from '../../data/enemies.js';
-import { PERKS } from '../../data/perks.js';
+import { MAPS } from '../../data/maps.ts';
+import { SYN, TD, TW_UNLOCK, TYPES } from '../../data/towers.ts';
+import { ED, MODS } from '../../data/enemies.ts';
+import { PERKS } from '../../data/perks.ts';
 import { muted } from '../../audio/sfx.js';
 import { IC, canVib, cap } from './shared.js';
 import { EINFO, baseStats, statRows } from './widgets.js';

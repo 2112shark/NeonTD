@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { dayKey, weekKey, dailyCfg } from '../../src/meta/daily.js';
-import { MODS } from '../../src/data/enemies.js';
-import { TYPES } from '../../src/data/towers.js';
+import { dayKey, weekKey, dailyCfg } from '../../src/meta/daily.ts';
+import { MODS } from '../../src/data/enemies.ts';
+import { TYPES } from '../../src/data/towers.ts';
 
 describe('date keys', () => {
   it('dayKey is YYYY-MM-DD in local time', () => {

@@ -1,11 +1,11 @@
 // Quest progress and rewards.
-import { hashS, rng } from '../core/util.js';
+import { hashS, rng } from '../core/util.ts';
 import { PROG } from './progress.js';
 import { saveProg } from './net.js';
 import { S } from '../core/state.js';
 import { unlock } from './achievements.js';
-import { QD, QIDX, QW, QW_REW, QW_XP, Q_XP } from '../data/quests.js';
-import { dayKey, weekKey } from './daily.js';
+import { QD, QIDX, QW, QW_REW, QW_XP, Q_XP } from '../data/quests.ts';
+import { dayKey, weekKey } from './daily.ts';
 import { addXP } from './season.js';
 import { snd } from '../audio/sfx.js';
 import { toast } from '../ui/comms.js';

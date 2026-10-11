@@ -1,11 +1,11 @@
 // Weekly challenge and leagues.
-import { hashS, rng } from '../core/util.js';
+import { hashS, rng } from '../core/util.ts';
 import { PROG } from './progress.js';
 import { lbSubmit } from './net.js';
 import { S } from '../core/state.js';
 import { unlock } from './achievements.js';
-import { MODS } from '../data/enemies.js';
-import { weekKey } from './daily.js';
+import { MODS } from '../data/enemies.ts';
+import { weekKey } from './daily.ts';
 import { addXP, seasonInfo } from './season.js';
 
 /* ---------- weekly challenge and leagues ---------- */

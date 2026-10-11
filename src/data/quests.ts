@@ -2,7 +2,18 @@
 import { fmtN } from '../ui/lobby/shared.js';
 
 /* quests */
-export const QD=[
+export interface QuestDef {
+  id: string;
+  /** event counted by qev() */
+  ev: string;
+  /** possible targets; one is picked per day */
+  n: number[];
+  /** filter on the event payload */
+  f?: (x: any) => unknown;
+  /** text for target n */
+  t: (n: number) => string;
+}
+export const QD: QuestDef[]=[
  {id:'kill',ev:'kill',n:[150,250],t:n=>`Уничтожьте ${n} врагов`},
  {id:'air',ev:'kill',n:[30,50],f:x=>x.air,t:n=>`Уничтожьте ${n} летающих врагов`},
  {id:'tank',ev:'kill',n:[15,25],f:x=>x.t==='tank',t:n=>`Уничтожьте ${n} Броневиков`},
@@ -22,12 +33,12 @@ export const QD=[
  {id:'clear',ev:'clear',n:[2,3],t:n=>`Расчистите ${n} завала`},
  {id:'vet',ev:'vet',n:[2,3],t:n=>`Вырастите ${n} ветеранов`},
 ];
-export const QW=[
+export const QW: QuestDef[]=[
  {id:'wkill',ev:'kill',n:[1500],t:n=>`Уничтожьте ${fmtN(n)} врагов`},
  {id:'wwave',ev:'wave',n:[100],t:n=>`Отбейте ${n} волн`},
  {id:'wmis',ev:'mwin',n:[6],t:n=>`Пройдите ${n} миссий кампании`},
  {id:'wboss',ev:'boss',n:[4],t:n=>`Уничтожьте ${n} боссов`},
  {id:'wdaily',ev:'dwin',n:[3],t:n=>`Пройдите вызов дня ${n} раза`},
 ];
-export const QIDX={};QD.concat(QW).forEach(q=>QIDX[q.id]=q);
+export const QIDX: Record<string, QuestDef>={};QD.concat(QW).forEach(q=>QIDX[q.id]=q);
 export const Q_XP=100,QW_XP=400,QW_REW=2;

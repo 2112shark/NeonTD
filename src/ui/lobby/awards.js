@@ -1,12 +1,12 @@
 // Lobby: awards, quests, season, profile.
-import { esc } from '../../core/util.js';
+import { esc } from '../../core/util.ts';
 import { PROG } from '../../meta/progress.js';
 import { NET } from '../../meta/net.js';
 import { ACH } from '../../meta/achievements.js';
-import { TD, TYPES } from '../../data/towers.js';
-import { MODS } from '../../data/enemies.js';
-import { MISSIONS } from '../../data/campaign.js';
-import { QIDX, QW_REW, Q_XP } from '../../data/quests.js';
+import { TD, TYPES } from '../../data/towers.ts';
+import { MODS } from '../../data/enemies.ts';
+import { MISSIONS } from '../../data/campaign.ts';
+import { QIDX, QW_REW, Q_XP } from '../../data/quests.ts';
 import { KFX, SKINS } from '../../meta/mastery.js';
 import { S_MAX, rewName, seasonInfo, seasonState, seasonTier, tierCost, tierRew, tierStart } from '../../meta/season.js';
 import { LEAGUES, leagueOf } from '../../meta/weekly.js';

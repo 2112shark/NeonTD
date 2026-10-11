@@ -1,12 +1,53 @@
 // Campaign chapters, missions, nightmare mode, operator lines.
+import type { EnemyType } from './enemies.ts';
+import type { TowerType } from './towers.ts';
+
+export interface Chapter { name: string; th: string; sub: string }
+/** A star condition: k is the kind, n its threshold where one is needed */
+export interface StarCond { k: 'lives' | 'noabil' | 'nosell' | 'flawless' | 'types' | 'boss' | 'early' | 'towers'; n?: number }
+export interface Mission {
+  id: string;
+  /** chapter index */
+  ch: number;
+  name: string;
+  lay: string;
+  /** 0 for flow missions */
+  waves: number;
+  /** enemy health multiplier, normal and nightmare */
+  hp: number; nmh: number;
+  gold: number;
+  goal: 'survive' | 'limit' | 'boss' | 'cores' | 'ban' | 'flow';
+  /** enemy type -> first wave it appears in */
+  roster: Partial<Record<EnemyType, number>>;
+  /** star 2 and star 3 conditions; star 1 is the win */
+  s2: StarCond; s3: StarCond;
+  brief: string[];
+  open: string; win: string;
+  /** enemy introduced by this mission */
+  newE?: EnemyType;
+  /** tower limit */
+  limit?: number;
+  boss?: EnemyType;
+  nodeN?: number; debrisN?: number;
+  ban?: TowerType[];
+  /** flow missions: seconds to hold */
+  flowT?: number;
+  // set at startup by core/map
+  /** index in MISSIONS */
+  i: number;
+  map: GameMap;
+}
+export interface BossLines { spawn: string; phase: string; rage: string; lap: string }
+
 /* campaign */
-export const CHAPTERS=[
+export const CHAPTERS: Chapter[]=[
  {name:'Сетевой узел',th:'net',sub:'Внешний периметр базы. Здесь рубеж встречает первые атаки.'},
  {name:'Серверная',th:'srv',sub:'Стойки с данными. Враги хитрее: лечат друг друга, глушат башни и прыгают.'},
  {name:'Реакторный отсек',th:'hot',sub:'Сердце базы. Короткие пути, жаркие волны и самый опасный босс.'},
 ];
-const ALL={drone:1,scout:2,tank:3,wasp:4,guard:5,split:6,medic:6,jammer:7,blink:7,carrier:8};
-export const MISSIONS=[
+const ALL: Mission['roster']={drone:1,scout:2,tank:3,wasp:4,guard:5,split:6,medic:6,jammer:7,blink:7,carrier:8};
+// i and map are filled in by core/map at startup
+export const MISSIONS=([
  {id:'m1',ch:0,name:'Первый контакт',lay:'ring',waves:8,hp:1.63,nmh:3.64,gold:240,goal:'survive',roster:{drone:1,scout:3},
   s2:{k:'lives',n:15},s3:{k:'noabil'},
   brief:['Командир, на связи ВЕГА, ИИ-оператор рубежа.','К узлу идут дроны. Лазер бьёт одну цель, пушка накрывает группу. Начнём с них.'],
@@ -67,10 +108,11 @@ export const MISSIONS=[
   s2:{k:'lives',n:15},s3:{k:'boss',n:80},
   brief:['Разрушитель: тяжёлый бот, который выжигает башни.','Он выводит из строя башни рядом с путём. Дальнобойные башни в безопасности, держите их в глубине.'],
   open:'Это решающий бой. Используйте всё, чему научились.',win:'Разрушитель уничтожен. База спасена, командир. Спасибо.'},
-];
-export const NM={hp:1.55,gold:.85};
+] satisfies Omit<Mission, 'i' | 'map'>[]) as Mission[];
+/** nightmare multipliers */
+export const NM: { hp: number; gold: number }={hp:1.55,gold:.85};
 // what the operator says when an enemy type shows up for the first time
-export const ELINE={
+export const ELINE: Partial<Record<EnemyType, string>>={
  tank:'Броневик на подходе. Броня режет слабый урон: нужны мощные выстрелы.',
  wasp:'Воздух! Осы летят напрямую, пушка их не достанет.',
  guard:'Стражи под щитом. Не давайте щиту восстановиться.',
@@ -80,7 +122,7 @@ export const ELINE={
  blink:'Прыгун перескакивает вперёд. Держите оборону и ближе к ядру.',
  carrier:'Носитель. После гибели из него вылетят мошки.',
 };
-export const BL={
+export const BL: Partial<Record<EnemyType, BossLines>>={
  boss:{spawn:'Колосс на подходе. Коснитесь его, и все башни будут бить прежде всего по нему.',phase:'Колосс вызывает охрану!',rage:'Колосс в ярости и ускоряется!',lap:'Колосс прорвался к ядру, восстановил силы и пошёл на второй круг! Второго прорыва ядро не выдержит.'},
  queen:{spawn:'Рой-матка на подходе. Коснитесь её, иначе башни отвлекутся на ос.',phase:'Матка выпускает весь рой!',rage:'Матка рожает ос всё быстрее!',lap:'Матка прорвалась, подлечилась и уходит на второй круг! Добейте её, второго прорыва ядро не выдержит.'},
  wrecker:{spawn:'Разрушитель на подходе. Он жжёт башни у пути, держите фокус огня на нём.',phase:'Разрушитель бьёт уже по двум башням!',rage:'Разрушитель ускоряется!',lap:'Разрушитель прорвался, залатал броню и идёт на второй круг! Второго удара ядро не переживёт.'},

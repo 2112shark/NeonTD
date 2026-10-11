@@ -1,8 +1,8 @@
 // Lobby building blocks: elements, formatting, ranks, icons.
-import { $ } from '../../core/util.js';
+import { $ } from '../../core/util.ts';
 import { PROG } from '../../meta/progress.js';
 import { ptsTotal } from '../../meta/lab.js';
-import { dayKey } from '../../meta/daily.js';
+import { dayKey } from '../../meta/daily.ts';
 
 /* ---------- lobby ---------- */
 export const LOBBY=$('#lobby'),LBV=$('#lbView'),NAV=$('#lbNav'),SHEET=$('#sheet'),END=$('#end');

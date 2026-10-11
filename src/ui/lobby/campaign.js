@@ -1,13 +1,13 @@
 // Lobby: campaign map, mission briefing, endless and daily screens.
-import { r1 } from '../../core/util.js';
+import { r1 } from '../../core/util.ts';
 import { PROG } from '../../meta/progress.js';
 import { labRaw } from '../../meta/lab.js';
-import { MAPS } from '../../data/maps.js';
-import { TD, TW_UNLOCK, TYPES } from '../../data/towers.js';
-import { MODS } from '../../data/enemies.js';
-import { CHAPTERS, MISSIONS, NM } from '../../data/campaign.js';
-import { allowedFor } from '../../core/map.js';
-import { dailyCfg } from '../../meta/daily.js';
+import { MAPS } from '../../data/maps.ts';
+import { TD, TW_UNLOCK, TYPES } from '../../data/towers.ts';
+import { MODS } from '../../data/enemies.ts';
+import { CHAPTERS, MISSIONS, NM } from '../../data/campaign.ts';
+import { allowedFor } from '../../core/map.ts';
+import { dailyCfg } from '../../meta/daily.ts';
 import { THEMES } from '../../render/map.js';
 import { ACC, DIFFC, IC, STAR, dailyProg, fmtN, fmtTime, plural, streak, timeLeft } from './shared.js';
 import { LBY, SCR, chapOpen, goalLong, goalShort, head, mDone, mOpen, mStars, misGold, misLives, resumable, starConds, starsMini } from './state.js';

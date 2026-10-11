@@ -1,9 +1,9 @@
 // First-mission tutorial coach.
-import { $, COLS, ROWS } from '../core/util.js';
+import { $, COLS, ROWS } from '../core/util.ts';
 import { PROG } from '../meta/progress.js';
 import { saveProg } from '../meta/net.js';
 import { S } from '../core/state.js';
-import { TD } from '../data/towers.js';
+import { TD } from '../data/towers.ts';
 import { canBuild } from '../core/actions.js';
 import { SHEET, lobbyOn } from './lobby/shared.js';
 

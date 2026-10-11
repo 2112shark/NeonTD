@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { COLS, ROWS } from '../../src/core/util.js';
+import { COLS, ROWS } from '../../src/core/util.ts';
 import { newGame, S } from '../../src/core/state.js';
 import { build, canBuild } from '../../src/core/actions.js';
 import { startWave, update } from '../../src/core/combat.js';

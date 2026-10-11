@@ -1,17 +1,17 @@
 // window.__td: debug and test handle into the game state.
-import { COLS, MAXW, ROWS } from './core/util.js';
+import { COLS, MAXW, ROWS } from './core/util.ts';
 import { PROG } from './meta/progress.js';
 import { NET, mergeProg, netInit, saveProg } from './meta/net.js';
 import { S, newGame } from './core/state.js';
 import { LAB, LAB_BR, ptsFree, ptsTotal, shopSpent } from './meta/lab.js';
-import { LAY, MAPS } from './data/maps.js';
-import { SYN, TD } from './data/towers.js';
-import { BOSSES, BOSS_LAP, BOSS_LAP_HEAL, CLOAK_NEAR, ED } from './data/enemies.js';
-import { CHAPTERS, MISSIONS } from './data/campaign.js';
-import { PERKS } from './data/perks.js';
-import { allowedFor } from './core/map.js';
-import { genWave, hpMul, maxW, waveMods } from './core/waves.js';
-import { dailyCfg, dailyScore } from './meta/daily.js';
+import { LAY, MAPS } from './data/maps.ts';
+import { SYN, TD } from './data/towers.ts';
+import { BOSSES, BOSS_LAP, BOSS_LAP_HEAL, CLOAK_NEAR, ED } from './data/enemies.ts';
+import { CHAPTERS, MISSIONS } from './data/campaign.ts';
+import { PERKS } from './data/perks.ts';
+import { allowedFor } from './core/map.ts';
+import { genWave, hpMul, maxW, waveMods } from './core/waves.ts';
+import { dailyCfg, dailyScore } from './meta/daily.ts';
 import { SKINS, killFx, mastLv, mastXP, skinFor, vetUp } from './meta/mastery.js';
 import { addXP, dupRew, grantTier, seasonInfo, seasonMigrate, seasonState, seasonTier, tierCost, tierOf, tierStart } from './meta/season.js';
 import { SHOP, shopBuy, shopSeasonTier } from './meta/shop.js';

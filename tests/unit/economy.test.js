@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { COLS, ROWS } from '../../src/core/util.js';
+import { COLS, ROWS } from '../../src/core/util.ts';
 import { newGame, S } from '../../src/core/state.js';
 import { build, upgrade, sell, canBuild } from '../../src/core/actions.js';
 import { tcost, ucost, sellRate } from '../../src/core/stats.js';

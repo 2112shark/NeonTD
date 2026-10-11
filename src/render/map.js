@@ -1,5 +1,5 @@
 // Map background: themes, paths, decorations.
-import { COLS, ROWS, hexA, rng } from '../core/util.js';
+import { COLS, ROWS, hexA, rng } from '../core/util.ts';
 import { bgc, bgx, cv, dpr, glow, poly, rr, tile } from './canvas.js';
 import { S } from '../core/state.js';
 

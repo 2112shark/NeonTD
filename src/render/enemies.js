@@ -1,5 +1,5 @@
 // Enemy sprites.
-import { clamp, hexA } from '../core/util.js';
+import { clamp, hexA } from '../core/util.ts';
 import { ctx, glow, poly, rr } from './canvas.js';
 import { S } from '../core/state.js';
 

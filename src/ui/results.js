@@ -1,10 +1,10 @@
 // Results screen after a run.
-import { $ } from '../core/util.js';
+import { $ } from '../core/util.ts';
 import { S } from '../core/state.js';
 import { fair, ptsFree, ptsTotal } from '../meta/lab.js';
-import { TD, TW_UNLOCK, TYPES } from '../data/towers.js';
-import { MISSIONS } from '../data/campaign.js';
-import { maxW } from '../core/waves.js';
+import { TD, TW_UNLOCK, TYPES } from '../data/towers.ts';
+import { MISSIONS } from '../data/campaign.ts';
+import { maxW } from '../core/waves.ts';
 import { rewName, seasonInfo, tierRew } from '../meta/season.js';
 import { LEAGUES, leagueOf } from '../meta/weekly.js';
 import { initAudio } from '../audio/sfx.js';

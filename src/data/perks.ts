@@ -1,6 +1,15 @@
 // Run perk definitions.
 /* run perks: one of three every five waves */
-export const PERKS=[
+import type { TowerType } from './towers.ts';
+
+export interface Perk {
+  id: string; name: string; desc: string; col: string;
+  /** icon key in PIC */
+  ic: string;
+  /** only offered when this tower is built */
+  need?: TowerType;
+}
+export const PERKS: Perk[]=[
  {id:'dmg',name:'Калибровка',desc:'+12% урона всем башням',col:'#ff4fd8',ic:'aim'},
  {id:'rate',name:'Разгон',desc:'Все башни стреляют на 10% быстрее',col:'#ffe14d',ic:'fast'},
  {id:'rng',name:'Дальномер',desc:'+0.3 к дальности всех башен',col:'#3df0ff',ic:'range'},
@@ -22,4 +31,4 @@ export const PERKS=[
  {id:'heavy',name:'Тяжёлая гравитация',desc:'Воронки Гравитона на 30% шире и держат дольше',col:'#4d7bff',ic:'range',need:'gravi'},
  {id:'divid',name:'Дивиденды',desc:'Генераторы приносят на 50% больше',col:'#ffd84d',ic:'coin',need:'gen'},
 ];
-export const PK_ID={};PERKS.forEach(p=>PK_ID[p.id]=p);
+export const PK_ID: Record<string, Perk>={};PERKS.forEach(p=>PK_ID[p.id]=p);

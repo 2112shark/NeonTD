@@ -1,7 +1,7 @@
 // Tower sprites.
-import { hexA } from '../core/util.js';
+import { hexA } from '../core/util.ts';
 import { glow, poly, rr } from './canvas.js';
-import { TD } from '../data/towers.js';
+import { TD } from '../data/towers.ts';
 import { skinCols } from '../meta/mastery.js';
 
 /* towers: platform grows with level, specialization changes the silhouette and accent colour */

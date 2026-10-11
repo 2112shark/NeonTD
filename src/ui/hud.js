@@ -1,8 +1,8 @@
 // Top HUD, ability buttons, speed and pause controls.
-import { $ } from '../core/util.js';
+import { $ } from '../core/util.ts';
 import { S, setSpeed, speed } from '../core/state.js';
-import { AB, abCd } from '../data/abilities.js';
-import { maxW } from '../core/waves.js';
+import { AB, abCd } from '../data/abilities.ts';
+import { maxW } from '../core/waves.ts';
 import { initAudio } from '../audio/sfx.js';
 import { startWave, useAbility } from '../core/combat.js';
 import { SHEET, fmtTime, lobbyOn } from './lobby/shared.js';
@@ -22,7 +22,7 @@ export function updHud(){
   else if(!S.started)nt='Старт ▶';
   else nt=`Волна ${S.wave+1} ▶ ${Math.ceil(S.countdown)} с`;
   setT('n',nt);hud.n.disabled=dis;
-  for(const k in AB){const e=abEls[k],c=S.ab[k],p=c/abCd(k);e.b.style.setProperty('--p',p.toFixed(3));
+  for(const k in AB){const e=abEls[k],c=S.ab[k],p=c/abCd(/** @type {AbilityId} */(k));e.b.style.setProperty('--p',p.toFixed(3));
     const txt=c>0?Math.ceil(c)+'с':(k==='shield'&&S.shieldT>0?Math.ceil(S.shieldT)+'с':'');if(e.cd.textContent!==txt)e.cd.textContent=txt;
     e.b.classList.toggle('ready',c<=0);e.b.classList.toggle('aim',S.aim===k||(k==='shield'&&S.shieldT>0))}
 }

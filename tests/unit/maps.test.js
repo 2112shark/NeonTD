@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { COLS, ROWS } from '../../src/core/util.js';
-import { MAPS } from '../../src/data/maps.js';
-import { MISSIONS } from '../../src/data/campaign.js';
-import '../../src/core/map.js';
+import { COLS, ROWS } from '../../src/core/util.ts';
+import { MAPS } from '../../src/data/maps.ts';
+import { MISSIONS } from '../../src/data/campaign.ts';
+import '../../src/core/map.ts';
 
 const all = [...MAPS.map((m) => ['map ' + m.name, m]), ...MISSIONS.map((M) => ['mission ' + M.id, M.map])];
 

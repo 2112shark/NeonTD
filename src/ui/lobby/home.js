@@ -1,7 +1,7 @@
 // Lobby: home screen.
 import { PROG } from '../../meta/progress.js';
-import { MAPS } from '../../data/maps.js';
-import { dailyCfg } from '../../meta/daily.js';
+import { MAPS } from '../../data/maps.ts';
+import { dailyCfg } from '../../meta/daily.ts';
 import { IC, RM, chevrons, dailyProg, fmtN, plural, rankInfo, streak, timeLeft } from './shared.js';
 import { logo } from './widgets.js';
 import { LBY, SCR, coresPill, dailyChips, mDone, nextMission, questCard, resumable, runName, runProg, seasonStrip, weeklyCard } from './state.js';

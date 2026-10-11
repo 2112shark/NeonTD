@@ -1,15 +1,15 @@
 // Battle simulation: waves, spawning, movement, targeting, damage, abilities, the per-frame update.
-import { COLS, ROWS, d2 } from './util.js';
+import { COLS, ROWS, d2 } from './util.ts';
 import { PROG } from '../meta/progress.js';
 import { saveProg } from '../meta/net.js';
 import { S } from './state.js';
 import { lab } from '../meta/lab.js';
 import { unlock } from '../meta/achievements.js';
-import { TD } from '../data/towers.js';
-import { BOSS_LAP, BOSS_LAP_HEAL, CLOAK_NEAR, ED, MODS } from '../data/enemies.js';
-import { AB, abCd } from '../data/abilities.js';
-import { BL, ELINE } from '../data/campaign.js';
-import { genWave, hpMul, maxW, waveMods } from './waves.js';
+import { TD } from '../data/towers.ts';
+import { BOSS_LAP, BOSS_LAP_HEAL, CLOAK_NEAR, ED, MODS } from '../data/enemies.ts';
+import { AB, abCd } from '../data/abilities.ts';
+import { BL, ELINE } from '../data/campaign.ts';
+import { genWave, hpMul, maxW, waveMods } from './waves.ts';
 import { killFx, vetUp } from '../meta/mastery.js';
 import { XP_WAVE, addXP } from '../meta/season.js';
 import { hasP, stats } from './stats.js';

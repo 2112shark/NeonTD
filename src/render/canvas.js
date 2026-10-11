@@ -1,5 +1,5 @@
 // Battlefield canvas, view size (tile, W, H, dpr) and shared drawing primitives.
-import { $, COLS, ROWS, hexA } from '../core/util.js';
+import { $, COLS, ROWS, hexA } from '../core/util.ts';
 import { S } from '../core/state.js';
 import { radKey, renderRadial, setRadKey } from '../ui/radial.js';
 import { buildBg } from './map.js';

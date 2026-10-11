@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { newGame, S } from '../../src/core/state.js';
-import { genWave, hpMul, maxW } from '../../src/core/waves.js';
-import { ED } from '../../src/data/enemies.js';
-import { MISSIONS } from '../../src/data/campaign.js';
+import { genWave, hpMul, maxW } from '../../src/core/waves.ts';
+import { ED } from '../../src/data/enemies.ts';
+import { MISSIONS } from '../../src/data/campaign.ts';
 
 describe('endless waves', () => {
   beforeEach(() => newGame(0, 'endless'));

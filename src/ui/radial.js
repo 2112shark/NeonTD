@@ -1,9 +1,9 @@
 // Radial build/upgrade ring around the selected tile.
-import { $, clamp } from '../core/util.js';
+import { $, clamp } from '../core/util.ts';
 import { cv, tile } from '../render/canvas.js';
 import { S } from '../core/state.js';
-import { TD, TYPES } from '../data/towers.js';
-import { MODE_NAMES } from '../data/enemies.js';
+import { TD, TYPES } from '../data/towers.ts';
+import { MODE_NAMES } from '../data/enemies.ts';
 import { skinFor } from '../meta/mastery.js';
 import { sellRate, stats, synFor, tcost, towerAt, ucost } from '../core/stats.js';
 import { initAudio, snd } from '../audio/sfx.js';

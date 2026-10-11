@@ -1,9 +1,9 @@
 // Pause menu.
-import { $ } from '../core/util.js';
+import { $ } from '../core/util.ts';
 import { PROG } from '../meta/progress.js';
 import { saveProg } from '../meta/net.js';
 import { S, newGame } from '../core/state.js';
-import { PK_ID } from '../data/perks.js';
+import { PK_ID } from '../data/perks.ts';
 import { initAudio, muted, setMuted, snd } from '../audio/sfx.js';
 import { say } from './comms.js';
 import { starOk } from '../core/endgame.js';

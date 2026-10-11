@@ -1,5 +1,31 @@
 // Enemy and boss definitions, wave modifiers.
-export const ED={
+export type EnemyType='drone'|'scout'|'tank'|'wasp'|'guard'|'split'|'shard'|'medic'|'jammer'|'blink'|'carrier'|'mite'|'boss'|'queen'|'wrecker';
+export type ModId='fast'|'regen'|'armor'|'cloak'|'swarm';
+
+export interface EnemyDef {
+  name: string; hp: number; spd: number;
+  /** credits for a kill */
+  rw: number;
+  /** radius in tiles */
+  r: number;
+  col: string;
+  armor?: number; shield?: number;
+  air?: 1; boss?: 1;
+  /** splits into this enemy on death */
+  splits?: EnemyType;
+  heal?: { r: number; p: number; cd: number };
+  jam?: { r: number; t: number; cd: number };
+  blink?: { d: number; cd: number };
+  /** drops these on death */
+  spawns?: { t: EnemyType; n: number };
+  /** boss: spawns escorts on a timer */
+  brood?: { t: EnemyType; n: number; cd: number };
+  /** boss: shoots towers and disables them for t seconds */
+  gun?: { r: number; cd: number; t: number };
+}
+export interface WaveMod { name: string; desc: string; long: string; col: string }
+
+export const ED: Record<EnemyType, EnemyDef>={
  drone:{name:'Дрон',hp:42,spd:1.15,rw:5,r:.26,col:'#ff5c7a'},
  scout:{name:'Скаут',hp:26,spd:2,rw:5,r:.22,col:'#ffe14d'},
  tank:{name:'Броневик',hp:130,spd:.65,rw:11,r:.33,armor:6,col:'#ff8a3d'},
@@ -16,9 +42,9 @@ export const ED={
  queen:{name:'Рой-матка',hp:1300,spd:.4,rw:170,r:.55,shield:220,col:'#2effb0',boss:1,brood:{t:'wasp',n:2,cd:6}},
  wrecker:{name:'Разрушитель',hp:1800,spd:.38,rw:220,r:.56,armor:7,shield:300,col:'#ff6a2e',boss:1,gun:{r:3.2,cd:4.2,t:6}},
 };
-export const BOSSES=['boss','queen','wrecker'];
+export const BOSSES: EnemyType[]=['boss','queen','wrecker'];
 export const BOSS_LAP=10,BOSS_LAP_HEAL=.3; // a mission boss that breaks through on normal difficulty costs 10 core, recovers 30% health and walks the route again
-export const MODS={
+export const MODS: Record<ModId, WaveMod>={
  fast:{name:'Ускоренные',desc:'+20% скорости',long:'Враги двигаются на 20% быстрее',col:'#ffe14d'},
  regen:{name:'Регенерация',desc:'лечатся на 2% в секунду',long:'Враги восстанавливают 2% здоровья в секунду, боссы в пять раз медленнее',col:'#6dff9e'},
  armor:{name:'Бронированные',desc:'+3 брони, кроме боссов',long:'Все враги, кроме боссов, получают 3 единицы брони',col:'#ff8a3d'},

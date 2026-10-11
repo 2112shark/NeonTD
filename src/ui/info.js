@@ -1,11 +1,11 @@
 // Info panel under the battlefield.
-import { $, r1 } from '../core/util.js';
+import { $, r1 } from '../core/util.ts';
 import { S } from '../core/state.js';
 import { lab } from '../meta/lab.js';
-import { SYN, TD } from '../data/towers.js';
-import { ED, MODS } from '../data/enemies.js';
-import { PK_ID } from '../data/perks.js';
-import { genWave, maxW, waveMods } from '../core/waves.js';
+import { SYN, TD } from '../data/towers.ts';
+import { ED, MODS } from '../data/enemies.ts';
+import { PK_ID } from '../data/perks.ts';
+import { genWave, maxW, waveMods } from '../core/waves.ts';
 import { stats, synFor, tcost } from '../core/stats.js';
 import { SPEC_COL, drawTowerShape } from '../render/towers.js';
 import { fmtTime } from './lobby/shared.js';

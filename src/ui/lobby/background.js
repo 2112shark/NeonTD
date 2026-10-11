@@ -1,6 +1,6 @@
 // Lobby background animation.
-import { $, clamp, hexA } from '../../core/util.js';
-import { dayKey } from '../../meta/daily.js';
+import { $, clamp, hexA } from '../../core/util.ts';
+import { dayKey } from '../../meta/daily.ts';
 import { LBV, LOBBY, RM, timeLeft } from './shared.js';
 import { LBY } from './state.js';
 import { go } from './nav.js';

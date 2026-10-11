@@ -1,7 +1,7 @@
 // Perk choice overlay.
-import { $ } from '../core/util.js';
+import { $ } from '../core/util.ts';
 import { S } from '../core/state.js';
-import { PK_ID } from '../data/perks.js';
+import { PK_ID } from '../data/perks.ts';
 import { initAudio } from '../audio/sfx.js';
 import { takePerk } from '../core/perks.js';
 import { PIC } from './lobby/shared.js';

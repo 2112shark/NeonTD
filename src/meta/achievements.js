@@ -1,5 +1,5 @@
 // Achievements and the unlock toast.
-import { $ } from '../core/util.js';
+import { $ } from '../core/util.ts';
 import { PROG } from './progress.js';
 import { saveProg } from './net.js';
 import { S } from '../core/state.js';

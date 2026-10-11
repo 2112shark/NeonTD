@@ -2,12 +2,12 @@
 import { PROG } from '../../meta/progress.js';
 import { S } from '../../core/state.js';
 import { labRaw, ptsFree } from '../../meta/lab.js';
-import { MAPS } from '../../data/maps.js';
-import { BOSS_LAP, BOSS_LAP_HEAL, ED, MODS } from '../../data/enemies.js';
-import { MISSIONS, NM } from '../../data/campaign.js';
-import { QIDX } from '../../data/quests.js';
-import { maxW } from '../../core/waves.js';
-import { weekKey } from '../../meta/daily.js';
+import { MAPS } from '../../data/maps.ts';
+import { BOSS_LAP, BOSS_LAP_HEAL, ED, MODS } from '../../data/enemies.ts';
+import { MISSIONS, NM } from '../../data/campaign.ts';
+import { QIDX } from '../../data/quests.ts';
+import { maxW } from '../../core/waves.ts';
+import { weekKey } from '../../meta/daily.ts';
 import { S_MAX, seasonInfo, seasonState, seasonTier, tierCost, tierStart } from '../../meta/season.js';
 import { LEAGUES, leagueOf, weeklyCfg } from '../../meta/weekly.js';
 import { popc } from '../../core/endgame.js';

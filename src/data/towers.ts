@@ -1,7 +1,29 @@
 // Tower definitions, unlock order and synergies.
-/** @type {TowerType[]} */
-export const TYPES=['laser','cannon','cryo','tesla','sniper','gravi','gen'];
-export const TD={
+export type TowerType='laser'|'cannon'|'cryo'|'tesla'|'sniper'|'gravi'|'gen';
+
+/** Stats a level or a specialization sets; anything not listed is inherited from the level before. */
+export interface TowerStats {
+  dps?: number; dmg?: number; range?: number; rate?: number; cost?: number;
+  splash?: number; shells?: number; slow?: number; freeze?: number; brit?: number;
+  chains?: number; stun?: number; crit?: number; pierce?: number; focus?: number; beams?: number;
+  pull?: number; wr?: number; dur?: number; boom?: number; drag?: number;
+  inc?: number; aura?: number; bank?: number; haste?: number;
+}
+export interface TowerBranch extends TowerStats { name: string; desc: string; cost: number }
+export interface TowerDef {
+  name: string; col: string; cost: number;
+  /** 1 if it can hit flying enemies */
+  air: 0 | 1;
+  desc: string;
+  /** levels 1..3 */
+  lv: TowerStats[];
+  /** specializations after level 3 */
+  br: { A: TowerBranch; B: TowerBranch };
+}
+export interface Synergy { to: TowerType; from: TowerType; name: string; desc: string; f: (s: Record<string, number>) => void }
+
+export const TYPES: TowerType[]=['laser','cannon','cryo','tesla','sniper','gravi','gen'];
+export const TD: Record<TowerType, TowerDef>={
  laser:{name:'Лазер',col:'#ff4fd8',cost:60,air:1,desc:'Непрерывный луч по одной цели. Бьёт по земле и воздуху.',
   lv:[{dps:24,range:2.8},{dps:40,range:3.1,cost:55},{dps:62,range:3.4,cost:95}],
   br:{A:{name:'Фокус',desc:'Урон растёт до ×3, пока луч держит цель',cost:190,dps:78,focus:1},B:{name:'Призма',desc:'Три луча по разным целям',cost:190,dps:52,beams:3}}},
@@ -25,8 +47,8 @@ export const TD={
   br:{A:{name:'Биржа',desc:'+70 кредитов за волну, лимит процентов выше на 20',cost:200,inc:70,bank:20},B:{name:'Усилитель',desc:'Соседи получают +30% урона и стреляют на 10% быстрее',cost:200,aura:.3,haste:.1}}},
 };
 // campaign mission index from which a tower can be built
-export const TW_UNLOCK={laser:0,cannon:0,cryo:1,tesla:5,sniper:7,gravi:10,gen:12};
-export const SYN=[
+export const TW_UNLOCK: Record<TowerType, number>={laser:0,cannon:0,cryo:1,tesla:5,sniper:7,gravi:10,gen:12};
+export const SYN: Synergy[]=[
  {to:'tesla',from:'cryo',name:'Сверхпроводимость',desc:'+20% урона',f:s=>{s.dmg*=1.2}},
  {to:'cryo',from:'tesla',name:'Ионизация',desc:'+0.4 дальности',f:s=>{s.range+=.4}},
  {to:'laser',from:'sniper',name:'Наводка',desc:'+15% урона',f:s=>{s.dps*=1.15}},

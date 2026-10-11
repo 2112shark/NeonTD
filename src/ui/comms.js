@@ -1,5 +1,5 @@
 // Toasts and operator transmissions.
-import { $ } from '../core/util.js';
+import { $ } from '../core/util.ts';
 import { S } from '../core/state.js';
 
 let toastH;

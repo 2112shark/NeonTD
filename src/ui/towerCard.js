@@ -1,7 +1,7 @@
 // Tower card with stats and upgrade preview.
-import { $, r1 } from '../core/util.js';
+import { $, r1 } from '../core/util.ts';
 import { S } from '../core/state.js';
-import { TD } from '../data/towers.js';
+import { TD } from '../data/towers.ts';
 import { skinFor } from '../meta/mastery.js';
 import { genAura, sellRate, stats, synFor, tcost, ucost } from '../core/stats.js';
 import { debCost } from '../core/combat.js';

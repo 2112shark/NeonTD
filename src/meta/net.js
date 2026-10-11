@@ -1,7 +1,7 @@
 // Saving: local + cloud save, weekly leaderboard (cloud parts only work inside Claude).
-import { $ } from '../core/util.js';
+import { $ } from '../core/util.ts';
 import { PROG, saveLocal, setPROG } from './progress.js';
-import { weekKey } from './daily.js';
+import { weekKey } from './daily.ts';
 import { seasonMigrate } from './season.js';
 import { popc } from '../core/endgame.js';
 import { LOBBY, rankInfo } from '../ui/lobby/shared.js';

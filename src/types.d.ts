@@ -1,13 +1,14 @@
 // Shared types for the game, checked by `npm run typecheck` (JS files opt in with // @ts-check via tsconfig checkJs).
 // Data tables (TD, ED, MISSIONS, ...) are typed by inference from their literals; this file covers runtime objects.
 
-type TowerDefs = typeof import('./data/towers.js').TD;
-type EnemyDefs = typeof import('./data/enemies.js').ED;
-type TowerType = keyof TowerDefs;
-type EnemyType = keyof EnemyDefs;
-type Mission = (typeof import('./data/campaign.js').MISSIONS)[number];
-type ChallengeCfg = { key: string; mi: number; mods: string[]; ban: string | null; gold: number; waves: number; weekly?: boolean };
-type AbilityId = 'orbital' | 'emp' | 'shield';
+type TowerType = import('./data/towers.ts').TowerType;
+type EnemyType = import('./data/enemies.ts').EnemyType;
+type EnemyDef = import('./data/enemies.ts').EnemyDef;
+type ModId = import('./data/enemies.ts').ModId;
+type Mission = import('./data/campaign.ts').Mission;
+type AbilityId = import('./data/abilities.ts').AbilityId;
+/** daily and weekly challenge setup */
+type ChallengeCfg = { key: string; mi: number; mods: ModId[]; ban: TowerType | null; gold: number; waves: number; weekly?: boolean };
 type Tile = [number, number];
 
 interface Point { x: number; y: number }
@@ -68,7 +69,7 @@ interface Tower {
 
 interface Enemy {
   t: EnemyType;
-  d: EnemyDefs[EnemyType] & Record<string, any>;
+  d: EnemyDef;
   hp: number; max: number;
   sh: number; msh: number;
   spd: number; armor: number;
@@ -147,7 +148,7 @@ interface RunState {
   shieldT: number; shieldBlocks: number;
   strikes: any[];
   links: SynLink[];
-  curMods: string[];
+  curMods: ModId[];
   built: Set<string>;
   sold: boolean;
   early: number;
@@ -155,7 +156,7 @@ interface RunState {
   lost: number;
   tut: { step: number; [k: string]: any } | null;
   pts0: number;
-  allowed: string[];
+  allowed: TowerType[];
   limit: number;
   peak: number;
   abilUsed: number;

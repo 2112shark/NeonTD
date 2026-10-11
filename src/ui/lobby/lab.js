@@ -1,7 +1,7 @@
 // Lobby: lab, arsenal, shop.
 import { PROG } from '../../meta/progress.js';
 import { LAB_BR, labRaw, ptsFree } from '../../meta/lab.js';
-import { TD, TYPES } from '../../data/towers.js';
+import { TD, TYPES } from '../../data/towers.ts';
 import { KFX, MAST, SKINS, mastLv, mastXP, skinFor, skinOwned } from '../../meta/mastery.js';
 import { seasonInfo } from '../../meta/season.js';
 import { SHOP, shopOwned, shopSeasonTier } from '../../meta/shop.js';
