@@ -26,6 +26,10 @@ npm run test:e2e   # браузерные тесты (Playwright): сборка,
 
 CI (`.github/workflows/ci.yml`) гоняет оба набора на каждый push и pull request.
 
+## Публикация
+
+`.github/workflows/pages.yml` собирает игру и выкладывает её на GitHub Pages при каждом push в основную ветку репозитория. Один раз нужно включить Pages: Settings → Pages → Build and deployment → Source: **GitHub Actions**. Адрес: `https://2112shark.github.io/NeonTD/`.
+
 ## Структура
 
 ```
