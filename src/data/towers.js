@@ -1,4 +1,5 @@
 // Tower definitions, unlock order and synergies.
+/** @type {TowerType[]} */
 export const TYPES=['laser','cannon','cryo','tesla','sniper','gravi','gen'];
 export const TD={
  laser:{name:'Лазер',col:'#ff4fd8',cost:60,air:1,desc:'Непрерывный луч по одной цели. Бьёт по земле и воздуху.',

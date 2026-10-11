@@ -20,6 +20,7 @@ import { hudLabels } from '../ui/hud.js';
 export let MODE='campaign';
 
 /* ---------- state ---------- */
+/** @type {RunState} */
 export let S=null;
 function chalCfg(mode,cfg){return mode==='daily'?(cfg&&cfg.key?cfg:dailyCfg()):mode==='weekly'?(cfg&&cfg.key?cfg:weeklyCfg()):null}
 export function newGame(mi,mode,cfg){

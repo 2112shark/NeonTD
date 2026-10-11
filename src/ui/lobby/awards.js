@@ -25,7 +25,7 @@ function questsHtml(){const Q=questState();
   <ul class="ql">${questLi(Q.wk,'w',`${IC.core}${QW_REW} и опыт`)}</ul>
   <p class="lead">Задания дня обновляются в полночь, недельное по понедельникам. Опыт идёт в сезонный трек.</p>`}
 function rewIcon(r){return r.k==='core'?IC.core:r.k==='skin'?`<i class="swt" style="background:${SKINS[r.id].c||'#fff'}"></i>`:r.k==='fx'?PIC.burst:IC.gem}
-function seasonHtml(){const si=seasonInfo(),s=seasonState(),tier=seasonTier(),into=s.xp-tierStart(tier),left=Math.max(1,Math.ceil((si.end-new Date())/864e5));
+function seasonHtml(){const si=seasonInfo(),s=seasonState(),tier=seasonTier(),into=s.xp-tierStart(tier),left=Math.max(1,Math.ceil((+si.end-Date.now())/864e5));
   return`<section class="scard cut" style="--zc:${si.def.col}"><span class="zn">Сезон ${si.num}</span><b>${si.def.name}</b><p>Ещё ${left} ${plural(left,['день','дня','дней'])}. Модификатор сезона в вызове недели: ${MODS[si.def.mod].name.toLowerCase()}.</p>
   <span class="tierl"><span>Ступень <b>${tier}</b> из ${S_MAX}</span><span>${tier<S_MAX?`${into} из ${tierCost(tier+1)} опыта`:'Трек пройден'}</span></span><span class="bar"><i style="width:${tier<S_MAX?Math.round(into/tierCost(tier+1)*100):100}%"></i></span></section>
   <p class="lead">Больше всего опыта дают задания дня и недели и первая за день победа в вызове дня, понемногу добавляют миссии и отбитые волны. Награды выдаются сразу.</p>

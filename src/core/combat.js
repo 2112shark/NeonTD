@@ -255,7 +255,7 @@ export function update(dt){
     if((S.flowPerk===0&&S.flowLeft<=S.mis.flowT-60)||(S.flowPerk===1&&S.flowLeft<=S.mis.flowT-120)){S.flowPerk++;offerPerks()}
     if(S.flowLeft<=0){purge();endGame(true);return}}
   if(S.queue.length){S.spawnT-=dt;while(S.queue.length&&S.spawnT<=0){const it=S.queue.shift();spawn(it.t,null,it.l);if(ED[it.t].boss)vib(60);S.spawnT+=S.queue.length?S.queue[0].d:0}}
-  if(S.curMods.includes('cloak')){const rad=S.towers.filter(t=>t.type==='cryo'||t.type==='tesla').map(t=>[t,stats(t).range**2]);
+  if(S.curMods.includes('cloak')){const rad=S.towers.filter(t=>t.type==='cryo'||t.type==='tesla').map(t=>/** @type {[Tower,number]} */([t,stats(t).range**2]));
     for(const e of S.enemies)if(e.cloak)e.vis=rad.some(([t,r2])=>d2(e,t)<=r2)||S.towers.some(t=>d2(e,t)<=CLOAK_NEAR)}
   for(const e of S.enemies){
     if(e.dead)continue;

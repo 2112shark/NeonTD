@@ -20,7 +20,7 @@ export function tierOf(xp){let t=0;while(t<S_MAX&&xp>=tierStart(t+1))t++;return 
 // a season started under the old flat 250-XP tiers keeps its tier and the progress inside it
 export function seasonMigrate(s){if(!s||s.e2)return s;const old=Math.min(S_MAX,(s.xp||0)/S_OLD),t=Math.floor(old);
   s.xp=t>=S_MAX?tierStart(S_MAX):Math.round(tierStart(t)+(old-t)*tierCost(t+1));s.e2=1;return s}
-export function seasonInfo(d){d=d||new Date();const e=new Date(2026,9,5),t=new Date(d.getFullYear(),d.getMonth(),d.getDate()),days=Math.round((t-e)/864e5),idx=Math.max(0,Math.floor(days/28));
+export function seasonInfo(d){d=d||new Date();const e=new Date(2026,9,5),t=new Date(d.getFullYear(),d.getMonth(),d.getDate()),days=Math.round((+t-+e)/864e5),idx=Math.max(0,Math.floor(days/28));
   return{idx,num:idx+1,def:SEASONS[idx%SEASONS.length],start:new Date(2026,9,5+idx*28),end:new Date(2026,9,5+idx*28+28)}}
 export function tierRew(def,t){if(t%10===0)return{k:'skin',id:def.skins[t/10-1]};if(t%10===5)return{k:'fx',id:def.fx[(t-5)/10]};if(t%10===7)return{k:'title',id:def.titles[(t-7)/10]};return{k:'core',n:1}}
 export function seasonState(){const si=seasonInfo();let s=PROG.season;if(!s||s.id!==si.num){s={id:si.num,xp:0,got:0,e2:1};PROG.season=s}else seasonMigrate(s);return s}

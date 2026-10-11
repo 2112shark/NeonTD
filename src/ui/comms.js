@@ -2,7 +2,8 @@
 import { $ } from '../core/util.js';
 import { S } from '../core/state.js';
 
-export function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('show'),2400)}
+let toastH;
+export function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastH);toastH=setTimeout(()=>t.classList.remove('show'),2400)}
 
 /* operator transmissions */
 const COM=$('#comms'),COMT=$('#commsT'),STG=$('#stage');const comQ=[];let comBusy=false,comH=0;

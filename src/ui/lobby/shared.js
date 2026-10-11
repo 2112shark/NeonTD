@@ -19,10 +19,11 @@ export function plural(n,f){n=Math.abs(n)%100;const d=n%10;return n>10&&n<20?f[2
 export const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 export const fmtN=n=>Number(n).toLocaleString('ru-RU');
 export function fmtTime(s){s=Math.floor(s);return`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
-export function weekLeft(){const n=new Date(),d=(8-n.getDay())%7||7,m=new Date(n.getFullYear(),n.getMonth(),n.getDate()+d),s=Math.max(0,(m-n)/1000),dd=Math.floor(s/86400),hh=Math.floor(s%86400/3600);return dd?`ещё ${dd} ${plural(dd,['день','дня','дней'])}`:`ещё ${hh} ч`}
-export function timeLeft(){const n=new Date(),m=new Date(n.getFullYear(),n.getMonth(),n.getDate()+1),s=Math.max(0,Math.floor((m-n)/1000));return[s/3600,s/60%60,s%60].map(v=>String(Math.floor(v)).padStart(2,'0')).join(':')}
+export function weekLeft(){const n=new Date(),d=(8-n.getDay())%7||7,m=new Date(n.getFullYear(),n.getMonth(),n.getDate()+d),s=Math.max(0,(+m-+n)/1000),dd=Math.floor(s/86400),hh=Math.floor(s%86400/3600);return dd?`ещё ${dd} ${plural(dd,['день','дня','дней'])}`:`ещё ${hh} ч`}
+export function timeLeft(){const n=new Date(),m=new Date(n.getFullYear(),n.getMonth(),n.getDate()+1),s=Math.max(0,Math.floor((+m-+n)/1000));return[s/3600,s/60%60,s%60].map(v=>String(Math.floor(v)).padStart(2,'0')).join(':')}
 export function dailyProg(key){return PROG.daily&&PROG.daily.key===key?PROG.daily:null}
 export function streak(){const st=PROG.streak;if(!st)return 0;return st.last===dayKey()||st.last===dayKey(new Date(Date.now()-864e5))?st.n:0}
+/** @type {[number,string][]} */
 const RANKS=[[0,'Рекрут'],[4,'Оператор'],[10,'Дозорный'],[18,'Инженер'],[28,'Командор'],[40,'Архитектор рубежа'],[60,'Страж сети'],[85,'Легенда рубежа'],[120,'Хранитель ядра'],[160,'Неоновый маршал']];
 export function rankInfo(){const xp=ptsTotal();let i=0;while(i+1<RANKS.length&&xp>=RANKS[i+1][0])i++;const next=RANKS[i+1]||null;return{i,name:RANKS[i][1],xp,next,prog:next?(xp-RANKS[i][0])/(next[0]-RANKS[i][0]):1}}
 export function chevrons(n){let p='';for(let k=0;k<n;k++){const y=23-k*3.6;p+=`<path d="M3 ${y}L11 ${y-5.5}L19 ${y}"/>`}return`<svg viewBox="0 -3 22 30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`}

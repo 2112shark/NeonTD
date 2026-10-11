@@ -17,6 +17,7 @@ import { go } from './ui/lobby/nav.js';
 import { closeSheet, openSheet } from './ui/pauseSheet.js';
 
 /* ---------- input ---------- */
+/** @returns {Tile} */
 function tileAt(ev){const r=cv.getBoundingClientRect();return[Math.floor((ev.clientX-r.left)/tile),Math.floor((ev.clientY-r.top)/tile)]}
 cv.addEventListener('pointermove',ev=>{if(ev.pointerType==='mouse'){S.hover=tileAt(ev);if(S.place)updInfo()}});
 cv.addEventListener('pointerleave',()=>{S.hover=null});

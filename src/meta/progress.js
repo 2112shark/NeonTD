@@ -2,6 +2,7 @@
 /* ---------- persistent progress ---------- */
 const PK='neon-rubezh-v2';
 export const freshProg=()=>({stars:{},ms:{},ach:{},lab:{},waves:0,kills:0,specs:[],mods:[],best:{},daily:null,dailyWins:0,tut:0,set:{sound:true,vib:true},streak:null,seenAch:0,legacy:0,bonus:0,q:null,st:{},seenE:{},own:{},skin:{},kfx:'none',title:'',show:[],season:null,weekly:null,buy:{},refund:{},ts:0});
+/** @type {Progress} */
 export let PROG=freshProg();
 try{Object.assign(PROG,JSON.parse(localStorage.getItem(PK)||'{}'))}catch(e){}
 PROG.set=Object.assign({sound:true,vib:true},PROG.set||{});
