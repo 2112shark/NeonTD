@@ -12,6 +12,7 @@ export function vib(ms){if(canVib&&PROG.set&&PROG.set.vib)try{navigator.vibrate(
 export const lobbyOn=()=>!LOBBY.hidden;
 export const MODE_RU={campaign:'кампания',endless:'бесконечный режим',daily:'вызов дня',weekly:'вызов недели'};
 export const GEN={laser:'лазера',cannon:'пушки',cryo:'крио',tesla:'теслы',sniper:'снайпера',gravi:'гравитона',gen:'генератора'};
+/** @type {Record<string,string>} */
 export const ACC={laser:'лазер',cannon:'пушку',cryo:'крио',tesla:'теслу',sniper:'снайпера',gravi:'гравитон',gen:'генератор'};
 export const DIFFC=['#6dff9e','#ffc94d','#ff4d6d'];
 export const STAR='M12 2.6l2.85 5.9 6.45.85-4.75 4.45 1.2 6.4L12 17.1l-5.75 3.1 1.2-6.4L2.7 9.35l6.45-.85z';

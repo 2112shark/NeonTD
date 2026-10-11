@@ -1,10 +1,10 @@
 // Top HUD, ability buttons, speed and pause controls.
 import { $ } from '../core/util.ts';
-import { S, setSpeed, speed } from '../core/state.js';
+import { S, setSpeed, speed } from '../core/state.ts';
 import { AB, abCd } from '../data/abilities.ts';
 import { maxW } from '../core/waves.ts';
 import { initAudio } from '../audio/sfx.js';
-import { startWave, useAbility } from '../core/combat.js';
+import { startWave, useAbility } from '../core/combat.ts';
 import { SHEET, fmtTime, lobbyOn } from './lobby/shared.js';
 import { openSheet } from './pauseSheet.js';
 
@@ -26,7 +26,7 @@ export function updHud(){
     const txt=c>0?Math.ceil(c)+'с':(k==='shield'&&S.shieldT>0?Math.ceil(S.shieldT)+'с':'');if(e.cd.textContent!==txt)e.cd.textContent=txt;
     e.b.classList.toggle('ready',c<=0);e.b.classList.toggle('aim',S.aim===k||(k==='shield'&&S.shieldT>0))}
 }
-document.querySelector('.abil').addEventListener('click',e=>{const b=/** @type {HTMLElement} */(/** @type {HTMLElement} */(e.target).closest('.ab'));if(b)useAbility(b.dataset.ab)});
+document.querySelector('.abil').addEventListener('click',e=>{const b=/** @type {HTMLElement} */(/** @type {HTMLElement} */(e.target).closest('.ab'));if(b)useAbility(/** @type {AbilityId} */(b.dataset.ab))});
 $('#bNext').onclick=()=>{initAudio();startWave()};
 $('#speed').onclick=e=>{const b=e.target.closest('button');if(!b)return;setSpeed(+b.dataset.s);document.querySelectorAll('#speed button').forEach(x=>x.classList.toggle('on',x===b))};
 export function togglePause(){if(!S||S.over||lobbyOn()||!SHEET.hidden)return;S.paused=!S.paused;$('#pauseOv').hidden=!S.paused;$('#bPause').textContent=S.paused?'▶':'❚❚'}

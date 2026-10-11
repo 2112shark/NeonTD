@@ -20,7 +20,12 @@ export interface TowerDef {
   /** specializations after level 3 */
   br: { A: TowerBranch; B: TowerBranch };
 }
-export interface Synergy { to: TowerType; from: TowerType; name: string; desc: string; f: (s: Record<string, number>) => void }
+/**
+ * Effective stats of a built tower (see stats() in core/stats). Only the keys its levels and branch set are present;
+ * the rest read as undefined at runtime, and code checks them where it matters.
+ */
+export type Stats = Record<Exclude<keyof TowerStats, 'cost'>, number>;
+export interface Synergy { to: TowerType; from: TowerType; name: string; desc: string; f: (s: Stats) => void }
 
 export const TYPES: TowerType[]=['laser','cannon','cryo','tesla','sniper','gravi','gen'];
 export const TD: Record<TowerType, TowerDef>={

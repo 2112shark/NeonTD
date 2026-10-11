@@ -2,7 +2,7 @@
 import { $ } from '../../core/util.ts';
 import { PROG, freshProg, setPROG } from '../../meta/progress.js';
 import { lbSub, saveProg } from '../../meta/net.js';
-import { S, newGame } from '../../core/state.js';
+import { S, newGame } from '../../core/state.ts';
 import { LAB, labRaw, ptsFree } from '../../meta/lab.js';
 import { MAPS } from '../../data/maps.ts';
 import { MISSIONS } from '../../data/campaign.ts';

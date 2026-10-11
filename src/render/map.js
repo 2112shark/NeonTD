@@ -1,7 +1,7 @@
 // Map background: themes, paths, decorations.
 import { COLS, ROWS, hexA, rng } from '../core/util.ts';
 import { bgc, bgx, cv, dpr, glow, poly, rr, tile } from './canvas.js';
-import { S } from '../core/state.js';
+import { S } from '../core/state.ts';
 
 /* ---------- drawing ---------- */
 export function buildBg(){if(!S)return;bgc.width=cv.width;bgc.height=cv.height;paintMap(bgx,S.grid?Object.assign(Object.create(S.map),{grid:S.grid}):S.map,dpr*tile)}

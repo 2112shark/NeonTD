@@ -1,18 +1,20 @@
 // Tower stats, costs, auras and synergies.
-import { S } from './state.js';
+import { S } from './state.ts';
 import { lab } from '../meta/lab.js';
 import { unlock } from '../meta/achievements.js';
-import { SYN, TD } from '../data/towers.ts';
+import { SYN, TD, type Stats, type Synergy } from '../data/towers.ts';
 import { mastB, vetB } from '../meta/mastery.js';
 
-export const towerAt=(c,r)=>S.towers.find(t=>t.c===c&&t.r===r);
-export const hasP=k=>!!(S&&S.perks.includes(k));
+export const towerAt=(c: number,r: number)=>S.towers.find(t=>t.c===c&&t.r===r);
+/** is this run perk taken */
+export const hasP=(k: string)=>!!(S&&S.perks.includes(k));
 // generator aura that reaches a tower: the strongest working generator on a neighbouring tile
-export function genAura(t){if(t.type==='gen'||!t.gens||!t.gens.length)return null;let best=null;
-  for(const u of t.gens){if(u.off>0||u.jam>0)continue;const s={};for(let i=0;i<u.lvl;i++)Object.assign(s,TD.gen.lv[i]);if(u.br)Object.assign(s,TD.gen.br[u.br]);
+export function genAura(t: TowerLike){if(t.type==='gen'||!t.gens||!t.gens.length)return null;let best: { aura: number; haste: number }|null=null;
+  for(const u of t.gens){if(u.off>0||u.jam>0)continue;const s={} as Stats;for(let i=0;i<u.lvl;i++)Object.assign(s,TD.gen.lv[i]);if(u.br)Object.assign(s,TD.gen.br[u.br]);
     const a=s.aura+(u.node?.04:0);if(!best||a>best.aura)best={aura:a,haste:s.haste||0}}return best}
-export function stats(t){
-  const d=TD[t.type],s={};for(let i=0;i<t.lvl;i++)Object.assign(s,d.lv[i]);if(t.br)Object.assign(s,d.br[t.br]);
+/** effective stats of a tower: levels, branch, lab, perks, node, veteran, mastery, generator aura and synergies */
+export function stats(t: TowerLike): Stats{
+  const d=TD[t.type],s={} as Stats & { cost?: number; name?: string; desc?: string };for(let i=0;i<t.lvl;i++)Object.assign(s,d.lv[i]);if(t.br)Object.assign(s,d.br[t.br]);
   delete s.cost;delete s.name;delete s.desc;
   let m=1+.08*lab('dmg');if(hasP('dmg'))m*=1.12;if(hasP('lens')&&t.type==='laser')m*=1.2;
   if(t.node)m*=1.25;m*=1+vetB(t)+mastB(t.type);const ga=genAura(t);if(ga)m*=1+ga.aura;
@@ -29,10 +31,11 @@ export function stats(t){
   if(t.syn)for(const r of t.syn)r.f(s);
   return s;
 }
-export const tcost=type=>Math.round(TD[type].cost*(1-.05*lab('thr')));
-export function ucost(t,br){const d=TD[t.type],c=br?d.br[br].cost:d.lv[t.lvl].cost;return Math.round(c*(hasP('cheap')?.85:1))}
-export function synFor(type,c,r,self){
-  const out=[];
+export const tcost=(type: TowerType)=>Math.round(TD[type].cost*(1-.05*lab('thr')));
+export function ucost(t: Tower,br?: 'A'|'B'){const d=TD[t.type],c=br?d.br[br].cost:d.lv[t.lvl].cost!;// levels 2 and 3 always have a cost
+  return Math.round(c*(hasP('cheap')?.85:1))}
+export function synFor(type: TowerType,c: number,r: number,self?: Tower|null){
+  const out: Synergy[]=[];
   for(const rule of SYN){if(rule.to!==type)continue;
     if(S.towers.some(u=>u!==self&&u.type===rule.from&&Math.max(Math.abs(u.c-c),Math.abs(u.r-r))<=1))out.push(rule)}
   return out;

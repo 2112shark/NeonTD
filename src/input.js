@@ -1,13 +1,13 @@
 // Pointer and keyboard input on the battlefield.
 import { cv, tile } from './render/canvas.js';
-import { S } from './core/state.js';
+import { S } from './core/state.ts';
 import { TYPES } from './data/towers.ts';
-import { tcost, towerAt } from './core/stats.js';
+import { tcost, towerAt } from './core/stats.ts';
 import { initAudio } from './audio/sfx.js';
 import { toast } from './ui/comms.js';
-import { castOrbital, enemyAt, forkTile, setFocus, startWave, toggleFork, useAbility } from './core/combat.js';
-import { build, buildBlock, canBuild, isDebris, sell, shown, upgrade } from './core/actions.js';
-import { takePerk } from './core/perks.js';
+import { castOrbital, enemyAt, forkTile, setFocus, startWave, toggleFork, useAbility } from './core/combat.ts';
+import { build, buildBlock, canBuild, isDebris, sell, shown, upgrade } from './core/actions.ts';
+import { takePerk } from './core/perks.ts';
 import { closeRadial, openRadial, radKey, renderRadial, setRadKey } from './ui/radial.js';
 import { updInfo } from './ui/info.js';
 import { togglePause } from './ui/hud.js';

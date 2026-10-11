@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { newGame, S } from '../../src/core/state.js';
+import { newGame, S } from '../../src/core/state.ts';
 import { genWave, hpMul, maxW } from '../../src/core/waves.ts';
 import { ED } from '../../src/data/enemies.ts';
 import { MISSIONS } from '../../src/data/campaign.ts';

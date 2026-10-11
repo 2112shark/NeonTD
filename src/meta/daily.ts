@@ -1,6 +1,6 @@
 // Daily challenge: date keys and daily config.
 import { hashS, rng } from '../core/util.ts';
-import { S } from '../core/state.js';
+import { S } from '../core/state.ts';
 import { TYPES } from '../data/towers.ts';
 import { MODS } from '../data/enemies.ts';
 

@@ -1,6 +1,6 @@
 // Lab upgrades bought with data cores.
 import { PROG } from './progress.js';
-import { MODE } from '../core/state.js';
+import { MODE } from '../core/state.ts';
 
 export const labRaw=id=>PROG.lab[id]||0;
 export const fair=()=>MODE==='daily'||MODE==='weekly';

@@ -1,6 +1,6 @@
 // Wave composition, enemy health scaling and wave modifiers.
 import { MAXW, rng } from './util.ts';
-import { S } from './state.js';
+import { S } from './state.ts';
 import { BOSSES, MODS } from '../data/enemies.ts';
 import { NM } from '../data/campaign.ts';
 

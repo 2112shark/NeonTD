@@ -1,7 +1,8 @@
 // End of a run: star conditions, rewards, records.
+import type { StarCond } from '../data/campaign.ts';
 import { PROG } from '../meta/progress.js';
 import { saveProg } from '../meta/net.js';
-import { S } from './state.js';
+import { S } from './state.ts';
 import { unlock } from '../meta/achievements.js';
 import { TYPES } from '../data/towers.ts';
 import { MISSIONS } from '../data/campaign.ts';
@@ -17,8 +18,9 @@ import { updInfo } from '../ui/info.js';
 import { lobbyOn, vib } from '../ui/lobby/shared.js';
 import { showResults } from '../ui/results.js';
 
-export const popc=n=>(n&1)+(n>>1&1)+(n>>2&1);
-export function starOk(c){switch(c.k){
+/** number of stars in a 3-bit mask */
+export const popc=(n: number)=>(n&1)+(n>>1&1)+(n>>2&1);
+export function starOk(c: StarCond){switch(c.k){
   case'lives':return S.coreHp?S.coreHp.every(h=>h>=c.n):S.lives>=c.n;
   case'noabil':return !S.abilUsed;
   case'nosell':return !S.sold;
@@ -28,7 +30,7 @@ export function starOk(c){switch(c.k){
   case'boss':return S.bossT!=null&&S.bossT<=c.n;
   case'early':return S.early>=c.n;
 }return false}
-export function endGame(won){
+export function endGame(won: boolean){
   if(S.over)return;S.over=true;S.won=won;closeRadial();S.aim=null;S.perkPick=null;PKO.hidden=true;
   let stars=0,mask=0,newMask=0,first=false,score=0,best=0,newBest=false;const M=S.mis;
   if(S.flow){PROG.waves+=S.wave;qev('wave',S.wave);addXP(XP_WAVE*S.wave)}
@@ -58,4 +60,4 @@ export function endGame(won){
   setTimeout(()=>{if(!lobbyOn())showResults({won,stars,mask,newMask,first,score,best,newBest})},900);
   updInfo(true);
 }
-const starStr=n=>'★'.repeat(n)+'<i>'+'★'.repeat(3-n)+'</i>';
+const starStr=(n: number)=>'★'.repeat(n)+'<i>'+'★'.repeat(3-n)+'</i>';

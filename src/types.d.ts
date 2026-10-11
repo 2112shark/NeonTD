@@ -57,15 +57,23 @@ interface Tower {
   spent: number; kills: number;
   fm: number;
   beams: any[];
-  syn: any[];
+  /** synergies this tower receives */
+  syn: import('./data/towers.ts').Synergy[];
   jam: number; off: number; vet: number;
   node: boolean;
   skin: string | null;
   /** credits produced (generator) */
   made?: number;
+  /** damage dealt */
+  dmg?: number;
+  /** laser focus: target held last frame */
+  last?: Enemy;
   /** generators boosting this tower */
   gens?: Tower[];
 }
+
+/** enough of a tower to compute its stats: built towers and build previews */
+type TowerLike = Pick<Tower, 'type' | 'lvl' | 'br'> & Partial<Tower>;
 
 interface Enemy {
   t: EnemyType;
@@ -86,17 +94,30 @@ interface Enemy {
   cloak: boolean; vis: boolean;
   born: number; cd: number; phase: number;
   /** grounded by a gravity tower: seconds left */
-  gnd?: number;
+  gnd: number;
   /** gravity well pull: seconds left and strength */
-  wellT?: number; wellP?: number;
+  wellT: number; wellP: number;
   /** distance already dragged back by wells */
-  dragD?: number;
+  dragD: number;
+  /** took the other branch at a fork */
+  forked?: boolean;
+  /** Wrecker: gun angle */
+  gunA?: number;
 }
 
 /** Short-lived visual effect */
 interface Fx { k: string; x?: number; y?: number; r?: number; life: number; max: number; col: string; [k: string]: any }
 interface Particle { x: number; y: number; vx: number; vy: number; life: number; max: number; col: string; size: number; g?: number }
-interface FloatText { [k: string]: any }
+/** floating text over the field: rewards, damage, status */
+interface FloatText { x: number; y: number; s: string; col: string; size: number; life: number; max: number }
+/** cannon shell in flight */
+interface Projectile { x: number; y: number; sx: number; sy: number; tx: number; ty: number; p: number; dur: number; dmg: number; sp: number; src: Tower; h: number; delay: number; done?: boolean }
+/** gravity well left by a Graviton */
+interface Well { x: number; y: number; r: number; t: number; max: number; pull: number; dps: number; drag: number; boom: number; src: Tower; kind: string; done?: boolean }
+/** Wrecker boss shot that disables a tower for `dis` seconds */
+interface BossShot { sx: number; sy: number; x: number; y: number; t: Tower; p: number; dur: number; dis: number; done?: boolean }
+/** orbital strike counting down to impact */
+interface Strike { x: number; y: number; t: number; r: number; done?: boolean }
 interface SynLink { a: Tower; b: Tower; col: string; gen?: number }
 interface QueuedEnemy { t: EnemyType; d: number; l: number }
 
@@ -119,7 +140,7 @@ interface RunState {
   wave: number;
   towers: Tower[];
   enemies: Enemy[];
-  proj: any[];
+  proj: Projectile[];
   fx: Fx[];
   parts: Particle[];
   texts: FloatText[];
@@ -139,14 +160,14 @@ interface RunState {
   started: boolean;
   /** open radial ring */
   rad: { c: number; r: number; deb: boolean } | null;
-  preview: { type: string; c: number; r: number } | null;
+  preview: { type: TowerType; c: number; r: number } | null;
   /** item highlighted in the radial ring */
   rsel: string | null;
   /** ability waiting for a target */
   aim: AbilityId | null;
   ab: Record<AbilityId, number>;
   shieldT: number; shieldBlocks: number;
-  strikes: any[];
+  strikes: Strike[];
   links: SynLink[];
   curMods: ModId[];
   built: Set<string>;
@@ -166,14 +187,14 @@ interface RunState {
   focus: { e: Enemy; t: number } | null;
   /** fork switch position */
   sw: number;
-  bshots: any[];
+  bshots: BossShot[];
   said: Record<string, any>;
   flowLeft: number; flowNext: number; flowPerk: number;
   bossT: number | null;
   guardW: number;
   leakAir: number; leakGround: number;
   grid: number[][];
-  wells: any[];
+  wells: Well[];
   cleared: number;
   xpGain: number;
   newTiers: any[];
@@ -182,8 +203,9 @@ interface RunState {
   seed: number;
   // set later during the run
   lastUp?: { t: Tower; diff: any[]; name: string | null } | null;
-  shake?: number;
-  flash?: number;
+  /** screen shake and red flash timers */
+  shake: number;
+  flash: number;
   bossLaps?: number;
   bossLeak?: number;
   diffMul?: number;

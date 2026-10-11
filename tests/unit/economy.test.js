@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { COLS, ROWS } from '../../src/core/util.ts';
-import { newGame, S } from '../../src/core/state.js';
-import { build, upgrade, sell, canBuild } from '../../src/core/actions.js';
-import { tcost, ucost, sellRate } from '../../src/core/stats.js';
+import { newGame, S } from '../../src/core/state.ts';
+import { build, upgrade, sell, canBuild } from '../../src/core/actions.ts';
+import { tcost, ucost, sellRate } from '../../src/core/stats.ts';
 
 function freeTile() {
   for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) if (canBuild(c, r)) return [c, r];

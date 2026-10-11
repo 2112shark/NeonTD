@@ -5,6 +5,7 @@ import { TD } from '../data/towers.ts';
 import { skinCols } from '../meta/mastery.js';
 
 /* towers: platform grows with level, specialization changes the silhouette and accent colour */
+/** @type {Record<string,string>} */
 export const SPEC_COL={graviA:'#c9b8ff',graviB:'#7dd8ff',genA:'#ffe9a8',genB:'#ff9a3d',laserA:'#ffd2f6',laserB:'#b48cff',cannonA:'#ff6a3d',cannonB:'#ffd23d',cryoA:'#ffffff',cryoB:'#c9a8ff',teslaA:'#8cc8ff',teslaB:'#ffe14d',sniperA:'#ffc94d',sniperB:'#c2ff5c'};
 const TURRET={
  laser(g,t,c,sc,lv,br,time,rc,alpha){

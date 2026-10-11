@@ -3,7 +3,7 @@ import { $ } from '../core/util.ts';
 import { PROG, saveLocal, setPROG } from './progress.js';
 import { weekKey } from './daily.ts';
 import { seasonMigrate } from './season.js';
-import { popc } from '../core/endgame.js';
+import { popc } from '../core/endgame.ts';
 import { LOBBY, rankInfo } from '../ui/lobby/shared.js';
 import { LBY } from '../ui/lobby/state.js';
 import { boardHtml } from '../ui/lobby/weekly.js';

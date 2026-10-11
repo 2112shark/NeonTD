@@ -17,16 +17,19 @@ import { buildBg } from '../render/map.js';
 import { updInfo } from '../ui/info.js';
 import { hudLabels } from '../ui/hud.js';
 
-export let MODE='campaign';
+export let MODE: RunState['mode']='campaign';
 
 /* ---------- state ---------- */
-/** @type {RunState} */
-export let S=null;
-function chalCfg(mode,cfg){return mode==='daily'?(cfg&&cfg.key?cfg:dailyCfg()):mode==='weekly'?(cfg&&cfg.key?cfg:weeklyCfg()):null}
-export function newGame(mi,mode,cfg){
+// null until the first newGame(), which runs at startup before anything reads it
+export let S: RunState=null as unknown as RunState;
+/** options for newGame: nightmare flag for missions, or a fixed challenge config */
+export type NewGameCfg = { nm?: boolean } | ChallengeCfg | null;
+function chalCfg(mode: RunState['mode'],cfg?: NewGameCfg){return mode==='daily'?(cfg&&'key' in cfg?cfg:dailyCfg()):mode==='weekly'?(cfg&&'key' in cfg?cfg:weeklyCfg()):null}
+/** start a run: mission index (campaign) or map index, mode and options */
+export function newGame(mi: number,mode?: RunState['mode'],cfg?: NewGameCfg){
   mode=mode||'campaign';MODE=mode;
   const ch=chalCfg(mode,cfg);if(ch)mi=ch.mi;
-  const M=mode==='campaign'?MISSIONS[mi]:null,nm=!!(M&&cfg&&cfg.nm),map=M?M.map:MAPS[mi],nc=map.cores.length;
+  const M=mode==='campaign'?MISSIONS[mi]:null,nm=!!(M&&cfg&&'nm' in cfg&&cfg.nm),map=M?M.map:MAPS[mi],nc=map.cores.length;
   const per=Math.round((20+5*lab('hp'))/(nc>1?2:1));
   const allowed=M?allowedFor(M):TYPES.filter(k=>!(ch&&ch.ban===k));
   S={mi,mode,daily:ch,mis:M,nm,map,flow:!!(M&&mFlag(M)),lives:per*nc,maxLives:per*nc,coreHp:nc>1?Array(nc).fill(per):null,coreMax:per,
@@ -35,11 +38,12 @@ export function newGame(mi,mode,cfg){
      rad:null,preview:null,rsel:null,aim:null,ab:{orbital:0,emp:0,shield:0},shieldT:0,shieldBlocks:0,strikes:[],links:[],
      curMods:[],built:new Set(),sold:false,early:0,newAch:[],lost:0,tut:null,pts0:ptsTotal(),
      allowed,limit:M&&M.limit||0,peak:0,abilUsed:0,specd:false,perks:[],perkPick:null,focus:null,sw:0,bshots:[],said:{},
-     flowLeft:M&&mFlag(M)?M.flowT:0,flowNext:0,flowPerk:0,bossT:null,guardW:-1,leakAir:0,leakGround:0,
+     flowLeft:M&&mFlag(M)?M.flowT!:0,flowNext:0,flowPerk:0,bossT:null,guardW:-1,leakAir:0,leakGround:0,
      grid:map.grid.map(r=>r.slice()),wells:[],cleared:0,xpGain:0,newTiers:[],mast0:Object.fromEntries(TYPES.map(k=>[k,mastLv(k)])),gens:0,
+     shake:0,flash:0,
      seed:ch?hashS(ch.key):M?M.i*101+(nm?55:7):mi*13+5};
   if(mode==='campaign'&&mi===0&&!PROG.tut)S.tut={step:0};
   closeRadial();buildBg();updInfo(true);renderCoach();hideComms();PKO.hidden=true;hudLabels();
 }
 export let speed=1;
-export function setSpeed(v){return speed=v}
+export function setSpeed(v: number){return speed=v}

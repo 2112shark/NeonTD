@@ -4,7 +4,9 @@ import type { TowerType } from './towers.ts';
 
 export interface Chapter { name: string; th: string; sub: string }
 /** A star condition: k is the kind, n its threshold where one is needed */
-export interface StarCond { k: 'lives' | 'noabil' | 'nosell' | 'flawless' | 'types' | 'boss' | 'early' | 'towers'; n?: number }
+export type StarCond =
+  | { k: 'noabil' | 'nosell' | 'flawless' }
+  | { k: 'lives' | 'types' | 'towers' | 'boss' | 'early'; n: number };
 export interface Mission {
   id: string;
   /** chapter index */

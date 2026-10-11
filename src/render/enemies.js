@@ -1,7 +1,7 @@
 // Enemy sprites.
 import { clamp, hexA } from '../core/util.ts';
 import { ctx, glow, poly, rr } from './canvas.js';
-import { S } from '../core/state.js';
+import { S } from '../core/state.ts';
 
 export function drawEnemy(e,g=ctx,time=S.time){
   const fly=e.air&&!(e.gnd>0),d=e.d,r=d.r,x=e.x,y=e.y-(fly?.12+Math.sin(time*4+e.wob)*.04:0);

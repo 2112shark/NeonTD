@@ -2,7 +2,7 @@
 import { $ } from '../core/util.ts';
 import { PROG } from './progress.js';
 import { saveProg } from './net.js';
-import { S } from '../core/state.js';
+import { S } from '../core/state.ts';
 import { snd } from '../audio/sfx.js';
 
 export const ACH=[

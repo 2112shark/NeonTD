@@ -1,5 +1,5 @@
 // Ability definitions and cooldowns.
-import { S } from '../core/state.js';
+import { S } from '../core/state.ts';
 import { lab } from '../meta/lab.js';
 
 export type AbilityId='orbital'|'emp'|'shield';

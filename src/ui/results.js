@@ -1,6 +1,6 @@
 // Results screen after a run.
 import { $ } from '../core/util.ts';
-import { S } from '../core/state.js';
+import { S } from '../core/state.ts';
 import { fair, ptsFree, ptsTotal } from '../meta/lab.js';
 import { TD, TW_UNLOCK, TYPES } from '../data/towers.ts';
 import { MISSIONS } from '../data/campaign.ts';

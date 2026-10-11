@@ -1,15 +1,15 @@
 // Radial build/upgrade ring around the selected tile.
 import { $, clamp } from '../core/util.ts';
 import { cv, tile } from '../render/canvas.js';
-import { S } from '../core/state.js';
+import { S } from '../core/state.ts';
 import { TD, TYPES } from '../data/towers.ts';
 import { MODE_NAMES } from '../data/enemies.ts';
 import { skinFor } from '../meta/mastery.js';
-import { sellRate, stats, synFor, tcost, towerAt, ucost } from '../core/stats.js';
+import { sellRate, stats, synFor, tcost, towerAt, ucost } from '../core/stats.ts';
 import { initAudio, snd } from '../audio/sfx.js';
 import { toast } from './comms.js';
-import { debCost, doClear } from '../core/combat.js';
-import { build, buildBlock, isDebris, sell, shown, upgrade } from '../core/actions.js';
+import { debCost, doClear } from '../core/combat.ts';
+import { build, buildBlock, isDebris, sell, shown, upgrade } from '../core/actions.ts';
 import { tutEvent } from './tutorial.js';
 import { TCD, renderTCard } from './towerCard.js';
 import { THEMES, drawDebris } from '../render/map.js';
@@ -23,7 +23,7 @@ function radItems(){
   if(S.rad.deb)return[{id:'clear',l:'Расчистить',cost:debCost(),col:'#ffb040'}];
   if(S.sel){const t=S.sel,d=TD[t.type],it=[];
     if(t.lvl<3)it.push({id:'up',l:`Улучшить<br>до ур. ${t.lvl+1}`,cost:ucost(t),col:d.col});
-    else if(!t.br)for(const b of['A','B'])it.push({id:b,l:d.br[b].name,cost:ucost(t,b),col:d.col});
+    else if(!t.br)for(const b of /** @type {const} */(['A','B']))it.push({id:b,l:d.br[b].name,cost:ucost(t,b),col:d.col});
     if(t.type!=='gen')it.push({id:'mode',l:`Цель:<br>${MODE_NAMES[t.mode]}`,col:'#3df0ff'});
     it.push({id:'sell',l:'Продать',sale:Math.floor(t.spent*sellRate()),col:'#6dff9e'});
     return it}

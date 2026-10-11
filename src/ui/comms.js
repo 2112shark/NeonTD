@@ -1,6 +1,6 @@
 // Toasts and operator transmissions.
 import { $ } from '../core/util.ts';
-import { S } from '../core/state.js';
+import { S } from '../core/state.ts';
 
 let toastH;
 export function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastH);toastH=setTimeout(()=>t.classList.remove('show'),2400)}

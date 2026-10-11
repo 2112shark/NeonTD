@@ -1,10 +1,10 @@
 // Tower veterans, mastery, skins and kill effects.
 import { PROG } from './progress.js';
-import { S } from '../core/state.js';
+import { S } from '../core/state.ts';
 import { fair, lab } from './lab.js';
 import { unlock } from './achievements.js';
 import { snd } from '../audio/sfx.js';
-import { burst, text } from '../core/combat.js';
+import { burst, text } from '../core/combat.ts';
 import { qev } from './quests.js';
 
 /* ---------- veterans, mastery, skins, kill effects ---------- */

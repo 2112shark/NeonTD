@@ -1,10 +1,10 @@
 // Tower card with stats and upgrade preview.
 import { $, r1 } from '../core/util.ts';
-import { S } from '../core/state.js';
+import { S } from '../core/state.ts';
 import { TD } from '../data/towers.ts';
 import { skinFor } from '../meta/mastery.js';
-import { genAura, sellRate, stats, synFor, tcost, ucost } from '../core/stats.js';
-import { debCost } from '../core/combat.js';
+import { genAura, sellRate, stats, synFor, tcost, ucost } from '../core/stats.ts';
+import { debCost } from '../core/combat.ts';
 import { debrisIcon } from './radial.js';
 import { SPEC_COL } from '../render/towers.js';
 import { iconCanvas } from './info.js';
@@ -14,6 +14,7 @@ import { GEN } from './lobby/shared.js';
 export const TCD=$('#tcard');
 const SK={wr:['Радиус воронки',r1],dur:['Удержание',v=>r1(v)+' с'],pull:['Замедление',v=>Math.round(v*100)+'%'],inc:['Доход за волну',v=>'+'+Math.round(v)],aura:['Усиление соседей',v=>'+'+Math.round(v*100)+'%'],dps:['Урон в секунду',v=>Math.round(v)],dmg:['Урон',v=>Math.round(v)],splash:['Радиус взрыва',r1],chains:['Целей в цепи',v=>Math.round(v)],slow:['Замедление',v=>Math.round(v*100)+'%'],crit:['Шанс крита',v=>Math.round(v*100)+'%'],range:['Дальность',r1],rate:['Перезарядка',v=>r1(v)+' с']};
 const SKEYS={laser:['dps','range'],cannon:['dmg','splash','range','rate'],cryo:['slow','dmg','range','rate'],tesla:['dmg','chains','range','rate'],sniper:['dmg','crit','range','rate'],gravi:['pull','wr','dur','dps','range'],gen:['inc','aura']};
+/** @type {Record<string,string>} */
 export const SHORT={wr:'воронка',dur:'удерж.',pull:'замедл.',inc:'доход',aura:'усил.',dps:'урон',dmg:'урон',splash:'взрыв',chains:'цели',slow:'замедл.',crit:'крит',range:'дальн.',rate:'перезар.'};
 const TARGET_RU=['первый в колонне','последний в колонне','самый крепкий','ближайший'];
 export function dFmt(k,d){const a=Math.abs(d),s=d>0?'+':'−';return k==='slow'||k==='crit'||k==='pull'||k==='aura'?s+Math.round(a*100)+'%':k==='rate'||k==='dur'?s+r1(a)+' с':k==='range'||k==='splash'||k==='wr'?s+r1(a):s+Math.round(a)}

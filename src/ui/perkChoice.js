@@ -1,9 +1,9 @@
 // Perk choice overlay.
 import { $ } from '../core/util.ts';
-import { S } from '../core/state.js';
+import { S } from '../core/state.ts';
 import { PK_ID } from '../data/perks.ts';
 import { initAudio } from '../audio/sfx.js';
-import { takePerk } from '../core/perks.js';
+import { takePerk } from '../core/perks.ts';
 import { PIC } from './lobby/shared.js';
 
 export const PKO=$('#perkOv');

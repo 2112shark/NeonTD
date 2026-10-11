@@ -2,7 +2,7 @@
 import { COLS, MAXW, ROWS } from './core/util.ts';
 import { PROG } from './meta/progress.js';
 import { NET, mergeProg, netInit, saveProg } from './meta/net.js';
-import { S, newGame } from './core/state.js';
+import { S, newGame } from './core/state.ts';
 import { LAB, LAB_BR, ptsFree, ptsTotal, shopSpent } from './meta/lab.js';
 import { LAY, MAPS } from './data/maps.ts';
 import { SYN, TD } from './data/towers.ts';
@@ -16,12 +16,12 @@ import { SKINS, killFx, mastLv, mastXP, skinFor, vetUp } from './meta/mastery.js
 import { addXP, dupRew, grantTier, seasonInfo, seasonMigrate, seasonState, seasonTier, tierCost, tierOf, tierStart } from './meta/season.js';
 import { SHOP, shopBuy, shopSeasonTier } from './meta/shop.js';
 import { LEAGUES, leagueOf, weeklyCfg } from './meta/weekly.js';
-import { stats, synFor, tcost, ucost } from './core/stats.js';
+import { stats, synFor, tcost, ucost } from './core/stats.ts';
 import { say } from './ui/comms.js';
-import { bossPhase, castOrbital, debCost, doClear, enemyAt, forkTile, genIncome, purge, setFocus, spawn, startWave, toggleFork, update, useAbility } from './core/combat.js';
-import { endGame, starOk } from './core/endgame.js';
-import { build, buildBlock, canBuild, isDebris, sell, upgrade } from './core/actions.js';
-import { offerPerks, takePerk } from './core/perks.js';
+import { bossPhase, castOrbital, debCost, doClear, enemyAt, forkTile, genIncome, purge, setFocus, spawn, startWave, toggleFork, update, useAbility } from './core/combat.ts';
+import { endGame, starOk } from './core/endgame.ts';
+import { build, buildBlock, canBuild, isDebris, sell, upgrade } from './core/actions.ts';
+import { offerPerks, takePerk } from './core/perks.ts';
 import { claimQuest, qev, questState } from './meta/quests.js';
 import { openRadial, renderRadial } from './ui/radial.js';
 import { THEMES, drawDeco, paintMap } from './render/map.js';

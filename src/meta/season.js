@@ -1,6 +1,6 @@
 // Season track: XP, tiers, rewards.
 import { PROG } from './progress.js';
-import { S } from '../core/state.js';
+import { S } from '../core/state.ts';
 import { unlock } from './achievements.js';
 import { KFX, SKINS } from './mastery.js';
 import { toast } from '../ui/comms.js';

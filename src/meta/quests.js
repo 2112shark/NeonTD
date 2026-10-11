@@ -2,7 +2,7 @@
 import { hashS, rng } from '../core/util.ts';
 import { PROG } from './progress.js';
 import { saveProg } from './net.js';
-import { S } from '../core/state.js';
+import { S } from '../core/state.ts';
 import { unlock } from './achievements.js';
 import { QD, QIDX, QW, QW_REW, QW_XP, Q_XP } from '../data/quests.ts';
 import { dayKey, weekKey } from './daily.ts';

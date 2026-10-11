@@ -1,12 +1,12 @@
 // Info panel under the battlefield.
 import { $, r1 } from '../core/util.ts';
-import { S } from '../core/state.js';
+import { S } from '../core/state.ts';
 import { lab } from '../meta/lab.js';
 import { SYN, TD } from '../data/towers.ts';
 import { ED, MODS } from '../data/enemies.ts';
 import { PK_ID } from '../data/perks.ts';
 import { genWave, maxW, waveMods } from '../core/waves.ts';
-import { stats, synFor, tcost } from '../core/stats.js';
+import { stats, synFor, tcost } from '../core/stats.ts';
 import { SPEC_COL, drawTowerShape } from '../render/towers.js';
 import { fmtTime } from './lobby/shared.js';
 
@@ -46,7 +46,7 @@ export function updInfo(force){
   else if(S.sel){const t=S.sel,d=TD[t.type],s=stats(t);
     h=`<div class="h"><span class="tn" style="color:${t.br?SPEC_COL[t.type+t.br]:d.col}">${d.name}${t.br?': '+d.br[t.br].name:''}</span><span>уровень ${t.lvl} из 3</span></div><div>${synChips(t.type,t.syn||[])}</div>`;
   }
-  else if(S.preview||S.place){const type=(S.preview||{}).type||S.place,d=TD[type];
+  else if(S.preview||S.place){const type=/** @type {TowerType} */((S.preview||{}).type||S.place),d=TD[type];
     const c=S.preview?S.preview.c:(S.hover||[])[0],r=S.preview?S.preview.r:(S.hover||[])[1];
     const act=c!=null?synFor(type,c,r,null):[];
     h=S.preview?`<div class="h"><span class="tn" style="color:${d.col}">${d.name}</span><span style="color:var(--gold)">${tcost(type)} кр.</span></div><div>${synChips(type,act)}</div>`
