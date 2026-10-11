@@ -1,0 +1,6 @@
+tests/out/
+tools/sim/out/
+__pycache__/
+node_modules/
+*.pyc
+.DS_Store
