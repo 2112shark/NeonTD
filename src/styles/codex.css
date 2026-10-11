@@ -1,0 +1,16 @@
+/* ---------- codex ---------- */
+.cx{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.cx li{display:grid;grid-template-columns:48px minmax(0,1fr);gap:4px 12px;padding:14px;border:1px solid var(--line);border-radius:12px;background:rgba(10,15,31,.94)}
+.cx canvas{grid-row:1/3;width:48px;height:48px}
+.cx .nm{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.cx .nm b{font-size:16px}
+.cx .nm span{font-family:var(--f-num);font-size:12px;color:var(--gold);white-space:nowrap}
+.cx p{margin:0;font-size:13px;color:var(--dim);line-height:1.45}
+.cxm{grid-column:1/-1;display:flex;flex-direction:column;gap:6px;margin-top:8px;font-size:13px;color:var(--dim);line-height:1.45}
+.cxm b{color:var(--fg);font-weight:600}
+.stt{width:100%;border-collapse:collapse;font-size:12px}
+.stt th{padding:4px 0;font-weight:600;color:var(--dim);text-align:left}
+.stt td{padding:4px 0;font-family:var(--f-num);color:var(--fg)}
+.stt td:first-child{padding-right:10px;font-family:var(--f-ui);color:var(--dim)}
+.stt tr+tr td{border-top:1px solid var(--line)}
+

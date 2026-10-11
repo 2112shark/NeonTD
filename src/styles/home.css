@@ -1,0 +1,25 @@
+/* ---------- home ---------- */
+.home-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rank{display:flex;align-items:center;gap:10px;min-width:0;padding:4px 4px 4px 0;border:0;background:none;text-align:left}
+.rank svg{flex:none;width:22px;height:28px;color:var(--gold);filter:drop-shadow(0 0 5px rgba(255,201,77,.55))}
+.rank span{min-width:0}
+.rank b{display:block;font-size:15px}
+.rank small{display:block;font-size:12px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.play{display:flex;flex-direction:column;align-items:stretch;gap:8px}
+.cta-sub{margin:0;text-align:center;color:var(--dim);font-size:13px}
+.dcard{--bc:color-mix(in srgb,var(--pink) 55%,transparent);width:100%;display:grid;grid-template-columns:minmax(0,1fr) 58px;gap:7px 14px;align-items:start;padding:14px 16px;border:1px solid var(--bc);background:linear-gradient(135deg,rgba(255,79,216,.13),rgba(10,15,31,.94) 58%);text-align:left}
+.dcard .dh{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.dcard .dh b{font-size:15px;color:var(--pink)}
+.timer{font-family:var(--f-num);font-size:13px;color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+.dcard .dm{font-size:21px;font-weight:700;line-height:1.15}
+.dcard canvas{grid-column:2;grid-row:2/5;width:58px;height:73px;border-radius:4px;box-shadow:0 0 0 1px var(--line)}
+.dcard .chips{display:flex;flex-wrap:wrap;gap:4px}
+.dcard .dstats{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;color:var(--dim)}
+.dcard .dstats b{display:block;font-family:var(--f-num);font-size:15px;color:var(--fg)}
+.okmark{align-self:end;color:var(--ok);font-weight:700}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{display:flex;flex-direction:column;gap:6px;min-height:96px;padding:14px;border:1px solid var(--line);border-radius:10px;background:rgba(10,15,31,.92);text-align:left}
+.tile svg{width:22px;height:22px;color:var(--accent)}
+.tile b{font-size:15px}
+.tile span{font-size:12px;color:var(--dim);line-height:1.35}
+

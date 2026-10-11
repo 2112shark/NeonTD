@@ -1,0 +1,21 @@
+/* ---------- more ---------- */
+.mlist{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:rgba(10,15,31,.94)}
+.mlist li+li{border-top:1px solid var(--line)}
+.mlist button{width:100%;min-height:60px;display:flex;align-items:center;gap:14px;padding:8px 16px;border:0;background:none;text-align:left}
+.mlist button>svg{flex:none;width:20px;height:20px;color:var(--accent)}
+.mlist .t{flex:1;min-width:0}
+.mlist .t b{display:block;font-size:15px;font-weight:600}
+.mlist .t span{display:block;font-size:12px;color:var(--dim)}
+.mlist .chev{width:16px;height:16px;color:var(--dim)}
+.mlist .danger b,.mlist .danger>svg{color:var(--warn)}
+.sw{flex:none;position:relative;width:46px;height:28px;border-radius:14px;background:#1f2a4d;transition:background .2s}
+.sw::after{content:"";position:absolute;top:4px;left:4px;width:20px;height:20px;border-radius:50%;background:var(--dim);transition:transform .2s,background .2s}
+.sw.on{background:color-mix(in srgb,var(--accent) 32%,#0f1630)}
+.sw.on::after{transform:translateX(18px);background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.kbd-sec{display:flex;flex-direction:column;gap:10px}
+.keys{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:13px;color:var(--dim)}
+.keys dt{font-family:var(--f-num);color:var(--fg)}
+.keys dd{margin:0}
+@media (hover:none){.kbd-sec{display:none}}
+.ver{margin:0;text-align:center;font-size:12px;color:#7a86b4}
+

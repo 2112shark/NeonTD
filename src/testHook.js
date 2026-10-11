@@ -1,0 +1,32 @@
+// window.__td: debug and test handle into the game state.
+import { COLS, MAXW, ROWS } from './core/util.js';
+import { PROG } from './meta/progress.js';
+import { NET, mergeProg, netInit, saveProg } from './meta/net.js';
+import { S, newGame } from './core/state.js';
+import { LAB, LAB_BR, ptsFree, ptsTotal, shopSpent } from './meta/lab.js';
+import { LAY, MAPS } from './data/maps.js';
+import { SYN, TD } from './data/towers.js';
+import { BOSSES, BOSS_LAP, BOSS_LAP_HEAL, CLOAK_NEAR, ED } from './data/enemies.js';
+import { CHAPTERS, MISSIONS } from './data/campaign.js';
+import { PERKS } from './data/perks.js';
+import { allowedFor } from './core/map.js';
+import { genWave, hpMul, maxW, waveMods } from './core/waves.js';
+import { dailyCfg, dailyScore } from './meta/daily.js';
+import { SKINS, killFx, mastLv, mastXP, skinFor, vetUp } from './meta/mastery.js';
+import { addXP, dupRew, grantTier, seasonInfo, seasonMigrate, seasonState, seasonTier, tierCost, tierOf, tierStart } from './meta/season.js';
+import { SHOP, shopBuy, shopSeasonTier } from './meta/shop.js';
+import { LEAGUES, leagueOf, weeklyCfg } from './meta/weekly.js';
+import { stats, synFor, tcost, ucost } from './core/stats.js';
+import { say } from './ui/comms.js';
+import { bossPhase, castOrbital, debCost, doClear, enemyAt, forkTile, genIncome, purge, setFocus, spawn, startWave, toggleFork, update, useAbility } from './core/combat.js';
+import { endGame, starOk } from './core/endgame.js';
+import { build, buildBlock, canBuild, isDebris, sell, upgrade } from './core/actions.js';
+import { offerPerks, takePerk } from './core/perks.js';
+import { claimQuest, qev, questState } from './meta/quests.js';
+import { openRadial, renderRadial } from './ui/radial.js';
+import { THEMES, drawDeco, paintMap } from './render/map.js';
+import { drawTowerShape } from './render/towers.js';
+import { drawEnemy } from './render/enemies.js';
+import { act, go, openLobby } from './ui/lobby/nav.js';
+
+window.__td={get S(){return S},genIncome,doClear,debCost,isDebris,addXP,seasonState,seasonInfo,seasonTier,weeklyCfg,LEAGUES,leagueOf,mastLv,mastXP,SKINS,NET,mergeProg,claimQuest,killFx,vetUp,skinFor,netInit,saveProg,endGame,openLobby,go,act,takePerk,offerPerks,setFocus,toggleFork,forkTile,MISSIONS,CHAPTERS,PERKS,LAY,BOSSES,questState,qev,buildBlock,tcost,ucost,starOk,allowedFor,enemyAt,purge,bossPhase,say,spawn,openRadial,renderRadial,drawTowerShape,drawEnemy,paintMap,drawDeco,THEMES,newGame,build,upgrade,sell,startWave,update,useAbility,castOrbital,stats,canBuild,synFor,genWave,waveMods,hpMul,dailyCfg,dailyScore,maxW,TD,ED,MAPS,SYN,LAB,LAB_BR,grantTier,dupRew,tierStart,tierCost,tierOf,seasonMigrate,SHOP,shopBuy,shopSeasonTier,ptsFree,ptsTotal,shopSpent,BOSS_LAP,BOSS_LAP_HEAL,CLOAK_NEAR,get PROG(){return PROG},COLS,ROWS,MAXW};

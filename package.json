@@ -1,0 +1,21 @@
+{
+  "name": "neontd",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Неоновый рубеж — браузерная tower defense",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "jsdom": "^29.1.1",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.3"
+  }
+}

@@ -1,0 +1,29 @@
+/* ---------- logo: neon tube lettering ---------- */
+.logo{display:flex;justify-content:center;padding:6px 0 2px}
+.lg{display:block;width:min(86%,340px);height:auto;overflow:visible}
+.lg use{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.lg .tg{stroke:var(--accent);stroke-width:10;opacity:.5}
+.lg .tt{stroke:var(--accent);stroke-width:5}
+.lg .tc{stroke:#eafeff;stroke-width:1.6}
+.lg .em .tg{stroke-width:6}
+.lg .em .tt{stroke-width:2.4}
+.lg .pg{stroke:var(--pink);stroke-width:5;opacity:.55}
+.lg .pt{stroke:var(--pink);stroke-width:2.2}
+.lg .pc{stroke:#ffe6f9;stroke-width:.7}
+.lg .sg{stroke:var(--accent);stroke-width:1.2;opacity:.45}
+.lg .dotc{fill:#fff}
+.lg .nd{fill:var(--pink)}
+.lg .scan{stroke:#fff;stroke-width:2.2;stroke-dasharray:18 320;animation:scan 5.5s linear infinite}
+@keyframes scan{from{stroke-dashoffset:338}to{stroke-dashoffset:0}}
+.lg .spin{transform-box:fill-box;transform-origin:center;animation:spin 18s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lg .fl{animation:flick 7s steps(1) 3s infinite}
+@keyframes flick{0%,86%,100%{opacity:1}87%{opacity:.25}88%{opacity:1}89.5%{opacity:.4}91%{opacity:1}}
+.lg.boot .L{animation:ignite 1s backwards;animation-delay:calc(.25s + var(--i) * .13s)}
+.lg.boot .em,.lg.boot .pkw,.lg.boot .wall{animation:fadeIn .6s backwards}
+.lg.boot .pkw{animation-delay:.95s}
+.lg.boot .wall{animation-delay:1.15s}
+@keyframes ignite{0%{opacity:.06}18%{opacity:.9}26%{opacity:.12}38%{opacity:1}50%{opacity:.35}60%,100%{opacity:1}}
+@keyframes fadeIn{from{opacity:0}}
+@media (max-height:700px){.lg{width:min(70%,290px)}}
+
