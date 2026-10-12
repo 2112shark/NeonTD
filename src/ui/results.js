@@ -1,12 +1,12 @@
 // Results screen after a run.
 import { $ } from '../core/util.ts';
 import { S } from '../core/state.ts';
-import { fair, ptsFree, ptsTotal } from '../meta/lab.js';
+import { fair, ptsFree, ptsTotal } from '../meta/lab.ts';
 import { TD, TW_UNLOCK, TYPES } from '../data/towers.ts';
 import { MISSIONS } from '../data/campaign.ts';
 import { maxW } from '../core/waves.ts';
-import { rewName, seasonInfo, tierRew } from '../meta/season.js';
-import { LEAGUES, leagueOf } from '../meta/weekly.js';
+import { rewName, seasonInfo, tierRew } from '../meta/season.ts';
+import { LEAGUES, leagueOf } from '../meta/weekly.ts';
 import { initAudio } from '../audio/sfx.js';
 import { END, IC, MODE_RU, STAR, fmtN, fmtTime, plural } from './lobby/shared.js';
 import { LBY, runName, starConds } from './lobby/state.js';

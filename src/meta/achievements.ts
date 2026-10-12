@@ -1,11 +1,12 @@
 // Achievements and the unlock toast.
 import { $ } from '../core/util.ts';
-import { PROG } from './progress.js';
-import { saveProg } from './net.js';
+import { PROG } from './progress.ts';
+import { saveProg } from './net.ts';
 import { S } from '../core/state.ts';
 import { snd } from '../audio/sfx.js';
 
-export const ACH=[
+/** id, title, how to earn it */
+export const ACH: [string, string, string][]=[
  ['first','Первый контакт','Уничтожьте первого врага'],
  ['w10','Десятка','Доживите до 10-й волны'],
  ['win','Рубеж удержан','Пройдите первую миссию кампании'],
@@ -48,12 +49,12 @@ export const ACH=[
  ['daily','Вызов принят','Пройдите вызов дня'],
  ['streak3','Постоянство','Пройдите вызов дня три дня подряд'],
 ];
-const achQ=[];let achBusy=false;
-export function unlock(id){
+const achQ: string[]=[];let achBusy=false;
+export function unlock(id: string){
   if(PROG.ach[id])return;PROG.ach[id]=Date.now();saveProg();
   const a=ACH.find(x=>x[0]===id);if(!a)return;if(S)S.newAch.push(a[1]);achQ.push(a[1]);showAch();
 }
 function showAch(){
-  if(achBusy||!achQ.length)return;achBusy=true;const n=achQ.shift();$('#achName').textContent=n;$('#achT').classList.add('show');snd('ach');
+  if(achBusy||!achQ.length)return;achBusy=true;const n=achQ.shift()!;$('#achName').textContent=n;$('#achT').classList.add('show');snd('ach');
   setTimeout(()=>{$('#achT').classList.remove('show');setTimeout(()=>{achBusy=false;showAch()},400)},2600);
 }

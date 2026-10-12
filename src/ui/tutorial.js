@@ -1,7 +1,7 @@
 // First-mission tutorial coach.
 import { $, COLS, ROWS } from '../core/util.ts';
-import { PROG } from '../meta/progress.js';
-import { saveProg } from '../meta/net.js';
+import { PROG } from '../meta/progress.ts';
+import { saveProg } from '../meta/net.ts';
 import { S } from '../core/state.ts';
 import { TD } from '../data/towers.ts';
 import { canBuild } from '../core/actions.ts';

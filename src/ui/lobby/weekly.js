@@ -1,10 +1,10 @@
 // Lobby: weekly challenge and leaderboard.
 import { esc } from '../../core/util.ts';
-import { NET } from '../../meta/net.js';
+import { NET } from '../../meta/net.ts';
 import { MAPS } from '../../data/maps.ts';
 import { MODS } from '../../data/enemies.ts';
-import { seasonInfo } from '../../meta/season.js';
-import { LEAGUES, leagueOf, weeklyCfg } from '../../meta/weekly.js';
+import { seasonInfo } from '../../meta/season.ts';
+import { LEAGUES, leagueOf, weeklyCfg } from '../../meta/weekly.ts';
 import { fmtN, weekLeft } from './shared.js';
 import { SCR, head, resumable, weekRec } from './state.js';
 

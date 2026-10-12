@@ -1,7 +1,7 @@
 // Info panel under the battlefield.
 import { $, r1 } from '../core/util.ts';
 import { S } from '../core/state.ts';
-import { lab } from '../meta/lab.js';
+import { lab } from '../meta/lab.ts';
 import { SYN, TD } from '../data/towers.ts';
 import { ED, MODS } from '../data/enemies.ts';
 import { PK_ID } from '../data/perks.ts';

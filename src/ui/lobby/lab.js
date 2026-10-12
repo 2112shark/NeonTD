@@ -1,10 +1,10 @@
 // Lobby: lab, arsenal, shop.
-import { PROG } from '../../meta/progress.js';
-import { LAB_BR, labRaw, ptsFree } from '../../meta/lab.js';
+import { PROG } from '../../meta/progress.ts';
+import { LAB_BR, labRaw, ptsFree } from '../../meta/lab.ts';
 import { TD, TYPES } from '../../data/towers.ts';
-import { KFX, MAST, SKINS, mastLv, mastXP, skinFor, skinOwned } from '../../meta/mastery.js';
-import { seasonInfo } from '../../meta/season.js';
-import { SHOP, shopOwned, shopSeasonTier } from '../../meta/shop.js';
+import { KFX, MAST, SKINS, mastLv, mastXP, skinFor, skinOwned } from '../../meta/mastery.ts';
+import { seasonInfo } from '../../meta/season.ts';
+import { SHOP, shopOwned, shopSeasonTier } from '../../meta/shop.ts';
 import { IC, PIC, fmtN } from './shared.js';
 import { LBY, SCR, head } from './state.js';
 

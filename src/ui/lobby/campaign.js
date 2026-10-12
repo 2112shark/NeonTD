@@ -1,7 +1,7 @@
 // Lobby: campaign map, mission briefing, endless and daily screens.
 import { r1 } from '../../core/util.ts';
-import { PROG } from '../../meta/progress.js';
-import { labRaw } from '../../meta/lab.js';
+import { PROG } from '../../meta/progress.ts';
+import { labRaw } from '../../meta/lab.ts';
 import { MAPS } from '../../data/maps.ts';
 import { TD, TW_UNLOCK, TYPES } from '../../data/towers.ts';
 import { MODS } from '../../data/enemies.ts';

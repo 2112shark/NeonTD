@@ -1,16 +1,16 @@
 // Lobby: awards, quests, season, profile.
 import { esc } from '../../core/util.ts';
-import { PROG } from '../../meta/progress.js';
-import { NET } from '../../meta/net.js';
-import { ACH } from '../../meta/achievements.js';
+import { PROG } from '../../meta/progress.ts';
+import { NET } from '../../meta/net.ts';
+import { ACH } from '../../meta/achievements.ts';
 import { TD, TYPES } from '../../data/towers.ts';
 import { MODS } from '../../data/enemies.ts';
 import { MISSIONS } from '../../data/campaign.ts';
 import { QIDX, QW_REW, Q_XP } from '../../data/quests.ts';
-import { KFX, SKINS } from '../../meta/mastery.js';
-import { S_MAX, rewName, seasonInfo, seasonState, seasonTier, tierCost, tierRew, tierStart } from '../../meta/season.js';
-import { LEAGUES, leagueOf } from '../../meta/weekly.js';
-import { questReady, questState } from '../../meta/quests.js';
+import { KFX, SKINS } from '../../meta/mastery.ts';
+import { S_MAX, rewName, seasonInfo, seasonState, seasonTier, tierCost, tierRew, tierStart } from '../../meta/season.ts';
+import { LEAGUES, leagueOf } from '../../meta/weekly.ts';
+import { questReady, questState } from '../../meta/quests.ts';
 import { IC, PIC, chevrons, fmtN, plural, rankInfo, timeLeft, weekLeft } from './shared.js';
 import { LBY, SCR, head, mStars, weekRec } from './state.js';
 

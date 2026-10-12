@@ -1,5 +1,5 @@
 // Lobby: home screen.
-import { PROG } from '../../meta/progress.js';
+import { PROG } from '../../meta/progress.ts';
 import { MAPS } from '../../data/maps.ts';
 import { dailyCfg } from '../../meta/daily.ts';
 import { IC, RM, chevrons, dailyProg, fmtN, plural, rankInfo, streak, timeLeft } from './shared.js';

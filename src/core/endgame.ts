@@ -1,18 +1,18 @@
 // End of a run: star conditions, rewards, records.
 import type { StarCond } from '../data/campaign.ts';
-import { PROG } from '../meta/progress.js';
-import { saveProg } from '../meta/net.js';
+import { PROG } from '../meta/progress.ts';
+import { saveProg } from '../meta/net.ts';
 import { S } from './state.ts';
-import { unlock } from '../meta/achievements.js';
+import { unlock } from '../meta/achievements.ts';
 import { TYPES } from '../data/towers.ts';
 import { MISSIONS } from '../data/campaign.ts';
 import { dailyScore, dayKey } from '../meta/daily.ts';
-import { mastLv } from '../meta/mastery.js';
-import { XP_DAILY, XP_WAVE, addXP } from '../meta/season.js';
-import { weeklyEnd } from '../meta/weekly.js';
+import { mastLv } from '../meta/mastery.ts';
+import { XP_DAILY, XP_WAVE, addXP } from '../meta/season.ts';
+import { weeklyEnd } from '../meta/weekly.ts';
 import { snd } from '../audio/sfx.js';
 import { PKO } from '../ui/perkChoice.js';
-import { qev } from '../meta/quests.js';
+import { qev } from '../meta/quests.ts';
 import { closeRadial } from '../ui/radial.js';
 import { updInfo } from '../ui/info.js';
 import { lobbyOn, vib } from '../ui/lobby/shared.js';

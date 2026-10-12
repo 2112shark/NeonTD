@@ -1,14 +1,14 @@
 // The current run (S), game mode and speed; newGame resets everything for a new run.
 import { hashS } from './util.ts';
-import { PROG } from '../meta/progress.js';
-import { lab, ptsTotal } from '../meta/lab.js';
+import { PROG } from '../meta/progress.ts';
+import { lab, ptsTotal } from '../meta/lab.ts';
 import { MAPS } from '../data/maps.ts';
 import { TYPES } from '../data/towers.ts';
 import { MISSIONS, NM } from '../data/campaign.ts';
 import { allowedFor, mFlag } from './map.ts';
 import { dailyCfg } from '../meta/daily.ts';
-import { mastLv } from '../meta/mastery.js';
-import { weeklyCfg } from '../meta/weekly.js';
+import { mastLv } from '../meta/mastery.ts';
+import { weeklyCfg } from '../meta/weekly.ts';
 import { hideComms } from '../ui/comms.js';
 import { PKO } from '../ui/perkChoice.js';
 import { renderCoach } from '../ui/tutorial.js';

@@ -1,12 +1,19 @@
 // Lab upgrades bought with data cores.
-import { PROG } from './progress.js';
+import { PROG } from './progress.ts';
 import { MODE } from '../core/state.ts';
 
-export const labRaw=id=>PROG.lab[id]||0;
-export const fair=()=>MODE==='daily'||MODE==='weekly';
-export const lab=id=>fair()?0:labRaw(id);
+/** a lab upgrade bought by the player, one per node level */
+export interface LabNode { id: string; name: string; desc: string; max: number; cost: number[] }
+export interface LabBranch { name: string; col: string; nodes: LabNode[] }
 
-export const LAB_BR=[
+/** level the player bought, ignoring fair-play modes */
+export const labRaw=(id: string): number=>PROG.lab[id]||0;
+/** daily and weekly challenges run without lab upgrades */
+export const fair=()=>MODE==='daily'||MODE==='weekly';
+/** level that applies in the current run */
+export const lab=(id: string)=>fair()?0:labRaw(id);
+
+export const LAB_BR: LabBranch[]=[
  {name:'Экономика',col:'#ffc94d',nodes:[
   {id:'cap',name:'Стартовый капитал',desc:'+40 кредитов на старте за уровень',max:3,cost:[1,2,3]},
   {id:'int',name:'Инвестиции',desc:'Проценты 6% вместо 5%, лимит 60',max:1,cost:[3]},
@@ -25,8 +32,9 @@ export const LAB_BR=[
   {id:'perk',name:'Широкий выбор',desc:'Перк выбирается из четырёх вариантов',max:1,cost:[3]}]},
 ];
 export const LAB=LAB_BR.flatMap(b=>b.nodes);
+/** data cores earned in total: stars, achievements, waves, daily wins, legacy and bonuses */
 export function ptsTotal(){return Object.values(PROG.stars).reduce((a,b)=>a+b,0)+Object.keys(PROG.ach).length+Math.floor(PROG.waves/10)+(PROG.dailyWins||0)+(PROG.legacy||0)+(PROG.bonus||0)}
 function ptsSpent(){let s=0;for(const n of LAB)for(let i=0;i<labRaw(n.id);i++)s+=n.cost[i];return s}
-const sumV=o=>Object.values(o||{}).reduce((a,b)=>a+(+b||0),0);
+const sumV=(o: Record<string, number>|undefined)=>Object.values(o||{}).reduce((a,b)=>a+(+b||0),0);
 export const shopSpent=()=>Math.max(0,sumV(PROG.buy)-sumV(PROG.refund));
 export const ptsFree=()=>ptsTotal()-ptsSpent()-shopSpent();

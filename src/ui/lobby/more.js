@@ -1,6 +1,6 @@
 // Lobby: settings and codex.
 import { r1 } from '../../core/util.ts';
-import { PROG } from '../../meta/progress.js';
+import { PROG } from '../../meta/progress.ts';
 import { MAPS } from '../../data/maps.ts';
 import { SYN, TD, TW_UNLOCK, TYPES } from '../../data/towers.ts';
 import { ED, MODS } from '../../data/enemies.ts';

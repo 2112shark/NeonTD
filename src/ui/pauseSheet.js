@@ -1,7 +1,7 @@
 // Pause menu.
 import { $ } from '../core/util.ts';
-import { PROG } from '../meta/progress.js';
-import { saveProg } from '../meta/net.js';
+import { PROG } from '../meta/progress.ts';
+import { saveProg } from '../meta/net.ts';
 import { S, newGame } from '../core/state.ts';
 import { PK_ID } from '../data/perks.ts';
 import { initAudio, muted, setMuted, snd } from '../audio/sfx.js';

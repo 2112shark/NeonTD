@@ -1,5 +1,5 @@
 // Synthesized sound effects (WebAudio), mute state.
-import { PROG } from '../meta/progress.js';
+import { PROG } from '../meta/progress.ts';
 
 /* ---------- audio ---------- */
 export let AC=null,master=null,muted=!PROG.set.sound;const lastS={};

@@ -4,7 +4,7 @@ import { cv, tile } from '../render/canvas.js';
 import { S } from '../core/state.ts';
 import { TD, TYPES } from '../data/towers.ts';
 import { MODE_NAMES } from '../data/enemies.ts';
-import { skinFor } from '../meta/mastery.js';
+import { skinFor } from '../meta/mastery.ts';
 import { sellRate, stats, synFor, tcost, towerAt, ucost } from '../core/stats.ts';
 import { initAudio, snd } from '../audio/sfx.js';
 import { toast } from './comms.js';

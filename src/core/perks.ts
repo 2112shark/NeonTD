@@ -1,14 +1,14 @@
 // In-run perk offers and picks.
 import { rng } from './util.ts';
-import { PROG } from '../meta/progress.js';
+import { PROG } from '../meta/progress.ts';
 import { S } from './state.ts';
-import { lab } from '../meta/lab.js';
-import { unlock } from '../meta/achievements.js';
+import { lab } from '../meta/lab.ts';
+import { unlock } from '../meta/achievements.ts';
 import { PERKS, PK_ID } from '../data/perks.ts';
 import { snd } from '../audio/sfx.js';
 import { toast } from '../ui/comms.js';
 import { PKO, renderPerks } from '../ui/perkChoice.js';
-import { qev } from '../meta/quests.js';
+import { qev } from '../meta/quests.ts';
 import { closeRadial } from '../ui/radial.js';
 import { updInfo } from '../ui/info.js';
 import { vib } from '../ui/lobby/shared.js';

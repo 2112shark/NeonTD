@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { mergeProg } from '../../src/meta/net.js';
-import { freshProg } from '../../src/meta/progress.js';
+import { mergeProg } from '../../src/meta/net.ts';
+import { freshProg } from '../../src/meta/progress.ts';
 
 describe('mergeProg (local save + cloud save)', () => {
   const local = () => Object.assign(freshProg(), {

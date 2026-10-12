@@ -2,7 +2,7 @@
 import { $, r1 } from '../core/util.ts';
 import { S } from '../core/state.ts';
 import { TD } from '../data/towers.ts';
-import { skinFor } from '../meta/mastery.js';
+import { skinFor } from '../meta/mastery.ts';
 import { genAura, sellRate, stats, synFor, tcost, ucost } from '../core/stats.ts';
 import { debCost } from '../core/combat.ts';
 import { debrisIcon } from './radial.js';

@@ -2,7 +2,7 @@
 import { COLS, ROWS, clamp, d2, hexA, rng } from '../core/util.ts';
 import { H, W, bgc, ctx, cv, dpr, glow, poly, rr, tile } from './canvas.js';
 import { S } from '../core/state.ts';
-import { lab } from '../meta/lab.js';
+import { lab } from '../meta/lab.ts';
 import { SYN, TD } from '../data/towers.ts';
 import { ED } from '../data/enemies.ts';
 import { genWave } from '../core/waves.ts';

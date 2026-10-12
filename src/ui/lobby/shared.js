@@ -1,7 +1,7 @@
 // Lobby building blocks: elements, formatting, ranks, icons.
 import { $ } from '../../core/util.ts';
-import { PROG } from '../../meta/progress.js';
-import { ptsTotal } from '../../meta/lab.js';
+import { PROG } from '../../meta/progress.ts';
+import { ptsTotal } from '../../meta/lab.ts';
 import { dayKey } from '../../meta/daily.ts';
 
 /* ---------- lobby ---------- */

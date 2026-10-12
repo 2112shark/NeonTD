@@ -1,17 +1,17 @@
 // Lobby navigation, map carousel and lobby actions.
 import { $ } from '../../core/util.ts';
-import { PROG, freshProg, setPROG } from '../../meta/progress.js';
-import { lbSub, saveProg } from '../../meta/net.js';
+import { PROG, freshProg, setPROG } from '../../meta/progress.ts';
+import { lbSub, saveProg } from '../../meta/net.ts';
 import { S, newGame } from '../../core/state.ts';
-import { LAB, labRaw, ptsFree } from '../../meta/lab.js';
+import { LAB, labRaw, ptsFree } from '../../meta/lab.ts';
 import { MAPS } from '../../data/maps.ts';
 import { MISSIONS } from '../../data/campaign.ts';
 import { dayKey } from '../../meta/daily.ts';
-import { skinOwned } from '../../meta/mastery.js';
-import { SHOP, shopBuy, shopOwned, shopSeasonTier } from '../../meta/shop.js';
+import { skinOwned } from '../../meta/mastery.ts';
+import { SHOP, shopBuy, shopOwned, shopSeasonTier } from '../../meta/shop.ts';
 import { initAudio, muted, setMuted, snd } from '../../audio/sfx.js';
 import { hideComms, say } from '../comms.js';
-import { claimQuest, questReady } from '../../meta/quests.js';
+import { claimQuest, questReady } from '../../meta/quests.ts';
 import { renderCoach } from '../tutorial.js';
 import { closeRadial } from '../radial.js';
 import { iconCanvas, updInfo } from '../info.js';

@@ -215,6 +215,11 @@ interface RunState {
   mastUp?: [string, number][];
 }
 
+/** one quest in progress: target n, progress p, claimed c */
+interface QuestProgress { id: string; n: number; p: number; c: number }
+/** today's three quests and this week's quest */
+interface QuestState { day: string; list: QuestProgress[]; wkk?: string | null; wk?: QuestProgress | null; bonus?: number }
+
 /** Persistent player progress, saved to localStorage and merged with the cloud copy. */
 interface Progress {
   v?: number;
@@ -233,7 +238,7 @@ interface Progress {
   set: { sound: boolean; vib: boolean; [k: string]: any };
   streak: any;
   seenAch: number; legacy: number; bonus: number;
-  q: any;
+  q: QuestState | null;
   st: Record<string, any>;
   seenE: Record<string, any>;
   own: Record<string, any>;

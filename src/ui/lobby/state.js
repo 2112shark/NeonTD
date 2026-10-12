@@ -1,17 +1,17 @@
 // Lobby state and helpers shared by screens; SCR holds screen renderers.
-import { PROG } from '../../meta/progress.js';
+import { PROG } from '../../meta/progress.ts';
 import { S } from '../../core/state.ts';
-import { labRaw, ptsFree } from '../../meta/lab.js';
+import { labRaw, ptsFree } from '../../meta/lab.ts';
 import { MAPS } from '../../data/maps.ts';
 import { BOSS_LAP, BOSS_LAP_HEAL, ED, MODS } from '../../data/enemies.ts';
 import { MISSIONS, NM } from '../../data/campaign.ts';
 import { QIDX } from '../../data/quests.ts';
 import { maxW } from '../../core/waves.ts';
 import { weekKey } from '../../meta/daily.ts';
-import { S_MAX, seasonInfo, seasonState, seasonTier, tierCost, tierStart } from '../../meta/season.js';
-import { LEAGUES, leagueOf, weeklyCfg } from '../../meta/weekly.js';
+import { S_MAX, seasonInfo, seasonState, seasonTier, tierCost, tierStart } from '../../meta/season.ts';
+import { LEAGUES, leagueOf, weeklyCfg } from '../../meta/weekly.ts';
 import { popc } from '../../core/endgame.ts';
-import { questReady, questState } from '../../meta/quests.js';
+import { questReady, questState } from '../../meta/quests.ts';
 import { ACC, GEN, IC, MODE_RU, STAR, fmtN, fmtTime, plural, timeLeft, weekLeft } from './shared.js';
 
 /* screens */

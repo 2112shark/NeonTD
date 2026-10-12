@@ -1,9 +1,9 @@
 // Tower stats, costs, auras and synergies.
 import { S } from './state.ts';
-import { lab } from '../meta/lab.js';
-import { unlock } from '../meta/achievements.js';
+import { lab } from '../meta/lab.ts';
+import { unlock } from '../meta/achievements.ts';
 import { SYN, TD, type Stats, type Synergy } from '../data/towers.ts';
-import { mastB, vetB } from '../meta/mastery.js';
+import { mastB, vetB } from '../meta/mastery.ts';
 
 export const towerAt=(c: number,r: number)=>S.towers.find(t=>t.c===c&&t.r===r);
 /** is this run perk taken */

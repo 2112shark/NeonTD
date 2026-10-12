@@ -2,7 +2,7 @@
 import { hexA } from '../core/util.ts';
 import { glow, poly, rr } from './canvas.js';
 import { TD } from '../data/towers.ts';
-import { skinCols } from '../meta/mastery.js';
+import { skinCols } from '../meta/mastery.ts';
 
 /* towers: platform grows with level, specialization changes the silhouette and accent colour */
 /** @type {Record<string,string>} */
