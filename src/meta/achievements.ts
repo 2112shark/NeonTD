@@ -3,7 +3,7 @@ import { $ } from '../core/util.ts';
 import { PROG } from './progress.ts';
 import { saveProg } from './net.ts';
 import { S } from '../core/state.ts';
-import { snd } from '../audio/sfx.js';
+import { snd } from '../audio/sfx.ts';
 
 /** id, title, how to earn it */
 export const ACH: [string, string, string][]=[

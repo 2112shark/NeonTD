@@ -1,11 +1,11 @@
 // Lobby widgets: logo, map previews, enemy icons, stat tables.
 import { COLS, r1 } from '../../core/util.ts';
-import { glow, poly } from '../../render/canvas.js';
+import { glow, poly } from '../../render/canvas.ts';
 import { TD } from '../../data/towers.ts';
 import { ED } from '../../data/enemies.ts';
-import { THEMES, drawDeco, paintMap } from '../../render/map.js';
-import { drawEnemy } from '../../render/enemies.js';
-import { drawSwitch } from '../../render/draw.js';
+import { THEMES, drawDeco, paintMap } from '../../render/map.ts';
+import { drawEnemy } from '../../render/enemies.ts';
+import { drawSwitch } from '../../render/draw.ts';
 
 export function logo(boot){
   const L=[['gR',0],['gU',48],['gB',96],['gE',142],['gZ',186]];

@@ -13,7 +13,7 @@ import { hideComms } from '../ui/comms.js';
 import { PKO } from '../ui/perkChoice.js';
 import { renderCoach } from '../ui/tutorial.js';
 import { closeRadial } from '../ui/radial.js';
-import { buildBg } from '../render/map.js';
+import { buildBg } from '../render/map.ts';
 import { updInfo } from '../ui/info.js';
 import { hudLabels } from '../ui/hud.js';
 

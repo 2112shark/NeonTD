@@ -3,7 +3,7 @@ import { $ } from '../core/util.ts';
 import { S, setSpeed, speed } from '../core/state.ts';
 import { AB, abCd } from '../data/abilities.ts';
 import { maxW } from '../core/waves.ts';
-import { initAudio } from '../audio/sfx.js';
+import { initAudio } from '../audio/sfx.ts';
 import { startWave, useAbility } from '../core/combat.ts';
 import { SHEET, fmtTime, lobbyOn } from './lobby/shared.js';
 import { openSheet } from './pauseSheet.js';

@@ -1,13 +1,17 @@
 // Tower sprites.
 import { hexA } from '../core/util.ts';
-import { glow, poly, rr } from './canvas.js';
+import { glow, poly, rr } from './canvas.ts';
 import { TD } from '../data/towers.ts';
 import { skinCols } from '../meta/mastery.ts';
 
 /* towers: platform grows with level, specialization changes the silhouette and accent colour */
-/** @type {Record<string,string>} */
-export const SPEC_COL={graviA:'#c9b8ff',graviB:'#7dd8ff',genA:'#ffe9a8',genB:'#ff9a3d',laserA:'#ffd2f6',laserB:'#b48cff',cannonA:'#ff6a3d',cannonB:'#ffd23d',cryoA:'#ffffff',cryoB:'#c9a8ff',teslaA:'#8cc8ff',teslaB:'#ffe14d',sniperA:'#ffc94d',sniperB:'#c2ff5c'};
-const TURRET={
+/** accent color of each specialization, keyed type+branch */
+export const SPEC_COL: Record<string, string>={graviA:'#c9b8ff',graviB:'#7dd8ff',genA:'#ffe9a8',genB:'#ff9a3d',laserA:'#ffd2f6',laserB:'#b48cff',cannonA:'#ff6a3d',cannonB:'#ffd23d',cryoA:'#ffffff',cryoB:'#c9a8ff',teslaA:'#8cc8ff',teslaB:'#ffe14d',sniperA:'#ffc94d',sniperB:'#c2ff5c'};
+/** what drawTowerShape needs: a tower on the field, or a stand-in for icons and previews */
+export type TowerDraw = TowerLike & { x: number; y: number; icon?: number | boolean };
+/** draws one turret around the origin: body color c, accent sc, level, branch, recoil rc */
+type TurretFn = (g: CanvasRenderingContext2D, t: TowerDraw, c: string, sc: string, lv: number, br: 'A' | 'B' | null, time: number, rc: number, alpha: number) => void;
+const TURRET: Record<TowerType, TurretFn>={
  laser(g,t,c,sc,lv,br,time,rc,alpha){
   g.rotate(t.ang||0);
   if(br==='B'){ // Призма: rotating prism with three coloured emitters
@@ -42,7 +46,7 @@ const TURRET={
   g.fillStyle='#1f2447';poly(g,8,.26,Math.PI/8);g.fill();g.strokeStyle=c;g.lineWidth=.03;g.stroke();
   if(lv>=2||br){g.fillStyle=hexA(c,.85);for(let k=0;k<4;k++){const a=Math.PI/4+k*Math.PI/2;g.beginPath();g.arc(Math.cos(a)*.19,Math.sin(a)*.19,.024,0,7);g.fill()}}
   if(br==='B'){ // Залп: rotary triple barrel
-   const ph=time*(t.rc>0?24:2.5);
+   const ph=time*((t.rc||0)>0?24:2.5);
    const bs=[0,1,2].map(k=>({o:Math.sin(ph+k*2.094)*.11,z:Math.cos(ph+k*2.094)})).sort((a,b)=>a.z-b.z);
    for(const b of bs){g.fillStyle=b.z>0?sc:hexA(sc,.5);rr(g,.02-rc,b.o-.042,.38,.084,.02);g.fill()}
    g.beginPath();g.arc(0,0,.13,0,7);g.fillStyle='#2b2140';g.fill();g.strokeStyle=sc;g.lineWidth=.025;g.stroke();
@@ -134,7 +138,7 @@ const TURRET={
    g.fillStyle=c;rr(g,-rc,-.09,.46,.065,.02);g.fill();rr(g,-rc,.025,.46,.065,.02);g.fill();
    g.fillStyle=sc;g.fillRect(.42-rc,-.1,.04,.2);
    g.beginPath();g.arc(-.1,.17,.09,0,7);g.fillStyle='#1e2c14';g.fill();g.strokeStyle=sc;g.lineWidth=.025;g.stroke();
-   g.save();g.translate(-.1,.17);g.rotate(time*(t.rc>0?12:1));g.strokeStyle=hexA(sc,.7);g.lineWidth=.015;g.beginPath();for(let k=0;k<4;k++){g.rotate(Math.PI/2);g.moveTo(0,0);g.lineTo(.07,0)}g.stroke();g.restore();
+   g.save();g.translate(-.1,.17);g.rotate(time*((t.rc||0)>0?12:1));g.strokeStyle=hexA(sc,.7);g.lineWidth=.015;g.beginPath();for(let k=0;k<4;k++){g.rotate(Math.PI/2);g.moveTo(0,0);g.lineTo(.07,0)}g.stroke();g.restore();
   }else{
    const L=lv>=3?.58:lv>=2?.54:.5;g.fillStyle=c;rr(g,-rc,-.035,L,.07,.02);g.fill();
    g.fillStyle='#0b1230';g.fillRect(.08-rc,-.015,L-.2,.03);
@@ -144,7 +148,7 @@ const TURRET={
   g.beginPath();g.arc(-.02,0,.06,0,7);g.fillStyle='#e6fff0';g.fill();
  }
 };
-export function drawTowerShape(g,t,time,alpha=1){
+export function drawTowerShape(g: CanvasRenderingContext2D,t: TowerDraw,time: number,alpha=1){
   const d=TD[t.type],skc=skinCols(t,time),c=skc?skc[0]:d.col,x=t.x,y=t.y,lv=t.lvl||1,br=t.br||null,sp=br?t.type+br:null,sc=sp?(skc?skc[1]:SPEC_COL[sp]):c;
   g.save();g.globalAlpha=alpha;
   // platform: square with brackets on level 2, octagonal plate with corner lights on level 3 and specializations

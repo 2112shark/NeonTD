@@ -5,7 +5,7 @@ import { MAPS } from '../../data/maps.ts';
 import { SYN, TD, TW_UNLOCK, TYPES } from '../../data/towers.ts';
 import { ED, MODS } from '../../data/enemies.ts';
 import { PERKS } from '../../data/perks.ts';
-import { muted } from '../../audio/sfx.js';
+import { muted } from '../../audio/sfx.ts';
 import { IC, canVib, cap } from './shared.js';
 import { EINFO, baseStats, statRows } from './widgets.js';
 import { LBY, SCR, head } from './state.js';

@@ -4,7 +4,7 @@ import { PROG } from '../meta/progress.ts';
 import { saveProg } from '../meta/net.ts';
 import { S, newGame } from '../core/state.ts';
 import { PK_ID } from '../data/perks.ts';
-import { initAudio, muted, setMuted, snd } from '../audio/sfx.js';
+import { initAudio, muted, setMuted, snd } from '../audio/sfx.ts';
 import { say } from './comms.js';
 import { starOk } from '../core/endgame.ts';
 import { renderCoach } from './tutorial.js';

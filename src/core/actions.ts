@@ -7,13 +7,13 @@ import { unlock } from '../meta/achievements.ts';
 import { TD, TW_UNLOCK, TYPES } from '../data/towers.ts';
 import { skinFor } from '../meta/mastery.ts';
 import { recomputeSyn, sellRate, stats, tcost, towerAt, ucost } from './stats.ts';
-import { snd } from '../audio/sfx.js';
+import { snd } from '../audio/sfx.ts';
 import { toast } from '../ui/comms.js';
 import { burst, text } from './combat.ts';
 import { qev } from '../meta/quests.ts';
 import { tutEvent } from '../ui/tutorial.js';
 import { SHORT, dFmt, statDiff } from '../ui/towerCard.js';
-import { SPEC_COL } from '../render/towers.js';
+import { SPEC_COL } from '../render/towers.ts';
 import { ACC, vib } from '../ui/lobby/shared.js';
 
 /* ---------- actions ---------- */

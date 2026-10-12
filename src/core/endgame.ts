@@ -10,7 +10,7 @@ import { dailyScore, dayKey } from '../meta/daily.ts';
 import { mastLv } from '../meta/mastery.ts';
 import { XP_DAILY, XP_WAVE, addXP } from '../meta/season.ts';
 import { weeklyEnd } from '../meta/weekly.ts';
-import { snd } from '../audio/sfx.js';
+import { snd } from '../audio/sfx.ts';
 import { PKO } from '../ui/perkChoice.js';
 import { qev } from '../meta/quests.ts';
 import { closeRadial } from '../ui/radial.js';

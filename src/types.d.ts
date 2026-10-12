@@ -105,8 +105,13 @@ interface Enemy {
   gunA?: number;
 }
 
-/** Short-lived visual effect */
-interface Fx { k: string; x?: number; y?: number; r?: number; life: number; max: number; col: string; [k: string]: any }
+/** Short-lived visual effect, by kind: round ones grow or fade at (x, y), lines run to (x2, y2), arcs are lightning */
+type Fx = (
+  | { k: 'ring' | 'boom' | 'pop' | 'emp' | 'heal' | 'lock' | 'beam'; x: number; y: number; r: number }
+  | { k: 'jam' | 'glitch'; x: number; y: number; r: number; seed: number }
+  | { k: 'blink' | 'trace'; x: number; y: number; x2: number; y2: number }
+  | { k: 'arc'; pts: Point[]; seed: number }
+) & { life: number; max: number; col: string };
 interface Particle { x: number; y: number; vx: number; vy: number; life: number; max: number; col: string; size: number; g?: number }
 /** floating text over the field: rewards, damage, status */
 interface FloatText { x: number; y: number; s: string; col: string; size: number; life: number; max: number }

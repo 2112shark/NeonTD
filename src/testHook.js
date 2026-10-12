@@ -24,9 +24,9 @@ import { build, buildBlock, canBuild, isDebris, sell, upgrade } from './core/act
 import { offerPerks, takePerk } from './core/perks.ts';
 import { claimQuest, qev, questState } from './meta/quests.ts';
 import { openRadial, renderRadial } from './ui/radial.js';
-import { THEMES, drawDeco, paintMap } from './render/map.js';
-import { drawTowerShape } from './render/towers.js';
-import { drawEnemy } from './render/enemies.js';
+import { THEMES, drawDeco, paintMap } from './render/map.ts';
+import { drawTowerShape } from './render/towers.ts';
+import { drawEnemy } from './render/enemies.ts';
 import { act, go, openLobby } from './ui/lobby/nav.js';
 
 window.__td={get S(){return S},genIncome,doClear,debCost,isDebris,addXP,seasonState,seasonInfo,seasonTier,weeklyCfg,LEAGUES,leagueOf,mastLv,mastXP,SKINS,NET,mergeProg,claimQuest,killFx,vetUp,skinFor,netInit,saveProg,endGame,openLobby,go,act,takePerk,offerPerks,setFocus,toggleFork,forkTile,MISSIONS,CHAPTERS,PERKS,LAY,BOSSES,questState,qev,buildBlock,tcost,ucost,starOk,allowedFor,enemyAt,purge,bossPhase,say,spawn,openRadial,renderRadial,drawTowerShape,drawEnemy,paintMap,drawDeco,THEMES,newGame,build,upgrade,sell,startWave,update,useAbility,castOrbital,stats,canBuild,synFor,genWave,waveMods,hpMul,dailyCfg,dailyScore,maxW,TD,ED,MAPS,SYN,LAB,LAB_BR,grantTier,dupRew,tierStart,tierCost,tierOf,seasonMigrate,SHOP,shopBuy,shopSeasonTier,ptsFree,ptsTotal,shopSpent,BOSS_LAP,BOSS_LAP_HEAL,CLOAK_NEAR,get PROG(){return PROG},COLS,ROWS,MAXW};

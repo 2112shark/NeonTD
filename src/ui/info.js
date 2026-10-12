@@ -7,7 +7,7 @@ import { ED, MODS } from '../data/enemies.ts';
 import { PK_ID } from '../data/perks.ts';
 import { genWave, maxW, waveMods } from '../core/waves.ts';
 import { stats, synFor, tcost } from '../core/stats.ts';
-import { SPEC_COL, drawTowerShape } from '../render/towers.js';
+import { SPEC_COL, drawTowerShape } from '../render/towers.ts';
 import { fmtTime } from './lobby/shared.js';
 
 /* ---------- info panel ---------- */

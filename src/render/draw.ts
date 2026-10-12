@@ -1,30 +1,34 @@
 // Draws one frame of the battle.
 import { COLS, ROWS, clamp, d2, hexA, rng } from '../core/util.ts';
-import { H, W, bgc, ctx, cv, dpr, glow, poly, rr, tile } from './canvas.js';
+import { H, W, bgc, ctx, cv, dpr, glow, poly, rr, tile } from './canvas.ts';
 import { S } from '../core/state.ts';
 import { lab } from '../meta/lab.ts';
-import { SYN, TD } from '../data/towers.ts';
+import { SYN, TD, type Stats } from '../data/towers.ts';
 import { ED } from '../data/enemies.ts';
 import { genWave } from '../core/waves.ts';
 import { stats, synFor, tcost } from '../core/stats.ts';
 import { canBuild } from '../core/actions.ts';
 import { tutTile } from '../ui/tutorial.js';
-import { THEMES, drawDeco } from './map.js';
-import { drawTowerShape } from './towers.js';
-import { drawEnemy } from './enemies.js';
+import { THEMES, drawDeco } from './map.ts';
+import { drawTowerShape, type TowerDraw } from './towers.ts';
+import { drawEnemy } from './enemies.ts';
 
-function lightning(g,pts,seed){
+type Ctx = CanvasRenderingContext2D;
+
+/** jagged polyline through pts, stable for a given seed */
+function lightning(g: Ctx,pts: Point[],seed: number){
   const R=rng(seed|0);g.beginPath();g.moveTo(pts[0].x,pts[0].y);
   for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i],n=5;for(let k=1;k<=n;k++){const q=k/n,j=k===n?0:(R()-.5)*.25;g.lineTo(a.x+(b.x-a.x)*q+j,a.y+(b.y-a.y)*q+j)}}
   g.stroke();
 }
-function showR(t,s,col,valid){ctx.beginPath();ctx.arc(t.x,t.y,s.range,0,7);ctx.fillStyle=hexA(valid?col:'#ff4d6d',.07);ctx.fill();ctx.setLineDash([.15,.1]);ctx.lineDashOffset=-S.time*.5;ctx.strokeStyle=hexA(valid?col:'#ff4d6d',.6);ctx.lineWidth=.03;ctx.stroke();ctx.setLineDash([])}
-const coreRatio=i=>S.coreHp?S.coreHp[i]/Math.max(1,S.coreMax):S.lives/Math.max(1,S.maxLives);
-function drawGate(g,x,y,col,time){g.save();g.translate(x,y);g.lineCap='round';g.strokeStyle=col;g.lineWidth=.06;
+/** range circle; red when the tower can't be afforded */
+function showR(t: Point,s: Stats,col: string,valid: boolean){ctx.beginPath();ctx.arc(t.x,t.y,s.range,0,7);ctx.fillStyle=hexA(valid?col:'#ff4d6d',.07);ctx.fill();ctx.setLineDash([.15,.1]);ctx.lineDashOffset=-S.time*.5;ctx.strokeStyle=hexA(valid?col:'#ff4d6d',.6);ctx.lineWidth=.03;ctx.stroke();ctx.setLineDash([])}
+const coreRatio=(i: number)=>S.coreHp?S.coreHp[i]/Math.max(1,S.coreMax):S.lives/Math.max(1,S.maxLives);
+function drawGate(g: Ctx,x: number,y: number,col: string,time: number){g.save();g.translate(x,y);g.lineCap='round';g.strokeStyle=col;g.lineWidth=.06;
   for(let k=0;k<3;k++){const a=time*1.4+k*2.094;g.beginPath();g.arc(0,0,.37,a,a+1.25);g.stroke()}
   g.strokeStyle=hexA(col,.5);g.lineWidth=.03;for(let k=0;k<3;k++){const a=-time*2.2+k*2.094;g.beginPath();g.arc(0,0,.24,a,a+1);g.stroke()}g.restore()}
 // core: hex reactor with pylons, flickers when integrity is low
-function drawCore(g,x,y,lr,time,shieldT){
+function drawCore(g: Ctx,x: number,y: number,lr: number,time: number,shieldT: number){
   const coreCol=lr<.3?(Math.sin(time*12)>0?'#ff2e4d':'#ff9aae'):'#ff4d8a';
   g.save();g.translate(x,y);g.fillStyle='#170a16';g.strokeStyle=hexA('#ff4d8a',.7);g.lineWidth=.025;
   for(let k=0;k<3;k++){g.save();g.rotate(time*.25+k*2.094);rr(g,.3,-.065,.17,.13,.03);g.fill();g.stroke();g.fillStyle=hexA('#ff4d8a',.8);g.fillRect(.41,-.025,.04,.05);g.fillStyle='#170a16';g.restore()}
@@ -34,18 +38,18 @@ function drawCore(g,x,y,lr,time,shieldT){
   if(shieldT>0){g.strokeStyle=hexA('#6dff9e',shieldT<3?(Math.sin(time*14)>0?.9:.3):.9);g.lineWidth=.06;poly(g,6,.85,time*.5);g.stroke();g.fillStyle='rgba(109,255,158,.08)';g.fill()}
   g.restore()}
 // fork switch: a round button on the junction with an arrow into the active branch
-export function drawSwitch(g,m,sw,time){const ft=m.routes[0].pts[m.fork],x=ft[0]+.5,y=ft[1]+.5,rt=m.routes[sw],a=rt.path[m.fork],b=rt.path[m.fork+1],ang=Math.atan2(b.y-a.y,b.x-a.x),p=.5+.5*Math.sin(time*4);
+export function drawSwitch(g: Ctx,m: GameMap,sw: number,time: number){const fork=m.fork!,ft=m.routes[0].pts[fork],x=ft[0]+.5,y=ft[1]+.5,rt=m.routes[sw],a=rt.path[fork],b=rt.path[fork+1],ang=Math.atan2(b.y-a.y,b.x-a.x),p=.5+.5*Math.sin(time*4);
   g.save();g.translate(x,y);g.beginPath();g.arc(0,0,.42,0,7);g.fillStyle='rgba(5,7,15,.88)';g.fill();g.strokeStyle=hexA('#ffe14d',.55+.35*p);g.lineWidth=.045;g.stroke();
   g.rotate(ang);g.fillStyle='#ffe14d';g.beginPath();g.moveTo(.28,0);g.lineTo(-.06,-.2);g.lineTo(.02,0);g.lineTo(-.06,.2);g.closePath();g.fill();
   g.beginPath();g.moveTo(.04,0);g.lineTo(-.28,-.2);g.lineTo(-.2,0);g.lineTo(-.28,.2);g.closePath();g.fillStyle=hexA('#ffe14d',.45);g.fill();g.restore()}
 // a tower hit by a jammer or by the Wrecker: dark veil, sparks and a countdown ring
-function drawDisabled(g,t,time){const off=t.off>0,col=off?'#ff6a2e':'#ff3dc8',x=t.x,y=t.y,R=rng((time*14|0)+t.c*7+t.r*13);
+function drawDisabled(g: Ctx,t: Tower,time: number){const off=t.off>0,col=off?'#ff6a2e':'#ff3dc8',x=t.x,y=t.y,R=rng((time*14|0)+t.c*7+t.r*13);
   g.save();g.fillStyle='rgba(5,7,15,.5)';rr(g,x-.42,y-.42,.84,.84,.14);g.fill();
   g.strokeStyle=hexA(col,.9);g.lineWidth=.03;g.beginPath();
   for(let k=0;k<2;k++){let px=x-.3+R()*.6,py=y-.3+R()*.6;g.moveTo(px,py);for(let s=0;s<3;s++){px+=(R()-.5)*.32;py+=(R()-.5)*.32;g.lineTo(px,py)}}g.stroke();
   const left=off?t.off/6:t.jam/2.2;g.strokeStyle=hexA(col,.95);g.lineWidth=.045;g.beginPath();g.arc(x,y,.47,-Math.PI/2,-Math.PI/2+Math.PI*2*clamp(left,0,1));g.stroke();g.restore()}
-function showAura(t){ctx.save();ctx.setLineDash([.15,.1]);ctx.lineDashOffset=-S.time*.5;ctx.strokeStyle=hexA('#ffd84d',.7);ctx.lineWidth=.035;ctx.strokeRect(t.c-1+.04,t.r-1+.04,2.92,2.92);ctx.fillStyle='rgba(255,216,77,.05)';ctx.fillRect(t.c-1,t.r-1,3,3);ctx.restore()}
-function link(a,b,col,alpha){ctx.strokeStyle=hexA(col,alpha);ctx.lineWidth=.05;ctx.setLineDash([.08,.1]);ctx.lineDashOffset=-S.time*.8;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();ctx.setLineDash([])}
+function showAura(t: { c: number; r: number }){ctx.save();ctx.setLineDash([.15,.1]);ctx.lineDashOffset=-S.time*.5;ctx.strokeStyle=hexA('#ffd84d',.7);ctx.lineWidth=.035;ctx.strokeRect(t.c-1+.04,t.r-1+.04,2.92,2.92);ctx.fillStyle='rgba(255,216,77,.05)';ctx.fillRect(t.c-1,t.r-1,3,3);ctx.restore()}
+function link(a: Point,b: Point,col: string,alpha: number){ctx.strokeStyle=hexA(col,alpha);ctx.lineWidth=.05;ctx.setLineDash([.08,.1]);ctx.lineDashOffset=-S.time*.8;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();ctx.setLineDash([])}
 export function draw(){
   const m=S.map;
   ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,cv.width,cv.height);
@@ -77,7 +81,8 @@ export function draw(){
   for(const t of S.towers)drawTowerShape(ctx,t,S.time);
   for(const t of S.towers)if(t.off>0||t.jam>0)drawDisabled(ctx,t,S.time);
   // preview ghost
-  const ghostOf=(type,c,r)=>{const g={type,c,r,x:c+.5,y:r+.5,lvl:1,br:null,ang:-Math.PI/2,rc:0};g.syn=synFor(type,c,r,null);return g};
+  // a not-yet-built tower under the cursor, for range and synergy preview
+  const ghostOf=(type: TowerType,c: number,r: number)=>{const g: TowerDraw & { c: number; r: number }={type,c,r,x:c+.5,y:r+.5,lvl:1,br:null,ang:-Math.PI/2,rc:0};g.syn=synFor(type,c,r,null);return g};
   const pv=S.preview||(S.place&&S.hover&&!S.rad?{type:S.place,c:S.hover[0],r:S.hover[1]}:null);
   if(pv&&pv.c>=0&&pv.r>=0&&pv.c<COLS&&pv.r<ROWS){
     if(canBuild(pv.c,pv.r)){const g=ghostOf(pv.type,pv.c,pv.r);g.node=S.grid[pv.r][pv.c]===3;if(pv.type==='gen')showAura(g);else showR(g,stats(g),TD[pv.type].col,S.gold>=tcost(pv.type));
@@ -143,6 +148,6 @@ export function draw(){
     ctx.fillStyle='#3a1020';ctx.fillRect(bx,by+10,bw,6);ctx.fillStyle=boss.d.col;ctx.fillRect(bx,by+10,bw*f,6);
     ctx.fillStyle='rgba(255,255,255,.7)';ctx.fillRect(bx+bw*.5-1,by+8,2,10);ctx.fillRect(bx+bw*.25-1,by+8,2,10);
     if(boss.msh){ctx.fillStyle='#5cc8ff';ctx.fillRect(bx,by+16,bw*(boss.sh/boss.msh),2)}
-    ctx.font='700 10px "Chakra Petch",sans-serif';ctx.fillStyle='#ffb3c0';ctx.textAlign='left';ctx.fillText(boss.d.name.toUpperCase()+(boss.phase?` · фаза ${boss.phase+1}`:'')+(S.bossLaps&&S.mis&&S.mis.boss===boss.t?' · 2-й круг':''),bx,by+3);ctx.textAlign='right';ctx.fillText(Math.ceil(boss.hp),bx+bw,by+3)}
+    ctx.font='700 10px "Chakra Petch",sans-serif';ctx.fillStyle='#ffb3c0';ctx.textAlign='left';ctx.fillText(boss.d.name.toUpperCase()+(boss.phase?` · фаза ${boss.phase+1}`:'')+(S.bossLaps&&S.mis&&S.mis.boss===boss.t?' · 2-й круг':''),bx,by+3);ctx.textAlign='right';ctx.fillText(String(Math.ceil(boss.hp)),bx+bw,by+3)}
   if(S.flash>0){ctx.fillStyle=`rgba(255,40,80,${S.flash*.35})`;ctx.fillRect(0,0,W,H)}
 }

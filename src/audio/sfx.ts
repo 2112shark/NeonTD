@@ -2,15 +2,18 @@
 import { PROG } from '../meta/progress.ts';
 
 /* ---------- audio ---------- */
-export let AC=null,master=null,muted=!PROG.set.sound;const lastS={};
-export function initAudio(){if(AC)return;try{AC=new(window.AudioContext||window.webkitAudioContext)();master=AC.createGain();master.gain.value=.32;master.connect(AC.destination)}catch(e){AC=null}}
-function tone(f,dur,type,vol,f2){const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+dur);
-  g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+.02)}
-let nbuf=null;
-function noise(dur,vol,ftype,freq){if(!nbuf){nbuf=AC.createBuffer(1,AC.sampleRate*.5,AC.sampleRate);const d=nbuf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1}
-  const s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain(),t=AC.currentTime;s.buffer=nbuf;f.type=ftype;f.frequency.value=freq;
-  g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);s.connect(f);f.connect(g);g.connect(master);s.start(t);s.stop(t+dur)}
-export function snd(k){if(muted||!AC)return;const now=performance.now();if(now-(lastS[k]||0)<(k==='kill'?45:70))return;lastS[k]=now;
+// created on the first user gesture (browsers block audio before that)
+export let AC: AudioContext|null=null,master: GainNode|null=null,muted=!PROG.set.sound;const lastS: Record<string, number>={};
+export function initAudio(){if(AC)return;try{const ac=AC=new(window.AudioContext||window.webkitAudioContext!)();master=ac.createGain();master.gain.value=.32;master.connect(ac.destination)}catch(e){AC=null}}
+// tone and noise only run from snd(), after it checked that audio is up
+function tone(f: number,dur: number,type: OscillatorType,vol: number,f2?: number){const AC_=AC!,o=AC_.createOscillator(),g=AC_.createGain(),t=AC_.currentTime;o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+dur);
+  g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g);g.connect(master!);o.start(t);o.stop(t+dur+.02)}
+let nbuf: AudioBuffer|null=null;
+function noise(dur: number,vol: number,ftype: BiquadFilterType,freq: number){const AC_=AC!;if(!nbuf){nbuf=AC_.createBuffer(1,AC_.sampleRate*.5,AC_.sampleRate);const d=nbuf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1}
+  const s=AC_.createBufferSource(),f=AC_.createBiquadFilter(),g=AC_.createGain(),t=AC_.currentTime;s.buffer=nbuf;f.type=ftype;f.frequency.value=freq;
+  g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);s.connect(f);f.connect(g);g.connect(master!);s.start(t);s.stop(t+dur)}
+/** play a sound effect by name; repeated calls within a few ms are dropped */
+export function snd(k: string){if(muted||!AC)return;const now=performance.now();if(now-(lastS[k]||0)<(k==='kill'?45:70))return;lastS[k]=now;
   try{switch(k){
     case'build':tone(420,.12,'square',.08,900);break;
     case'tap':tone(900,.04,'square',.04);break;
@@ -45,4 +48,4 @@ export function snd(k){if(muted||!AC)return;const now=performance.now();if(now-(
     case'coin':tone(1320,.08,'square',.04);setTimeout(()=>tone(1760,.12,'square',.04),60);break;
     case'vet':[784,1046,1318].forEach((f,i)=>setTimeout(()=>tone(f,.12,'triangle',.06),i*60));break;
   }}catch(e){}}
-export function setMuted(v){return muted=v}
+export function setMuted(v: boolean){return muted=v}

@@ -8,7 +8,7 @@ import { MODS } from '../../data/enemies.ts';
 import { CHAPTERS, MISSIONS, NM } from '../../data/campaign.ts';
 import { allowedFor } from '../../core/map.ts';
 import { dailyCfg } from '../../meta/daily.ts';
-import { THEMES } from '../../render/map.js';
+import { THEMES } from '../../render/map.ts';
 import { ACC, DIFFC, IC, STAR, dailyProg, fmtN, fmtTime, plural, streak, timeLeft } from './shared.js';
 import { LBY, SCR, chapOpen, goalLong, goalShort, head, mDone, mOpen, mStars, misGold, misLives, resumable, starConds, starsMini } from './state.js';
 

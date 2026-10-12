@@ -5,7 +5,7 @@ import { S } from './state.ts';
 import { lab } from '../meta/lab.ts';
 import { unlock } from '../meta/achievements.ts';
 import { PERKS, PK_ID } from '../data/perks.ts';
-import { snd } from '../audio/sfx.js';
+import { snd } from '../audio/sfx.ts';
 import { toast } from '../ui/comms.js';
 import { PKO, renderPerks } from '../ui/perkChoice.js';
 import { qev } from '../meta/quests.ts';

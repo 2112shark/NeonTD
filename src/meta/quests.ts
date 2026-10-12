@@ -7,7 +7,7 @@ import { unlock } from './achievements.ts';
 import { QD, QIDX, QW, QW_REW, QW_XP, Q_XP } from '../data/quests.ts';
 import { dayKey, weekKey } from './daily.ts';
 import { addXP } from './season.ts';
-import { snd } from '../audio/sfx.js';
+import { snd } from '../audio/sfx.ts';
 import { toast } from '../ui/comms.js';
 
 /* ---------- quests ---------- */

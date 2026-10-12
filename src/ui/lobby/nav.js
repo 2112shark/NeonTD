@@ -9,7 +9,7 @@ import { MISSIONS } from '../../data/campaign.ts';
 import { dayKey } from '../../meta/daily.ts';
 import { skinOwned } from '../../meta/mastery.ts';
 import { SHOP, shopBuy, shopOwned, shopSeasonTier } from '../../meta/shop.ts';
-import { initAudio, muted, setMuted, snd } from '../../audio/sfx.js';
+import { initAudio, muted, setMuted, snd } from '../../audio/sfx.ts';
 import { hideComms, say } from '../comms.js';
 import { claimQuest, questReady } from '../../meta/quests.ts';
 import { renderCoach } from '../tutorial.js';

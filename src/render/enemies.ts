@@ -1,10 +1,13 @@
 // Enemy sprites.
 import { clamp, hexA } from '../core/util.ts';
-import { ctx, glow, poly, rr } from './canvas.js';
+import { ctx, glow, poly, rr } from './canvas.ts';
 import { S } from '../core/state.ts';
 
-export function drawEnemy(e,g=ctx,time=S.time){
-  const fly=e.air&&!(e.gnd>0),d=e.d,r=d.r,x=e.x,y=e.y-(fly?.12+Math.sin(time*4+e.wob)*.04:0);
+type EnemyDrawKeys = 't' | 'd' | 'x' | 'y' | 'air' | 'ang' | 'hp' | 'max' | 'sh' | 'msh' | 'slowT' | 'frz' | 'stun' | 'regen' | 'cloak' | 'vis' | 'hitT' | 'wob' | 'phase';
+/** an enemy on the field, or a stand-in drawn as an icon in the lobby */
+export type EnemyDraw = Pick<Enemy, EnemyDrawKeys> & Partial<Omit<Enemy, EnemyDrawKeys | 'cd'>> & { icon?: boolean; cd?: number | null };
+export function drawEnemy(e: EnemyDraw,g=ctx,time=S.time){
+  const fly=e.air&&!((e.gnd||0)>0),d=e.d,r=d.r,x=e.x,y=e.y-(fly?.12+Math.sin(time*4+e.wob)*.04:0);
   const ghost=e.cloak&&!e.vis;
   if(ghost)g.globalAlpha=.28;
   if(!e.icon){
@@ -126,9 +129,9 @@ export function drawEnemy(e,g=ctx,time=S.time){
   g.restore();
   if(e.t==='guard'&&e.sh>0&&e.msh>0){const k=e.sh/e.msh;g.save();g.translate(x,y);g.rotate(time*.5);poly(g,6,r+.15,0);g.fillStyle=hexA('#5cc8ff',.05+.08*k);g.fill();g.strokeStyle=hexA('#5cc8ff',.35+.5*k);g.lineWidth=.03;g.stroke();
     g.strokeStyle=hexA('#5cc8ff',.2*k);g.lineWidth=.015;g.beginPath();for(let i=0;i<6;i++){const a=i*Math.PI/3;g.moveTo(Math.cos(a)*(r+.15)*.5,Math.sin(a)*(r+.15)*.5);g.lineTo(Math.cos(a)*(r+.15),Math.sin(a)*(r+.15))}g.stroke();g.restore()}
-  if(e.air&&e.gnd>0&&!e.icon){g.strokeStyle=hexA('#8fa8ff',.85);g.lineWidth=.03;g.setLineDash([.05,.05]);g.beginPath();g.arc(x,y,r+.12,0,7);g.stroke();g.setLineDash([])}
+  if(e.air&&(e.gnd||0)>0&&!e.icon){g.strokeStyle=hexA('#8fa8ff',.85);g.lineWidth=.03;g.setLineDash([.05,.05]);g.beginPath();g.arc(x,y,r+.12,0,7);g.stroke();g.setLineDash([])}
   if(e.regen&&!ghost){g.fillStyle='#6dff9e';g.fillRect(x+r*.6,y-r-.02,.12,.035);g.fillRect(x+r*.6+.0425,y-r-.0625,.035,.12)}
-  if(e.slowT>0){g.strokeStyle=e.brit>0?'rgba(255,255,255,.7)':'rgba(127,228,255,.7)';g.lineWidth=.025;g.setLineDash([.06,.06]);g.beginPath();g.arc(x,y,r+.08,0,7);g.stroke();g.setLineDash([])}
+  if(e.slowT>0){g.strokeStyle=(e.brit||0)>0?'rgba(255,255,255,.7)':'rgba(127,228,255,.7)';g.lineWidth=.025;g.setLineDash([.06,.06]);g.beginPath();g.arc(x,y,r+.08,0,7);g.stroke();g.setLineDash([])}
   if(e.frz>0){g.save();g.translate(x,y);poly(g,6,r+.1,0);g.fillStyle='rgba(200,245,255,.35)';g.fill();g.strokeStyle='#dff8ff';g.lineWidth=.03;g.stroke();g.restore()}
   if(e.stun>0&&!e.frz){g.strokeStyle='#e8e0ff';g.lineWidth=.02;g.beginPath();for(let k=0;k<3;k++){const a=time*9+k*2.1,px=x+Math.cos(a)*(r+.1),py=y-r-.05+Math.sin(a)*.05;g.moveTo(px+.03,py);g.arc(px,py,.03,0,7)}g.stroke()}
   if(e.t!=='guard'&&e.msh>0&&e.sh>0){g.strokeStyle=hexA('#5cc8ff',.4+.4*(e.sh/e.msh));g.lineWidth=.035;g.beginPath();g.arc(x,y,r+.12,-Math.PI/2,-Math.PI/2+Math.PI*2*e.sh/e.msh);g.stroke()}

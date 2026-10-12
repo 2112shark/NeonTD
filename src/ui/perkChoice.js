@@ -2,7 +2,7 @@
 import { $ } from '../core/util.ts';
 import { S } from '../core/state.ts';
 import { PK_ID } from '../data/perks.ts';
-import { initAudio } from '../audio/sfx.js';
+import { initAudio } from '../audio/sfx.ts';
 import { takePerk } from '../core/perks.ts';
 import { PIC } from './lobby/shared.js';
 

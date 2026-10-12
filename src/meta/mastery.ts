@@ -3,7 +3,7 @@ import { PROG } from './progress.ts';
 import { S } from '../core/state.ts';
 import { fair, lab } from './lab.ts';
 import { unlock } from './achievements.ts';
-import { snd } from '../audio/sfx.js';
+import { snd } from '../audio/sfx.ts';
 import { burst, text } from '../core/combat.ts';
 import { qev } from './quests.ts';
 

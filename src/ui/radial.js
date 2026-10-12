@@ -1,18 +1,18 @@
 // Radial build/upgrade ring around the selected tile.
 import { $, clamp } from '../core/util.ts';
-import { cv, tile } from '../render/canvas.js';
+import { cv, tile } from '../render/canvas.ts';
 import { S } from '../core/state.ts';
 import { TD, TYPES } from '../data/towers.ts';
 import { MODE_NAMES } from '../data/enemies.ts';
 import { skinFor } from '../meta/mastery.ts';
 import { sellRate, stats, synFor, tcost, towerAt, ucost } from '../core/stats.ts';
-import { initAudio, snd } from '../audio/sfx.js';
+import { initAudio, snd } from '../audio/sfx.ts';
 import { toast } from './comms.js';
 import { debCost, doClear } from '../core/combat.ts';
 import { build, buildBlock, isDebris, sell, shown, upgrade } from '../core/actions.ts';
 import { tutEvent } from './tutorial.js';
 import { TCD, renderTCard } from './towerCard.js';
-import { THEMES, drawDebris } from '../render/map.js';
+import { THEMES, drawDebris } from '../render/map.ts';
 import { iconCanvas, updInfo } from './info.js';
 
 /* ---------- radial ring ---------- */

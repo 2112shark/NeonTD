@@ -1,9 +1,9 @@
 // Pointer and keyboard input on the battlefield.
-import { cv, tile } from './render/canvas.js';
+import { cv, tile } from './render/canvas.ts';
 import { S } from './core/state.ts';
 import { TYPES } from './data/towers.ts';
 import { tcost, towerAt } from './core/stats.ts';
-import { initAudio } from './audio/sfx.js';
+import { initAudio } from './audio/sfx.ts';
 import { toast } from './ui/comms.js';
 import { castOrbital, enemyAt, forkTile, setFocus, startWave, toggleFork, useAbility } from './core/combat.ts';
 import { build, buildBlock, canBuild, isDebris, sell, shown, upgrade } from './core/actions.ts';

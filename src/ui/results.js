@@ -7,7 +7,7 @@ import { MISSIONS } from '../data/campaign.ts';
 import { maxW } from '../core/waves.ts';
 import { rewName, seasonInfo, tierRew } from '../meta/season.ts';
 import { LEAGUES, leagueOf } from '../meta/weekly.ts';
-import { initAudio } from '../audio/sfx.js';
+import { initAudio } from '../audio/sfx.ts';
 import { END, IC, MODE_RU, STAR, fmtN, fmtTime, plural } from './lobby/shared.js';
 import { LBY, runName, starConds } from './lobby/state.js';
 import { openLobby } from './lobby/nav.js';

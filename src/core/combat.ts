@@ -13,14 +13,14 @@ import { genWave, hpMul, maxW, waveMods } from './waves.ts';
 import { killFx, vetUp } from '../meta/mastery.ts';
 import { XP_WAVE, addXP } from '../meta/season.ts';
 import { hasP, stats } from './stats.ts';
-import { initAudio, snd } from '../audio/sfx.js';
+import { initAudio, snd } from '../audio/sfx.ts';
 import { say, toast } from '../ui/comms.js';
 import { endGame } from './endgame.ts';
 import { offerPerks } from './perks.ts';
 import { qev } from '../meta/quests.ts';
 import { endTut, tutEvent } from '../ui/tutorial.js';
 import { closeRadial } from '../ui/radial.js';
-import { buildBg } from '../render/map.js';
+import { buildBg } from '../render/map.ts';
 import { updInfo } from '../ui/info.js';
 import { SHEET, lobbyOn, vib } from '../ui/lobby/shared.js';
 
