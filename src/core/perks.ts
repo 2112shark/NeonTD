@@ -6,12 +6,12 @@ import { lab } from '../meta/lab.ts';
 import { unlock } from '../meta/achievements.ts';
 import { PERKS, PK_ID } from '../data/perks.ts';
 import { snd } from '../audio/sfx.ts';
-import { toast } from '../ui/comms.js';
-import { PKO, renderPerks } from '../ui/perkChoice.js';
+import { toast } from '../ui/comms.ts';
+import { PKO, renderPerks } from '../ui/perkChoice.ts';
 import { qev } from '../meta/quests.ts';
-import { closeRadial } from '../ui/radial.js';
-import { updInfo } from '../ui/info.js';
-import { vib } from '../ui/lobby/shared.js';
+import { closeRadial } from '../ui/radial.ts';
+import { updInfo } from '../ui/info.ts';
+import { vib } from '../ui/lobby/shared.ts';
 
 export function offerPerks(){
   const pool=PERKS.filter(p=>!S.perks.includes(p.id)&&(!p.need||S.allowed.includes(p.need)));if(!pool.length)return;

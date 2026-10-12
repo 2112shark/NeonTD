@@ -8,7 +8,7 @@ import { ED } from '../data/enemies.ts';
 import { genWave } from '../core/waves.ts';
 import { stats, synFor, tcost } from '../core/stats.ts';
 import { canBuild } from '../core/actions.ts';
-import { tutTile } from '../ui/tutorial.js';
+import { tutTile } from '../ui/tutorial.ts';
 import { THEMES, drawDeco } from './map.ts';
 import { drawTowerShape, type TowerDraw } from './towers.ts';
 import { drawEnemy } from './enemies.ts';

@@ -9,13 +9,13 @@ import { allowedFor, mFlag } from './map.ts';
 import { dailyCfg } from '../meta/daily.ts';
 import { mastLv } from '../meta/mastery.ts';
 import { weeklyCfg } from '../meta/weekly.ts';
-import { hideComms } from '../ui/comms.js';
-import { PKO } from '../ui/perkChoice.js';
-import { renderCoach } from '../ui/tutorial.js';
-import { closeRadial } from '../ui/radial.js';
+import { hideComms } from '../ui/comms.ts';
+import { PKO } from '../ui/perkChoice.ts';
+import { renderCoach } from '../ui/tutorial.ts';
+import { closeRadial } from '../ui/radial.ts';
 import { buildBg } from '../render/map.ts';
-import { updInfo } from '../ui/info.js';
-import { hudLabels } from '../ui/hud.js';
+import { updInfo } from '../ui/info.ts';
+import { hudLabels } from '../ui/hud.ts';
 
 export let MODE: RunState['mode']='campaign';
 

@@ -5,13 +5,13 @@ import { saveProg } from '../meta/net.ts';
 import { S, newGame } from '../core/state.ts';
 import { PK_ID } from '../data/perks.ts';
 import { initAudio, muted, setMuted, snd } from '../audio/sfx.ts';
-import { say } from './comms.js';
+import { say } from './comms.ts';
 import { starOk } from '../core/endgame.ts';
-import { renderCoach } from './tutorial.js';
-import { closeRadial } from './radial.js';
-import { SHEET, STAR, lobbyOn } from './lobby/shared.js';
-import { LBY, goalLong, runName, runProg, starConds } from './lobby/state.js';
-import { openLobby } from './lobby/nav.js';
+import { renderCoach } from './tutorial.ts';
+import { closeRadial } from './radial.ts';
+import { SHEET, STAR, lobbyOn } from './lobby/shared.ts';
+import { LBY, goalLong, runName, runProg, starConds } from './lobby/state.ts';
+import { openLobby } from './lobby/nav.ts';
 
 /* pause sheet */
 export function openSheet(){if(!S||S.over||lobbyOn()||!SHEET.hidden)return;closeRadial();S.aim=null;S.place=null;S.paused=true;$('#pauseOv').hidden=true;LBY.arm=null;renderSheet();SHEET.hidden=false;renderCoach();snd('tap')}
@@ -29,10 +29,10 @@ export function renderSheet(){
   const rb=$('#shRestart');rb.textContent=LBY.arm==='restart'?'Точно заново?':'Начать заново';rb.classList.toggle('warnish',LBY.arm==='restart');
 }
 export function rerun(){const mode=S.mode,mi=S.mi,cfg=S.mis?{nm:S.nm}:null;newGame(mi,mode,cfg);S.paused=false;$('#bPause').textContent='❚❚';
-  if(S.mis&&!S.tut)setTimeout(()=>{if(S&&!S.over&&!lobbyOn())say(S.mis.open)},500)}
+  if(S.mis&&!S.tut)setTimeout(()=>{if(S&&!S.over&&!lobbyOn())say(S.mis!.open)},500)}
 SHEET.addEventListener('click',e=>{
   if(e.target===SHEET){closeSheet();return}
-  const b=e.target.closest('button');if(!b)return;initAudio();
+  const b=(e.target as HTMLElement).closest<HTMLElement>('button');if(!b)return;initAudio();
   if(b.id==='shResume')closeSheet();
   else if(b.id==='shSound'){setMuted(!muted);PROG.set.sound=!muted;saveProg();if(!muted)snd('tap');renderSheet()}
   else if(b.id==='shRestart'){if(LBY.arm!=='restart'){LBY.arm='restart';renderSheet();return}LBY.arm=null;SHEET.hidden=true;rerun();renderCoach()}

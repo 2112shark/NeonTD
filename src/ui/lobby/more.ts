@@ -6,9 +6,9 @@ import { SYN, TD, TW_UNLOCK, TYPES } from '../../data/towers.ts';
 import { ED, MODS } from '../../data/enemies.ts';
 import { PERKS } from '../../data/perks.ts';
 import { muted } from '../../audio/sfx.ts';
-import { IC, canVib, cap } from './shared.js';
-import { EINFO, baseStats, statRows } from './widgets.js';
-import { LBY, SCR, head } from './state.js';
+import { IC, canVib, cap } from './shared.ts';
+import { EINFO, baseStats, statRows } from './widgets.ts';
+import { LBY, SCR, head } from './state.ts';
 
 SCR.more=()=>`<div class="lb-in">${head('Ещё')}
   <ul class="mlist">
@@ -27,15 +27,15 @@ function codexTowers(){return`<ul class="cx">${TYPES.map(k=>{const d=TD[k],a=sta
   <div>Улучшения стоят ${d.lv[1].cost} и ${d.lv[2].cost} кредитов, специализация ${d.br.A.cost}.</div>
   <div><b>${d.br.A.name}.</b> ${d.br.A.desc}.</div><div><b>${d.br.B.name}.</b> ${d.br.B.desc}.</div>
   ${syn.map(s=>`<div><b>${s.name}.</b> ${cap(s.desc)}, если рядом ${TD[s.from].name.toLowerCase()}.</div>`).join('')}</div></li>`}).join('')}</ul>`}
-function codexEnemies(){return`<ul class="cx">${Object.keys(EINFO).map(k=>{const d=ED[k],[txt,w]=EINFO[k];
+function codexEnemies(){return`<ul class="cx">${(Object.keys(EINFO) as EnemyType[]).map(k=>{const d=ED[k],[txt,w]=EINFO[k]!;
   return`<li><canvas width="96" height="96" data-enemy="${k}"></canvas><div class="nm"><b style="color:${d.col}">${d.name}</b><span>${typeof w==='string'?w:'с '+w+'-й волны'}</span></div><p>${txt}</p>
-  <div class="cxm"><table class="stt"><tr><td>Здоровье на 1-й волне</td><td>${Math.round(d.hp*MAPS[0].hp)}</td></tr><tr><td>Скорость, клеток в секунду</td><td>${r1(d.spd)}</td></tr><tr><td>Награда, кредитов</td><td>${d.rw}</td></tr></table></div></li>`}).join('')}</ul>
+  <div class="cxm"><table class="stt"><tr><td>Здоровье на 1-й волне</td><td>${Math.round(d.hp*MAPS[0].hp!)}</td></tr><tr><td>Скорость, клеток в секунду</td><td>${r1(d.spd)}</td></tr><tr><td>Награда, кредитов</td><td>${d.rw}</td></tr></table></div></li>`}).join('')}</ul>
   <p class="lead">Здоровье и волны указаны для Кольца в бесконечном режиме. В кампании враги появляются по сюжету миссий.</p>`}
 function codexWaves(){return`<h3 class="sec">Перки</h3><p class="lead">После каждой пятой волны игра предлагает три перка. Выбранный действует до конца забега.</p><ul class="rules">${PERKS.map(p=>`<li><span class="chip" style="--cc:${p.col}">${p.name}</span>${p.desc}.</li>`).join('')}</ul>
   <h3 class="sec">Элементы карт</h3><ul class="rules"><li><span class="chip" style="--cc:#ffe14d">Энергоузел</span>Башня на светящемся гнезде бьёт на 25% сильнее и дальше на 0.5. Генератор на узле приносит больше.</li><li><span class="chip" style="--cc:#ffb040">Завал</span>Коснитесь завала у пути, чтобы расчистить его за кредиты и построить там башню.</li><li><span class="chip" style="--cc:#ffe14d">Развилка</span>Жёлтая стрелка решает, по какой ветке пойдут враги. Коснитесь её, чтобы переключить.</li></ul>
   <h3 class="sec">Ветераны и мастерство</h3><p class="lead">Башня, уничтожившая 20, 60 и 140 врагов, получает звёзды ветерана: +5% урона за каждую. Мастерство копится за всё время и даёт до +9% урона и облики в Арсенале.</p>
   <h3 class="sec">Фокус огня</h3><p class="lead">Коснитесь врага: на 5 секунд все башни, которые до него достают, стреляют прежде всего по нему. Полезно против Лекарей и боссов.</p>
-  <h3 class="sec">Модификаторы</h3><ul class="rules">${Object.keys(MODS).map(k=>`<li><span class="chip" style="--cc:${MODS[k].col}">${MODS[k].name}</span>${MODS[k].long}.</li>`).join('')}</ul>
+  <h3 class="sec">Модификаторы</h3><ul class="rules">${(Object.keys(MODS) as ModId[]).map(k=>`<li><span class="chip" style="--cc:${MODS[k].col}">${MODS[k].name}</span>${MODS[k].long}.</li>`).join('')}</ul>
   <p class="lead">В бесконечном режиме модификаторы появляются с 6-й волны, в «Кошмаре» со 2-й. За врагов из такой волны платят на 20% больше.</p>
   <h3 class="sec">Экономика</h3><ul class="rules"><li><span class="chip" style="--cc:#ffc94d">Проценты</span>Перед каждой волной начисляется 5% от ваших кредитов, но не больше 40.</li><li><span class="chip" style="--cc:#3df0ff">Досрочно</span>Вызовите волну раньше таймера и получите 2 кредита за каждую оставшуюся секунду.</li><li><span class="chip" style="--cc:#6dff9e">Продажа</span>Башня возвращает 70% вложенного.</li></ul>
   <h3 class="sec">Синергии</h3><ul class="rules">${SYN.map(s=>`<li><span class="chip" style="--cc:${TD[s.to].col}">${s.name}</span>${TD[s.to].name}: ${s.desc}, если рядом стоит ${TD[s.from].name.toLowerCase()}.</li>`).join('')}</ul>`}

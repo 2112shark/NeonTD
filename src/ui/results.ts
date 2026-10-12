@@ -8,10 +8,10 @@ import { maxW } from '../core/waves.ts';
 import { rewName, seasonInfo, tierRew } from '../meta/season.ts';
 import { LEAGUES, leagueOf } from '../meta/weekly.ts';
 import { initAudio } from '../audio/sfx.ts';
-import { END, IC, MODE_RU, STAR, fmtN, fmtTime, plural } from './lobby/shared.js';
-import { LBY, runName, starConds } from './lobby/state.js';
-import { openLobby } from './lobby/nav.js';
-import { rerun } from './pauseSheet.js';
+import { END, IC, MODE_RU, STAR, fmtN, fmtTime, plural } from './lobby/shared.ts';
+import { LBY, runName, starConds } from './lobby/state.ts';
+import { openLobby } from './lobby/nav.ts';
+import { rerun } from './pauseSheet.ts';
 
 /* results */
 function loseHint(){
@@ -20,7 +20,9 @@ function loseHint(){
   if(S.wave<=3)return'Ранние волны решают всё. Постройте первые башни у поворотов ещё до старта.';
   if(!S.perks.length&&S.wave>=5)return'Перки дают заметный прирост. Выбирайте их после каждой пятой волны.';
   return'Улучшайте башни до третьего уровня и открывайте специализации: одна сильная башня лучше двух слабых.'}
-export function showResults(r){
+/** what endGame hands to the results screen */
+export interface RunResult { won: boolean; stars: number; mask: number; newMask: number; first: boolean; score: number; best: number; newBest: boolean }
+export function showResults(r: RunResult){
   const m=S.mode,win=r.won,gained=ptsTotal()-S.pts0,free=ptsFree(),M=S.mis;
   const title=M?(win?'Миссия выполнена':'Рубеж пал'):m==='daily'?(win?'Вызов пройден':'Вызов провален'):m==='weekly'?(win?'Вызов недели пройден':'Вызов недели завершён'):win?'Рубеж удержан':'Рубеж пал';
   let hero='',quote='';
@@ -40,7 +42,7 @@ export function showResults(r){
   if(M&&win&&r.first&&!S.nm){if(nx){const nt=TYPES.find(k=>TW_UNLOCK[k]===nx.i);rew+=`<span class="core">Открыта миссия ${nx.i+1}</span>`;if(nt)rew+=`<span>Новая башня: ${TD[nt].name}</span>`}rew+=`<span>Открыт «Кошмар»</span>`}
   if(S.xpGain)rew+=`<span class="xp">+${S.xpGain} опыта сезона</span>`;
   const def=seasonInfo().def;for(const t of S.newTiers||[])rew+=`<span class="xp">Ступень ${t}: ${rewName(tierRew(def,t))}</span>`;
-  for(const [k,l] of S.mastUp||[])rew+=`<span>${TD[k].name}: мастерство ${l}</span>`;
+  for(const [k,l] of S.mastUp||[])rew+=`<span>${TD[k as TowerType].name}: мастерство ${l}</span>`;
   rew+=S.newAch.map(n=>`<span>${n}</span>`).join('');
   const res=$('#res');res.className='res cut '+(win?'win':'lose');
   res.innerHTML=`<h2 style="color:${win?'var(--accent)':'var(--warn)'}">${title}</h2><p class="sub">${M?runName():`${S.map.name}, ${MODE_RU[m]}`}</p>${hero}${quote}
@@ -50,8 +52,8 @@ export function showResults(r){
   ${free>0&&!fair()?`<button class="textbtn" data-act="lab">Ядер в Лаборатории: ${free}. Потратить</button>`:''}</div>`;
   END.hidden=false;
 }
-END.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;initAudio();const a=b.dataset.act;
-  if(a==='next'){LBY.mis=S.mis.i+1;LBY.nm=false;LBY.chap=MISSIONS[LBY.mis].ch;openLobby('mission','camp')}
+END.addEventListener('click',e=>{const b=(e.target as HTMLElement).closest<HTMLElement>('[data-act]');if(!b)return;initAudio();const a=b.dataset.act;
+  if(a==='next'){LBY.mis=S.mis!.i+1;LBY.nm=false;LBY.chap=MISSIONS[LBY.mis].ch;openLobby('mission','camp')}
   else if(a==='retry'){END.hidden=true;rerun()}
   else if(a==='lobby')openLobby('home');
   else if(a==='lab')openLobby('lab')});

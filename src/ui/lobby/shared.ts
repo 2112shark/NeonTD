@@ -8,28 +8,31 @@ import { dayKey } from '../../meta/daily.ts';
 export const LOBBY=$('#lobby'),LBV=$('#lbView'),NAV=$('#lbNav'),SHEET=$('#sheet'),END=$('#end');
 export const RM=typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 export const canVib=typeof navigator!=='undefined'&&'vibrate' in navigator;
-export function vib(ms){if(canVib&&PROG.set&&PROG.set.vib)try{navigator.vibrate(ms)}catch(e){}}
+/** short vibration on phones, if the player allows it */
+export function vib(ms: number){if(canVib&&PROG.set&&PROG.set.vib)try{navigator.vibrate(ms)}catch(e){}}
 export const lobbyOn=()=>!LOBBY.hidden;
-export const MODE_RU={campaign:'кампания',endless:'бесконечный режим',daily:'вызов дня',weekly:'вызов недели'};
-export const GEN={laser:'лазера',cannon:'пушки',cryo:'крио',tesla:'теслы',sniper:'снайпера',gravi:'гравитона',gen:'генератора'};
-/** @type {Record<string,string>} */
-export const ACC={laser:'лазер',cannon:'пушку',cryo:'крио',tesla:'теслу',sniper:'снайпера',gravi:'гравитон',gen:'генератор'};
+export const MODE_RU: Record<RunState['mode'], string>={campaign:'кампания',endless:'бесконечный режим',daily:'вызов дня',weekly:'вызов недели'};
+// tower names in the genitive and accusative case, for sentences
+export const GEN: Record<TowerType, string>={laser:'лазера',cannon:'пушки',cryo:'крио',tesla:'теслы',sniper:'снайпера',gravi:'гравитона',gen:'генератора'};
+export const ACC: Record<TowerType, string>={laser:'лазер',cannon:'пушку',cryo:'крио',tesla:'теслу',sniper:'снайпера',gravi:'гравитон',gen:'генератор'};
 export const DIFFC=['#6dff9e','#ffc94d','#ff4d6d'];
 export const STAR='M12 2.6l2.85 5.9 6.45.85-4.75 4.45 1.2 6.4L12 17.1l-5.75 3.1 1.2-6.4L2.7 9.35l6.45-.85z';
-export function plural(n,f){n=Math.abs(n)%100;const d=n%10;return n>10&&n<20?f[2]:d>1&&d<5?f[1]:d===1?f[0]:f[2]}
-export const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
-export const fmtN=n=>Number(n).toLocaleString('ru-RU');
-export function fmtTime(s){s=Math.floor(s);return`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
+/** Russian plural form: f = [one, few, many] */
+export function plural(n: number,f: [string, string, string]){n=Math.abs(n)%100;const d=n%10;return n>10&&n<20?f[2]:d>1&&d<5?f[1]:d===1?f[0]:f[2]}
+export const cap=(s: string)=>s.charAt(0).toUpperCase()+s.slice(1);
+export const fmtN=(n: number)=>Number(n).toLocaleString('ru-RU');
+export function fmtTime(s: number){s=Math.floor(s);return`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
 export function weekLeft(){const n=new Date(),d=(8-n.getDay())%7||7,m=new Date(n.getFullYear(),n.getMonth(),n.getDate()+d),s=Math.max(0,(+m-+n)/1000),dd=Math.floor(s/86400),hh=Math.floor(s%86400/3600);return dd?`ещё ${dd} ${plural(dd,['день','дня','дней'])}`:`ещё ${hh} ч`}
 export function timeLeft(){const n=new Date(),m=new Date(n.getFullYear(),n.getMonth(),n.getDate()+1),s=Math.max(0,Math.floor((+m-+n)/1000));return[s/3600,s/60%60,s%60].map(v=>String(Math.floor(v)).padStart(2,'0')).join(':')}
-export function dailyProg(key){return PROG.daily&&PROG.daily.key===key?PROG.daily:null}
+export function dailyProg(key: string){return PROG.daily&&PROG.daily.key===key?PROG.daily:null}
 export function streak(){const st=PROG.streak;if(!st)return 0;return st.last===dayKey()||st.last===dayKey(new Date(Date.now()-864e5))?st.n:0}
-/** @type {[number,string][]} */
-const RANKS=[[0,'Рекрут'],[4,'Оператор'],[10,'Дозорный'],[18,'Инженер'],[28,'Командор'],[40,'Архитектор рубежа'],[60,'Страж сети'],[85,'Легенда рубежа'],[120,'Хранитель ядра'],[160,'Неоновый маршал']];
+/** data cores needed, rank title */
+const RANKS: [number, string][]=[[0,'Рекрут'],[4,'Оператор'],[10,'Дозорный'],[18,'Инженер'],[28,'Командор'],[40,'Архитектор рубежа'],[60,'Страж сети'],[85,'Легенда рубежа'],[120,'Хранитель ядра'],[160,'Неоновый маршал']];
 export function rankInfo(){const xp=ptsTotal();let i=0;while(i+1<RANKS.length&&xp>=RANKS[i+1][0])i++;const next=RANKS[i+1]||null;return{i,name:RANKS[i][1],xp,next,prog:next?(xp-RANKS[i][0])/(next[0]-RANKS[i][0]):1}}
-export function chevrons(n){let p='';for(let k=0;k<n;k++){const y=23-k*3.6;p+=`<path d="M3 ${y}L11 ${y-5.5}L19 ${y}"/>`}return`<svg viewBox="0 -3 22 30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`}
-const sv=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
-export const IC={
+export function chevrons(n: number){let p='';for(let k=0;k<n;k++){const y=23-k*3.6;p+=`<path d="M3 ${y}L11 ${y-5.5}L19 ${y}"/>`}return`<svg viewBox="0 -3 22 30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`}
+const sv=(d: string)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+/** inline SVG icons */
+export const IC: Record<string, string>={
  back:sv('<path d="M15 5l-7 7 7 7"/>'),
  chev:'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>',
  core:'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 13.6 4.75v6.5L8 14.5 2.4 11.25v-6.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg>',
@@ -45,7 +48,7 @@ export const IC={
  gem:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 4h9L20 9l-8 11L4 9z" fill="currentColor"/><path d="M4 9h16M9.5 4 12 9l2.5-5M12 9v11" fill="none" stroke="#05070f" stroke-width="1.1" stroke-linejoin="round" opacity=".45"/></svg>'
 };
 /* perk choice */
-export const PIC={
+export const PIC: Record<string, string>={
  aim:sv('<circle cx="12" cy="12" r="7"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/>'),
  fast:sv('<path d="M5 6l6 6-6 6M12 6l6 6-6 6"/>'),
  range:sv('<circle cx="12" cy="12" r="8.5" stroke-dasharray="3 2.6"/><path d="M12 12l6-6"/><circle cx="12" cy="12" r="1.6"/>'),

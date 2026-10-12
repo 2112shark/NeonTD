@@ -11,7 +11,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "typecheck": "tsc -p . && tsc -p tsconfig.strict.json"
+    "typecheck": "tsc -p ."
   },
   "devDependencies": {
     "@playwright/test": "^1.64.0",

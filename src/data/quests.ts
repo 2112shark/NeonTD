@@ -1,5 +1,5 @@
 // Daily and weekly quest definitions.
-import { fmtN } from '../ui/lobby/shared.js';
+import { fmtN } from '../ui/lobby/shared.ts';
 
 /* quests */
 export interface QuestDef {

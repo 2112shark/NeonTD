@@ -8,7 +8,7 @@ import { QD, QIDX, QW, QW_REW, QW_XP, Q_XP } from '../data/quests.ts';
 import { dayKey, weekKey } from './daily.ts';
 import { addXP } from './season.ts';
 import { snd } from '../audio/sfx.ts';
-import { toast } from '../ui/comms.js';
+import { toast } from '../ui/comms.ts';
 
 /* ---------- quests ---------- */
 /** today's quests, rolled fresh each day (and each week for the weekly one) */

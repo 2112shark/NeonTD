@@ -8,13 +8,13 @@ import { TD, TW_UNLOCK, TYPES } from '../data/towers.ts';
 import { skinFor } from '../meta/mastery.ts';
 import { recomputeSyn, sellRate, stats, tcost, towerAt, ucost } from './stats.ts';
 import { snd } from '../audio/sfx.ts';
-import { toast } from '../ui/comms.js';
+import { toast } from '../ui/comms.ts';
 import { burst, text } from './combat.ts';
 import { qev } from '../meta/quests.ts';
-import { tutEvent } from '../ui/tutorial.js';
-import { SHORT, dFmt, statDiff } from '../ui/towerCard.js';
+import { tutEvent } from '../ui/tutorial.ts';
+import { SHORT, dFmt, statDiff } from '../ui/towerCard.ts';
 import { SPEC_COL } from '../render/towers.ts';
-import { ACC, vib } from '../ui/lobby/shared.js';
+import { ACC, vib } from '../ui/lobby/shared.ts';
 
 /* ---------- actions ---------- */
 export function canBuild(c: number,r: number){return c>=0&&r>=0&&c<COLS&&r<ROWS&&(S.grid[r][c]===0||S.grid[r][c]===3)&&!towerAt(c,r)}

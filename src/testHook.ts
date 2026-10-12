@@ -17,16 +17,16 @@ import { addXP, dupRew, grantTier, seasonInfo, seasonMigrate, seasonState, seaso
 import { SHOP, shopBuy, shopSeasonTier } from './meta/shop.ts';
 import { LEAGUES, leagueOf, weeklyCfg } from './meta/weekly.ts';
 import { stats, synFor, tcost, ucost } from './core/stats.ts';
-import { say } from './ui/comms.js';
+import { say } from './ui/comms.ts';
 import { bossPhase, castOrbital, debCost, doClear, enemyAt, forkTile, genIncome, purge, setFocus, spawn, startWave, toggleFork, update, useAbility } from './core/combat.ts';
 import { endGame, starOk } from './core/endgame.ts';
 import { build, buildBlock, canBuild, isDebris, sell, upgrade } from './core/actions.ts';
 import { offerPerks, takePerk } from './core/perks.ts';
 import { claimQuest, qev, questState } from './meta/quests.ts';
-import { openRadial, renderRadial } from './ui/radial.js';
+import { openRadial, renderRadial } from './ui/radial.ts';
 import { THEMES, drawDeco, paintMap } from './render/map.ts';
 import { drawTowerShape } from './render/towers.ts';
 import { drawEnemy } from './render/enemies.ts';
-import { act, go, openLobby } from './ui/lobby/nav.js';
+import { act, go, openLobby } from './ui/lobby/nav.ts';
 
 window.__td={get S(){return S},genIncome,doClear,debCost,isDebris,addXP,seasonState,seasonInfo,seasonTier,weeklyCfg,LEAGUES,leagueOf,mastLv,mastXP,SKINS,NET,mergeProg,claimQuest,killFx,vetUp,skinFor,netInit,saveProg,endGame,openLobby,go,act,takePerk,offerPerks,setFocus,toggleFork,forkTile,MISSIONS,CHAPTERS,PERKS,LAY,BOSSES,questState,qev,buildBlock,tcost,ucost,starOk,allowedFor,enemyAt,purge,bossPhase,say,spawn,openRadial,renderRadial,drawTowerShape,drawEnemy,paintMap,drawDeco,THEMES,newGame,build,upgrade,sell,startWave,update,useAbility,castOrbital,stats,canBuild,synFor,genWave,waveMods,hpMul,dailyCfg,dailyScore,maxW,TD,ED,MAPS,SYN,LAB,LAB_BR,grantTier,dupRew,tierStart,tierCost,tierOf,seasonMigrate,SHOP,shopBuy,shopSeasonTier,ptsFree,ptsTotal,shopSpent,BOSS_LAP,BOSS_LAP_HEAL,CLOAK_NEAR,get PROG(){return PROG},COLS,ROWS,MAXW};

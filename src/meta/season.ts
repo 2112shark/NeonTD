@@ -3,8 +3,8 @@ import { PROG } from './progress.ts';
 import { S } from '../core/state.ts';
 import { unlock } from './achievements.ts';
 import { KFX, SKINS } from './mastery.ts';
-import { toast } from '../ui/comms.js';
-import { lobbyOn } from '../ui/lobby/shared.js';
+import { toast } from '../ui/comms.ts';
+import { lobbyOn } from '../ui/lobby/shared.ts';
 
 /* ---------- season track ---------- */
 /** a 28-day season: its weekly modifier and the rewards on its track */

@@ -4,9 +4,9 @@ import { LAB_BR, labRaw, ptsFree } from '../../meta/lab.ts';
 import { TD, TYPES } from '../../data/towers.ts';
 import { KFX, MAST, SKINS, mastLv, mastXP, skinFor, skinOwned } from '../../meta/mastery.ts';
 import { seasonInfo } from '../../meta/season.ts';
-import { SHOP, shopOwned, shopSeasonTier } from '../../meta/shop.ts';
-import { IC, PIC, fmtN } from './shared.js';
-import { LBY, SCR, head } from './state.js';
+import { SHOP, shopOwned, shopSeasonTier, type ShopItem } from '../../meta/shop.ts';
+import { IC, PIC, fmtN } from './shared.ts';
+import { LBY, SCR, head } from './state.ts';
 
 function arsenalHtml(){return`<ul class="ars">${TYPES.map(k=>{const lv=mastLv(k),x=mastXP(k),nx=MAST[lv],prev=MAST[lv-1],f=nx?(x-prev)/(nx-prev):1,cur=skinFor(k);
   const skins=['base','chrome','gold','holo',...Object.keys(SKINS).filter(id=>!SKINS[id].m&&id!=='base'&&PROG.own&&PROG.own[id])];
@@ -14,8 +14,8 @@ function arsenalHtml(){return`<ul class="ars">${TYPES.map(k=>{const lv=mastLv(k)
   <span class="qbar"><i style="width:${Math.round(f*100)}%"></i></span>
   <div class="sk">${skins.map(id=>{const own=skinOwned(k,id),z=SKINS[id];return`<button class="skc${id===cur?' on':''}" data-act="skin:${k}:${id}"${own?'':' disabled'}><i class="${z.holo?'holo':''}" style="background:${z.holo?'':z.c||TD[k].col}"></i>${z.name}${own?'':`<small>ур. ${z.m}</small>`}</button>`}).join('')}</div></li>`}).join('')}</ul>
   <p class="lead">Мастерство растёт за каждого врага, которого уничтожили башни этого типа, а у генератора за заработанные кредиты. Облики сезона подходят к любой башне.</p>`}
-function shopHtml(free){const si=seasonInfo();
-  const row=it=>{const own=shopOwned(it),st=shopSeasonTier(it),z=it.k==='skin'?SKINS[it.id]:KFX[it.id];
+function shopHtml(free: number){const si=seasonInfo();
+  const row=(it: ShopItem)=>{const own=shopOwned(it),st=shopSeasonTier(it),z=it.k==='skin'?SKINS[it.id]:KFX[it.id];
     const pv=it.k==='skin'?`<canvas width="88" height="88" data-tower="laser" data-skin="${it.id}"></canvas>`:`<span class="fxi">${PIC.burst}</span>`;
     const right=own?'<span class="done">Есть</span>':st?`<span class="sea">Награда сезона<br>ступень ${st}</span>`:`<button class="buy" data-act="buy:${it.id}"${free<it.cost?' disabled':''}>Купить<em>${IC.core}${it.cost}</em></button>`;
     return`<li>${pv}<div><b>${z.name}</b><p>${it.k==='skin'?'Облик для любой башни':'Эффект уничтожения'}${it.cost>=60?'. Только в магазине':''}</p></div>${right}</li>`};

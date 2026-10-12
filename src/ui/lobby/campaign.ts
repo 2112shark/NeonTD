@@ -9,10 +9,10 @@ import { CHAPTERS, MISSIONS, NM } from '../../data/campaign.ts';
 import { allowedFor } from '../../core/map.ts';
 import { dailyCfg } from '../../meta/daily.ts';
 import { THEMES } from '../../render/map.ts';
-import { ACC, DIFFC, IC, STAR, dailyProg, fmtN, fmtTime, plural, streak, timeLeft } from './shared.js';
-import { LBY, SCR, chapOpen, goalLong, goalShort, head, mDone, mOpen, mStars, misGold, misLives, resumable, starConds, starsMini } from './state.js';
+import { ACC, DIFFC, IC, STAR, dailyProg, fmtN, fmtTime, plural, streak, timeLeft } from './shared.ts';
+import { LBY, SCR, chapOpen, goalLong, goalShort, head, mDone, mOpen, mStars, misGold, misLives, resumable, starConds, starsMini } from './state.ts';
 
-function missionNode(M){const open=mOpen(M.i),done=mDone(M.i),cur=open&&!done,n=mStars(M.i),nm=mStars(M.i,true);
+function missionNode(M: Mission){const open=mOpen(M.i),done=mDone(M.i),cur=open&&!done,n=mStars(M.i),nm=mStars(M.i,true);
   return`<li class="mn${done?' done':''}${cur?' cur':''}${open?'':' locked'}${M.boss?' boss':''}"><button data-act="mis:${M.i}"${open?'':' disabled'} aria-label="Миссия ${M.i+1}: ${M.name}${open?'':', закрыта'}">
   <span class="hx"><i>${open?M.i+1:IC.lock}</i></span>
   <span class="t"><b>${M.name}</b><span>${cur?'Следующая. ':''}${goalShort(M)}</span></span>
@@ -35,10 +35,11 @@ SCR.mission=()=>{const M=MISSIONS[LBY.mis],nmOpen=mDone(M.i),nm=LBY.nm&&nmOpen,m
   <ul class="stl">${starConds(M).map((c,k)=>`<li class="${mask>>k&1?'got':''}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${STAR}"/></svg><span>${c}</span>${mask>>k&1?'<em>Есть</em>':''}</li>`).join('')}</ul>
   <h3 class="sec">Башни</h3>
   <ul class="twl">${TYPES.filter(k=>TW_UNLOCK[k]<=M.i).map(k=>{const ban=!tw.includes(k);return`<li class="${ban?'ban':''}"><canvas width="64" height="64" data-tower="${k}"></canvas><span>${TD[k].name}</span>${k===newT?'<em>Новая</em>':ban?'<em class="no">Запрет</em>':''}</li>`}).join('')}</ul>
-  <dl class="facts"><div><dt>${M.goal==='flow'?'Время':'Волн'}</dt><dd>${M.goal==='flow'?fmtTime(M.flowT):M.waves}</dd></div><div><dt>Кредиты</dt><dd>${misGold(M,nm)}</dd></div><div><dt>Ядро</dt><dd>${misLives(M)}</dd></div></dl>
+  <dl class="facts"><div><dt>${M.goal==='flow'?'Время':'Волн'}</dt><dd>${M.goal==='flow'?fmtTime(M.flowT!):M.waves}</dd></div><div><dt>Кредиты</dt><dd>${misGold(M,nm)}</dd></div><div><dt>Ядро</dt><dd>${misLives(M)}</dd></div></dl>
   <div class="sticky"><div class="cta-glow${nm?' pink':''}"><button class="cta" data-act="mstart">${nm?'В бой: кошмар':'В бой'}</button></div>${resumable()?'<p class="note">Текущий бой будет прерван</p>':''}</div>
   </div>`};
-export function briefHtml(){const i=LBY.sel,m=MAPS[i],tough=Math.round((m.hp/MAPS[0].hp-1)*100);
+/** endless mode: description of the selected classic map */
+export function briefHtml(){const i=LBY.sel,m=MAPS[i],tough=Math.round((m.hp!/MAPS[0].hp!-1)*100);
   return`<h3 class="sec">${m.name}: ${m.zone.toLowerCase()}</h3><p>${m.sub}</p><dl class="facts">
   <div><dt>Путь</dt><dd>${Math.round(m.len)} клеток</dd></div><div><dt>Сила врагов</dt><dd>${tough?'+'+tough+'%':'базовая'}</dd></div><div><dt>Рекорд</dt><dd>${PROG.best[i]?'волна '+PROG.best[i]:'нет'}</dd></div>
   <div><dt>Ядро</dt><dd>${20+5*labRaw('hp')}</dd></div><div><dt>Кредиты</dt><dd>${260+40*labRaw('cap')}</dd></div><div><dt>Волн</dt><dd>∞</dd></div></dl>`}

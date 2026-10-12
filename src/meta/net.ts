@@ -4,10 +4,10 @@ import { PROG, saveLocal, setPROG } from './progress.ts';
 import { weekKey } from './daily.ts';
 import { seasonMigrate } from './season.ts';
 import { popc } from '../core/endgame.ts';
-import { LOBBY, rankInfo } from '../ui/lobby/shared.js';
-import { LBY } from '../ui/lobby/state.js';
-import { boardHtml } from '../ui/lobby/weekly.js';
-import { go } from '../ui/lobby/nav.js';
+import { LOBBY, rankInfo } from '../ui/lobby/shared.ts';
+import { LBY } from '../ui/lobby/state.ts';
+import { boardHtml } from '../ui/lobby/weekly.ts';
+import { go } from '../ui/lobby/nav.ts';
 
 export function saveProg(){PROG.ts=Date.now();saveLocal();cloudSave()}
 

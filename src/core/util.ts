@@ -1,6 +1,6 @@
 // Small shared helpers: DOM lookup, grid size, seeded RNG, math, escaping.
-/** DOM lookup; untyped by default for the JS modules, pass T for a typed element */
-export const $=<T = any>(s: string)=>document.querySelector(s) as T;
+/** DOM lookup of an element the page always has; pass T for a more specific element type */
+export const $=<T extends Element = HTMLElement>(s: string)=>document.querySelector(s) as T;
 export const COLS=12, ROWS=15, MAXW=30;
 export const clamp=(v: number,a: number,b: number)=>Math.max(a,Math.min(b,v));
 

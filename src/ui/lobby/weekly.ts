@@ -5,8 +5,8 @@ import { MAPS } from '../../data/maps.ts';
 import { MODS } from '../../data/enemies.ts';
 import { seasonInfo } from '../../meta/season.ts';
 import { LEAGUES, leagueOf, weeklyCfg } from '../../meta/weekly.ts';
-import { fmtN, weekLeft } from './shared.js';
-import { SCR, head, resumable, weekRec } from './state.js';
+import { fmtN, weekLeft } from './shared.ts';
+import { SCR, head, resumable, weekRec } from './state.ts';
 
 export function boardHtml(){
   if(!NET.db)return`<p class="lead">Общая таблица работает, когда игру открывают в Claude: в ней все, кто играет по этой ссылке. Ваш рекорд сохраняется в любом случае.</p>`;
@@ -15,7 +15,7 @@ export function boardHtml(){
   if(!NET.rows.length)return`<p class="lead">На этой неделе ещё никто не играл. Станьте первым.</p>`;
   return`<ol class="board">${NET.rows.slice(0,20).map((r,i)=>{const me=r.id===NET.me,lg=LEAGUES[leagueOf(r.score)];
     return`<li class="${me?'me':''}"><span class="pl">${i+1}</span><span class="nm"><b>${esc(NET.names[r.id]||(me?'Вы':'Командир'))}</b>${r.title?`<small>${esc(r.title)}</small>`:''}</span><i class="lgm" style="--lc:${lg[2]}" title="${lg[0]}"></i><span class="sc">${fmtN(r.score)}</span></li>`}).join('')}</ol>`}
-function weekSpan(){const n=new Date(),s=new Date(n.getFullYear(),n.getMonth(),n.getDate()-(n.getDay()+6)%7),e=new Date(s.getFullYear(),s.getMonth(),s.getDate()+6),f=d=>d.toLocaleDateString('ru-RU',{day:'numeric',month:'long'});
+function weekSpan(){const n=new Date(),s=new Date(n.getFullYear(),n.getMonth(),n.getDate()-(n.getDay()+6)%7),e=new Date(s.getFullYear(),s.getMonth(),s.getDate()+6),f=(d: Date)=>d.toLocaleDateString('ru-RU',{day:'numeric',month:'long'});
   return s.getMonth()===e.getMonth()?`${s.getDate()}–${f(e)}`:`${f(s)} – ${f(e)}`}
 SCR.weekly=()=>{const wc=weeklyCfg(),w=weekRec(),lg=leagueOf(w?w.best:0),def=seasonInfo().def;
   return`<div class="lb-in">${head('Вызов недели',1)}

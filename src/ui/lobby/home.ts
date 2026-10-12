@@ -2,9 +2,9 @@
 import { PROG } from '../../meta/progress.ts';
 import { MAPS } from '../../data/maps.ts';
 import { dailyCfg } from '../../meta/daily.ts';
-import { IC, RM, chevrons, dailyProg, fmtN, plural, rankInfo, streak, timeLeft } from './shared.js';
-import { logo } from './widgets.js';
-import { LBY, SCR, coresPill, dailyChips, mDone, nextMission, questCard, resumable, runName, runProg, seasonStrip, weeklyCard } from './state.js';
+import { IC, RM, chevrons, dailyProg, fmtN, plural, rankInfo, streak, timeLeft } from './shared.ts';
+import { logo } from './widgets.ts';
+import { LBY, SCR, coresPill, dailyChips, mDone, nextMission, questCard, resumable, runName, runProg, seasonStrip, weeklyCard } from './state.ts';
 
 SCR.home=()=>{
   const rk=rankInfo(),dc=dailyCfg(),dp=dailyProg(dc.key),st=streak(),need=rk.next?rk.next[0]-rk.xp:0,nx=nextMission();

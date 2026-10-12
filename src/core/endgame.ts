@@ -11,12 +11,12 @@ import { mastLv } from '../meta/mastery.ts';
 import { XP_DAILY, XP_WAVE, addXP } from '../meta/season.ts';
 import { weeklyEnd } from '../meta/weekly.ts';
 import { snd } from '../audio/sfx.ts';
-import { PKO } from '../ui/perkChoice.js';
+import { PKO } from '../ui/perkChoice.ts';
 import { qev } from '../meta/quests.ts';
-import { closeRadial } from '../ui/radial.js';
-import { updInfo } from '../ui/info.js';
-import { lobbyOn, vib } from '../ui/lobby/shared.js';
-import { showResults } from '../ui/results.js';
+import { closeRadial } from '../ui/radial.ts';
+import { updInfo } from '../ui/info.ts';
+import { lobbyOn, vib } from '../ui/lobby/shared.ts';
+import { showResults } from '../ui/results.ts';
 
 /** number of stars in a 3-bit mask */
 export const popc=(n: number)=>(n&1)+(n>>1&1)+(n>>2&1);

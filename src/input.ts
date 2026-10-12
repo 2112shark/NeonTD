@@ -4,24 +4,23 @@ import { S } from './core/state.ts';
 import { TYPES } from './data/towers.ts';
 import { tcost, towerAt } from './core/stats.ts';
 import { initAudio } from './audio/sfx.ts';
-import { toast } from './ui/comms.js';
+import { toast } from './ui/comms.ts';
 import { castOrbital, enemyAt, forkTile, setFocus, startWave, toggleFork, useAbility } from './core/combat.ts';
 import { build, buildBlock, canBuild, isDebris, sell, shown, upgrade } from './core/actions.ts';
 import { takePerk } from './core/perks.ts';
-import { closeRadial, openRadial, radKey, renderRadial, setRadKey } from './ui/radial.js';
-import { updInfo } from './ui/info.js';
-import { togglePause } from './ui/hud.js';
-import { END, SHEET, lobbyOn } from './ui/lobby/shared.js';
-import { LBY, SUB } from './ui/lobby/state.js';
-import { go } from './ui/lobby/nav.js';
-import { closeSheet, openSheet } from './ui/pauseSheet.js';
+import { closeRadial, openRadial, radKey, renderRadial, setRadKey } from './ui/radial.ts';
+import { updInfo } from './ui/info.ts';
+import { togglePause } from './ui/hud.ts';
+import { END, SHEET, lobbyOn } from './ui/lobby/shared.ts';
+import { LBY, SUB } from './ui/lobby/state.ts';
+import { go } from './ui/lobby/nav.ts';
+import { closeSheet, openSheet } from './ui/pauseSheet.ts';
 
 /* ---------- input ---------- */
-/** @returns {Tile} */
-function tileAt(ev){const r=cv.getBoundingClientRect();return[Math.floor((ev.clientX-r.left)/tile),Math.floor((ev.clientY-r.top)/tile)]}
+function tileAt(ev: PointerEvent): Tile{const r=cv.getBoundingClientRect();return[Math.floor((ev.clientX-r.left)/tile),Math.floor((ev.clientY-r.top)/tile)]}
 cv.addEventListener('pointermove',ev=>{if(ev.pointerType==='mouse'){S.hover=tileAt(ev);if(S.place)updInfo()}});
 cv.addEventListener('pointerleave',()=>{S.hover=null});
-function worldAt(ev){const r=cv.getBoundingClientRect();return[(ev.clientX-r.left)/tile,(ev.clientY-r.top)/tile]}
+function worldAt(ev: PointerEvent): [number, number]{const r=cv.getBoundingClientRect();return[(ev.clientX-r.left)/tile,(ev.clientY-r.top)/tile]}
 cv.addEventListener('pointerdown',ev=>{
   initAudio();if(S.over||S.perkPick)return;const [c,r]=tileAt(ev);S.hover=[c,r];
   if(S.aim==='orbital'){castOrbital(c+.5,r+.5);return}
@@ -40,7 +39,7 @@ cv.addEventListener('pointerdown',ev=>{
 });
 addEventListener('keydown',ev=>{
   const k=(ev.key||'').toLowerCase();
-  if(lobbyOn()){if(k==='escape'&&SUB[LBY.scr])go(LBY.back||'home');return}
+  if(lobbyOn()){if(k==='escape'&&LBY.scr&&SUB[LBY.scr])go(LBY.back||'home');return}
   if(!SHEET.hidden){if(k==='escape')closeSheet();return}
   if(!END.hidden||!S||S.over)return;
   if(S.perkPick){const i=+k-1;if(k>='1'&&k<='4'&&S.perkPick[i])takePerk(S.perkPick[i]);return}
