@@ -16,7 +16,7 @@
 .leagues li{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border:1px solid var(--line);border-radius:10px;background:rgba(10,15,31,.94);text-align:center;min-width:0}
 .leagues .lgm{width:20px;height:20px}
 .leagues b{font-size:12px}
-.leagues span{font-family:var(--f-num);font-size:10px;color:var(--dim);white-space:nowrap}
+.leagues span{font-family:var(--f-num);font-size:11px;color:var(--dim);white-space:nowrap}
 .leagues li.on{border-color:var(--accent);box-shadow:0 0 12px rgba(61,240,255,.25)}
 .leagues li:not(.on):not(.done) .lgm{opacity:.45}
 .board{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:rgba(10,15,31,.94)}
@@ -41,7 +41,7 @@
 .skc{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 10px;border:1px solid var(--line);border-radius:16px;background:var(--panel2);font-size:12px;font-weight:600}
 .skc i{width:12px;height:12px;border-radius:50%;box-shadow:0 0 6px currentColor}
 .skc i.holo{background:conic-gradient(#ff4fd8,#ffe14d,#6dff9e,#3df0ff,#a98bff,#ff4fd8)!important}
-.skc small{font-size:10px;color:var(--dim);font-weight:500}
+.skc small{font-size:11px;color:var(--dim);font-weight:500}
 .skc.on{border-color:var(--accent);color:var(--accent);box-shadow:0 0 10px rgba(61,240,255,.25)}
 .skc:disabled{opacity:.45}
 .qall{display:flex;align-items:center;gap:8px;margin:-4px 0 0;font-size:13px;color:var(--dim)}

@@ -5,7 +5,7 @@
 @keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
 .rng{position:absolute;transform:translate(-50%,-50%);border-radius:50%;border:1.5px dashed color-mix(in srgb,var(--c) 75%,transparent);background:color-mix(in srgb,var(--c) 3%,transparent);box-shadow:0 0 8px color-mix(in srgb,var(--c) 18%,transparent);pointer-events:none;z-index:2}
 .rng.nx{border:1.5px solid var(--c);background:none}
-.rng span{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);font-family:var(--f-num);font-size:10px;line-height:1;color:var(--c);background:var(--bg);border:1px solid var(--c);border-radius:4px;padding:2px 5px;white-space:nowrap}
+.rng span{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);font-family:var(--f-num);font-size:11px;line-height:1;color:var(--c);background:var(--bg);border:1px solid var(--c);border-radius:4px;padding:2px 5px;white-space:nowrap}
 .rng.nx span{top:auto;bottom:0;transform:translate(-50%,50%)}
 #radial.pv .ring{background:none;border-color:transparent}
 #radial.pv .ri:not(.on){opacity:.3}
@@ -14,7 +14,7 @@
 .ri{position:absolute;transform:translate(-50%,-50%);animation:pop .16s ease-out backwards}
 .ri.tw{width:52px;height:52px;border-radius:50%;background:var(--panel2);border:1.5px solid color-mix(in srgb,var(--c) 70%,transparent);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:0}
 .ri.tw canvas{width:30px;height:30px}
-.ri .c{font-family:var(--f-num);font-size:10px;color:var(--gold);line-height:1}
+.ri .c{font-family:var(--f-num);font-size:11px;color:var(--gold);line-height:1}
 .ri.poor .c{color:var(--warn)}
 .ri.on{background:color-mix(in srgb,var(--c) 22%,var(--panel2));box-shadow:0 0 16px color-mix(in srgb,var(--c) 60%,transparent);border-color:var(--c)}
 .ri.act{min-width:78px;max-width:96px;min-height:44px;border-radius:10px;background:var(--panel2);border:1.5px solid var(--line);padding:4px 7px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;font-size:11px;font-weight:600}
@@ -59,7 +59,7 @@
 /* Panel */
 #panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:8px;min-width:0}
 .abil{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.ab{position:relative;overflow:hidden;background:var(--panel2);border:1px solid color-mix(in srgb,var(--c) 55%,transparent);border-radius:7px;height:42px;display:flex;align-items:center;gap:6px;padding:0 8px;text-align:left;min-width:0}
+.ab{position:relative;overflow:hidden;background:var(--panel2);border:1px solid color-mix(in srgb,var(--c) 55%,transparent);border-radius:7px;height:44px;display:flex;align-items:center;gap:6px;padding:0 8px;text-align:left;min-width:0}
 .ab svg{width:20px;height:20px;flex:none;color:var(--c);filter:drop-shadow(0 0 4px var(--c))}
 .ab .an{font-size:12px;font-weight:700;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ab .cd{margin-left:auto;font-family:var(--f-num);font-size:12px;color:var(--dim);flex:none}
@@ -70,7 +70,7 @@
 @media (hover:none){.ab kbd{display:none}}
 .info{font-size:12px;line-height:1.45;min-height:3.9em;color:var(--dim)}
 #coach{border:1px solid var(--accent);border-radius:8px;background:color-mix(in srgb,var(--accent) 8%,var(--panel));padding:8px 10px;display:flex;flex-direction:column;gap:6px;box-shadow:0 0 16px rgba(61,240,255,.18)}
-#coach .cs{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);display:flex;justify-content:space-between;gap:8px;align-items:center}
+#coach .cs{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);display:flex;justify-content:space-between;gap:8px;align-items:center}
 #coach .cs button{background:none;border:0;color:var(--dim);font-size:11px;letter-spacing:.04em;text-transform:none;padding:2px 0;text-decoration:underline}
 #coach .ct{font-size:13px;line-height:1.4;color:var(--fg)}
 #coach .ok{align-self:flex-start;background:var(--panel2);border:1px solid var(--accent);color:var(--accent);border-radius:6px;padding:5px 12px;font-weight:700}

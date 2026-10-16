@@ -39,6 +39,11 @@ function lbDraw(dt: number){
     lbx.fillStyle=hexA(p.col,.55*f);lbx.beginPath();lbx.arc(hx,hy,1.7,0,7);lbx.fill()});
   lbx.globalCompositeOperation='source-over';
 }
+// battery: the background animates at 30 fps and freezes after IDLE_MS without input
+const FRAME=1/30,IDLE_MS=30000;let lbAcc=0,lastInput=performance.now();
+const poke=()=>{lastInput=performance.now()};
+for(const ev of ['pointerdown','pointermove','keydown','wheel'])addEventListener(ev,poke,{passive:true,capture:true});
+LBV.addEventListener('scroll',poke,{passive:true});
 /** lobby frame: background, plus once a second the countdown timers (and a re-render when the day changes) */
-export function lbFrame(dt: number){lbDraw(dt);lbT+=dt;if(lbT>=1){lbT=0;if(dayKey()!==LBY.day){LBY.day=dayKey();go(LBY.scr!,true)}else LBV.querySelectorAll('[data-timer]').forEach(el=>el.textContent=timeLeft())}}
+export function lbFrame(dt: number){lbAcc+=dt;if(lbAcc>=FRAME){if(performance.now()-lastInput<IDLE_MS)lbDraw(lbAcc);lbAcc=0}lbT+=dt;if(lbT>=1){lbT=0;if(dayKey()!==LBY.day){LBY.day=dayKey();go(LBY.scr!,true)}else LBV.querySelectorAll('[data-timer]').forEach(el=>el.textContent=timeLeft())}}
 new ResizeObserver(lbResize).observe(LOBBY);

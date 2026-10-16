@@ -1,6 +1,8 @@
 // Top HUD, ability buttons, speed and pause controls.
 import { $ } from '../core/util.ts';
 import { S, setSpeed, speed } from '../core/state.ts';
+import { PROG } from '../meta/progress.ts';
+import { saveProg } from '../meta/net.ts';
 import { AB, abCd } from '../data/abilities.ts';
 import { maxW } from '../core/waves.ts';
 import { initAudio } from '../audio/sfx.ts';
@@ -31,7 +33,14 @@ export function updHud(){
 }
 $('.abil').addEventListener('click',e=>{const b=(e.target as HTMLElement).closest<HTMLElement>('.ab');if(b)useAbility(b.dataset.ab as AbilityId)});
 $('#bNext').onclick=()=>{initAudio();startWave()};
-$('#speed').onclick=e=>{const b=(e.target as HTMLElement).closest<HTMLElement>('button');if(!b)return;setSpeed(+b.dataset.s!);document.querySelectorAll('#speed button').forEach(x=>x.classList.toggle('on',x===b))};
+// one button cycles the game speed; the choice is remembered with the settings
+export const SPEEDS=[1,2,3,5,7];
+const spdBtn=$<HTMLButtonElement>('#speed');
+function showSpeed(){spdBtn.textContent='×'+speed;spdBtn.setAttribute('aria-label','Скорость игры: ×'+speed)}
+export function cycleSpeed(){const i=SPEEDS.indexOf(speed);setSpeed(SPEEDS[(i+1)%SPEEDS.length]);PROG.set.speed=speed;saveProg();showSpeed()}
+/** restore the remembered speed; called from main once every module is loaded (core/state initializes after this module) */
+export function initSpeed(){if(SPEEDS.includes(PROG.set.speed))setSpeed(PROG.set.speed);showSpeed()}
+spdBtn.onclick=cycleSpeed;
 export function togglePause(){if(!S||S.over||lobbyOn()||!SHEET.hidden)return;S.paused=!S.paused;$('#pauseOv').hidden=!S.paused;$('#bPause').textContent=S.paused?'▶':'❚❚'}
 $('#bPause').onclick=togglePause;
 $('#bMenu').onclick=()=>{initAudio();openSheet()};

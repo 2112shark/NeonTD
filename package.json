@@ -11,13 +11,15 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "typecheck": "tsc -p ."
+    "typecheck": "tsc -p .",
+    "build:artifact": "vite build -c vite.artifact.config.js && node tools/artifact-fragment.mjs dist-artifact/index.html dist-artifact/neon-td.html"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.0",
     "jsdom": "^29.1.1",
     "typescript": "^7.0.2",
     "vite": "^8.3.4",
+    "vite-plugin-singlefile": "^2.3.3",
     "vitest": "^5.0.3"
   }
 }

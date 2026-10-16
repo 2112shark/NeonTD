@@ -17,9 +17,9 @@ SCR.more=()=>`<div class="lb-in">${head('Ещё')}
   <li><button data-act="go:codex">${IC.book}<span class="t"><b>Справочник</b><span>Башни, враги, перки и модификаторы</span></span>${IC.chev}</button></li>
   <li><button data-act="tut">${IC.help}<span class="t"><b>Пройти обучение заново</b><span>Первая миссия с подсказками</span></span>${IC.chev}</button></li>
   </ul>
-  <section class="kbd-sec"><h3 class="sec">Клавиатура</h3><dl class="keys"><dt>1–7</dt><dd>Выбрать башню для постройки</dd><dt>Q W E</dt><dd>Удар, ЭМИ, Щит</dd><dt>U</dt><dd>Улучшить выбранную башню</dd><dt>S</dt><dd>Продать</dd><dt>T</dt><dd>Сменить цель</dd><dt>N</dt><dd>Следующая волна</dd><dt>Пробел</dt><dd>Тактическая пауза</dd><dt>Esc</dt><dd>Меню паузы</dd></dl></section>
+  <section class="kbd-sec"><h3 class="sec">Клавиатура</h3><dl class="keys"><dt>1–7</dt><dd>Выбрать башню для постройки</dd><dt>Q W E</dt><dd>Удар, ЭМИ, Щит</dd><dt>U</dt><dd>Улучшить выбранную башню</dd><dt>S</dt><dd>Продать</dd><dt>T</dt><dd>Сменить цель</dd><dt>N</dt><dd>Следующая волна</dd><dt>F</dt><dd>Скорость игры</dd><dt>Пробел</dt><dd>Тактическая пауза</dd><dt>Esc</dt><dd>Меню паузы</dd></dl></section>
   <ul class="mlist"><li><button class="danger" data-act="resetall">${IC.reset}<span class="t"><b>${LBY.arm==='resetall'?'Коснитесь ещё раз для сброса':'Сбросить весь прогресс'}</b><span>Звёзды, рекорды, достижения, задания и исследования</span></span></button></li></ul>
-  <p class="ver">Неоновый рубеж, версия 9</p>
+  <p class="ver">Неоновый рубеж, версия 10</p>
   </div>`;
 function codexTowers(){return`<ul class="cx">${TYPES.map(k=>{const d=TD[k],a=statRows(k,baseStats(k,1)),b=statRows(k,baseStats(k,3)),syn=SYN.filter(s=>s.to===k);
   return`<li><canvas width="96" height="96" data-tower="${k}"></canvas><div class="nm"><b style="color:${d.col}">${d.name}</b><span>${d.cost} кредитов</span></div><p>${d.desc}${TW_UNLOCK[k]?` В кампании с миссии ${TW_UNLOCK[k]+1}.`:''}</p>

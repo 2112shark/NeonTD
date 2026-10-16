@@ -63,3 +63,15 @@ test('pause menu opens and returns to the lobby', async ({ page }) => {
   await page.click('#shExit');
   await expect(page.locator('#lobby')).toBeVisible();
 });
+
+test('speed button cycles and is remembered after a reload', async ({ page }) => {
+  await page.goto('/');
+  await page.click('#lbView .cta');
+  await expect(page.locator('#speed')).toHaveText('×1');
+  await page.click('#speed');
+  await page.click('#speed');
+  await expect(page.locator('#speed')).toHaveText('×3');
+  await page.reload();
+  await expect(page.locator('#speed')).toHaveText('×3');
+  expect(await page.evaluate(() => window.__td.S && 1)).toBe(1);
+});

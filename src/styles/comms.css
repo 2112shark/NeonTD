@@ -4,9 +4,9 @@
 @keyframes commIn{from{opacity:0;transform:translateY(-8px)}}
 #comms svg{flex:none;width:26px;height:26px;color:var(--accent);filter:drop-shadow(0 0 4px var(--accent))}
 #comms p{margin:0;font-size:13px;line-height:1.4}
-#comms b{display:block;font-size:10px;letter-spacing:.14em;color:var(--accent)}
+#comms b{display:block;font-size:11px;letter-spacing:.14em;color:var(--accent)}
 #stage.comm #toast{top:74px}
 .vq{width:100%;box-sizing:border-box;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:10px;background:rgba(61,240,255,.06);text-align:left}
 .vq svg{flex:none;width:24px;height:24px;color:var(--accent)}
 .vq p{margin:0;font-size:13px;line-height:1.45}
-.vq b{display:block;font-size:10px;letter-spacing:.14em;color:var(--accent)}
+.vq b{display:block;font-size:11px;letter-spacing:.14em;color:var(--accent)}

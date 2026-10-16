@@ -37,7 +37,7 @@ import './render/towers.ts';
 import './render/enemies.ts';
 import { draw } from './render/draw.ts';
 import { updInfo } from './ui/info.ts';
-import { updHud } from './ui/hud.ts';
+import { initSpeed, updHud } from './ui/hud.ts';
 import { SHEET, lobbyOn } from './ui/lobby/shared.ts';
 import './ui/lobby/widgets.ts';
 import './ui/lobby/state.ts';
@@ -65,4 +65,4 @@ function loop(now: number){
   acc+=dt;if(acc>.2){acc=0;updInfo();if(S.rad)renderRadial();if(!SHEET.hidden)renderSheet()}
   requestAnimationFrame(loop);
 }
-newGame(0);fit();openLobby('home');requestAnimationFrame(loop);netInit();
+initSpeed();newGame(0);fit();openLobby('home');requestAnimationFrame(loop);netInit();

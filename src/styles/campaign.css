@@ -58,6 +58,6 @@
 .twl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
 .twl li{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px 8px;border:1px solid var(--line);border-radius:10px;background:rgba(10,15,31,.94);font-size:12px}
 .twl canvas{width:40px;height:40px}
-.twl em{position:absolute;top:4px;right:5px;font-style:normal;font-size:10px;font-weight:700;color:var(--ok)}
+.twl em{position:absolute;top:4px;right:5px;font-style:normal;font-size:11px;font-weight:700;color:var(--ok)}
 .twl em.no{color:var(--warn)}
 .twl li.ban{opacity:.55}

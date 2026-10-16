@@ -1,4 +1,5 @@
 // Lobby: weekly challenge and leaderboard.
+import { cloakFrom } from '../../core/waves.ts';
 import { esc } from '../../core/util.ts';
 import { NET } from '../../meta/net.ts';
 import { MAPS } from '../../data/maps.ts';
@@ -21,7 +22,7 @@ SCR.weekly=()=>{const wc=weeklyCfg(),w=weekRec(),lg=leagueOf(w?w.best:0),def=sea
   return`<div class="lb-in">${head('Вызов недели',1)}
   <div class="dhero cut wk"><canvas width="240" height="300" data-map="${wc.mi}"></canvas><div class="dhi"><span class="date">${weekSpan()}</span><b>${MAPS[wc.mi].name}</b><span class="timer">${weekLeft()}</span><span class="tl">до нового вызова</span></div></div>
   <h3 class="sec">Условия</h3>
-  <ul class="rules">${wc.mods.map(k=>`<li><span class="chip" style="--cc:${MODS[k].col}">${MODS[k].name}${k===def.mod?', модификатор сезона':''}</span>${MODS[k].long}. Действует с 3-й волны.</li>`).join('')}<li><span class="chip">Старт</span>${wc.gold} кредитов и ${wc.waves} волн.</li><li><span class="chip">Равные условия</span>Лаборатория и мастерство отключены, перки одинаковые для всех.</li><li><span class="chip">Счёт</span>10 очков за врага, 150 за единицу прочности ядра, 100 за волну и 2000 за победу. После 30-й волны враги быстро крепнут: каждая волна дальше даёт заметно больше очков.</li></ul>
+  <ul class="rules">${wc.mods.map(k=>`<li><span class="chip" style="--cc:${MODS[k].col}">${MODS[k].name}${k===def.mod?', модификатор сезона':''}</span>${MODS[k].long}. Действует с ${k==='cloak'?cloakFrom(wc):3}-й волны.</li>`).join('')}<li><span class="chip">Старт</span>${wc.gold} кредитов и ${wc.waves} волн.</li><li><span class="chip">Равные условия</span>Лаборатория и мастерство отключены, перки одинаковые для всех.</li><li><span class="chip">Счёт</span>10 очков за врага, 150 за единицу прочности ядра, 100 за волну и 2000 за победу. После 30-й волны враги быстро крепнут: каждая волна дальше даёт заметно больше очков.</li></ul>
   <h3 class="sec">Лиги</h3>
   <ul class="leagues">${LEAGUES.map((L,i)=>`<li class="${w&&i===lg?'on':''}${w&&i<lg?' done':''}"><i class="lgm" style="--lc:${L[2]}"></i><b>${L[0]}</b><span>от ${fmtN(L[1])}</span></li>`).join('')}</ul>
   <dl class="facts"><div><dt>Ваш рекорд</dt><dd>${w?fmtN(w.best):'—'}</dd></div><div><dt>Лига</dt><dd>${w?LEAGUES[lg][0]:'—'}</dd></div><div><dt>Попыток</dt><dd>${w?w.plays:0}</dd></div></dl>

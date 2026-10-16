@@ -1,4 +1,5 @@
 // Lobby navigation, map carousel and lobby actions.
+import { cloakFrom } from '../../core/waves.ts';
 import { $ } from '../../core/util.ts';
 import { PROG, freshProg, setPROG } from '../../meta/progress.ts';
 import { lbSub, saveProg } from '../../meta/net.ts';
@@ -74,7 +75,10 @@ export function openLobby(scr: string,from?: string){
 }
 function closeLobby(){LOBBY.hidden=true;renderCoach();updInfo(true);hudLabels()}
 function launch(mi: number,mode: RunState['mode'],cfg?: NewGameCfg){newGame(mi,mode,cfg);S.paused=false;$('#pauseOv').hidden=true;$('#bPause').textContent='❚❚';closeLobby();
-  if(S.mis&&!S.tut)setTimeout(()=>{if(S&&!S.over&&!lobbyOn())say(S.mis!.open)},600)}
+  if(S.mis&&!S.tut)setTimeout(()=>{if(S&&!S.over&&!lobbyOn())say(S.mis!.open)},600);
+  // warn about invisible enemies before the first wave, while there is still time to place Cryo
+  else if(S.daily&&S.daily.mods.includes('cloak')){S.said.cloak=1;const from=cloakFrom(S.daily);
+    setTimeout(()=>{if(S&&!S.over&&!lobbyOn())say(`В этом вызове невидимки, с ${from}-й волны. Их видят Крио и Тесла во всей зоне и любая башня вплотную. Поставьте Крио у пути заранее.`)},600)}}
 /** lobby action from a data-act="name:value" attribute */
 export function act(a: string,v: string){
   const armed=LBY.arm===a;if(a!=='labreset'&&a!=='resetall')LBY.arm=null;

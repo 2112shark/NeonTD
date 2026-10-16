@@ -22,7 +22,7 @@ export const PERKS: Perk[]=[
  {id:'bank',name:'Вклад',desc:'Проценты 8%, лимит выше на 30',col:'#ffc94d',ic:'coin'},
  {id:'armor',name:'Бронебой',desc:'Броня врагов вдвое слабее',col:'#ff8a3d',ic:'burst'},
  {id:'chainx',name:'Цепная реакция',desc:'Враги взрываются при гибели и ранят соседей',col:'#ff8a3d',ic:'burst'},
- {id:'guard',name:'Аварийный щит',desc:'Первый прорыв в каждой волне блокируется',col:'#6dff9e',ic:'hex'},
+ {id:'guard',name:'Аварийный щит',desc:'Первый прорыв в каждой волне блокируется, кроме босса миссии',col:'#6dff9e',ic:'hex'},
  {id:'chain',name:'Разветвление',desc:'Тесла бьёт на 2 цели больше',col:'#a98bff',ic:'bolt',need:'tesla'},
  {id:'frost',name:'Глубокий холод',desc:'Крио замедляет на 10% сильнее и дольше',col:'#7fe4ff',ic:'snow',need:'cryo'},
  {id:'blast',name:'Детонатор',desc:'Взрывы пушек на 30% шире',col:'#ffae3d',ic:'burst',need:'cannon'},

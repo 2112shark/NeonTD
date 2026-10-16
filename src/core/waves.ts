@@ -8,9 +8,16 @@ import { NM } from '../data/campaign.ts';
 export function hpMul(w: number){const k=w-1,M=S.mis;
   const base=M?M.hp*(S.nm?M.nmh||NM.hp:1):S.map.hp!;
   return(1+k*.2+k*k*.024)*base*(S.diffMul||1)*(S.mode==='daily'?.8:1)*(w>MAXW?Math.pow(1.07,w-MAXW):1)}
+/**
+ * Challenge modifiers start on wave 3. In the weekly challenge invisible enemies wait until wave 5, so new players
+ * have time to set up Cryo. The rule starts with week CLOAK_RULE_WEEK, so a week in progress keeps its conditions.
+ */
+export const WEEKLY_CLOAK_FROM=5,CLOAK_RULE_WEEK='2026-W43';
+/** first wave with invisible enemies in this challenge */
+export const cloakFrom=(ch: ChallengeCfg)=>ch.weekly&&ch.key>=CLOAK_RULE_WEEK?WEEKLY_CLOAK_FROM:3;
 /** modifiers active on wave w */
 export function waveMods(w: number){const out: ModId[]=[],keys=(Object.keys(MODS) as ModId[]).filter(k=>k!=='cloak'||!S.allowed||S.allowed.includes('cryo')||S.allowed.includes('tesla'));
-  if(S.daily){if(w>=3)out.push(...S.daily.mods);return out}
+  if(S.daily){const ch=S.daily;if(w>=3)out.push(...ch.mods.filter(k=>!(k==='cloak'&&w<cloakFrom(ch))));return out}
   if(S.mis){if(S.nm&&w>=2){const R=rng(w*53+S.mis.i*977+11);out.push(keys[R()*keys.length|0]);
       if(w>=Math.max(8,(S.mis.waves||18)-2)&&R()<.5){const k=keys[R()*keys.length|0];if(!out.includes(k))out.push(k)}}
     return out}

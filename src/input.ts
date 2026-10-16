@@ -10,7 +10,7 @@ import { build, buildBlock, canBuild, isDebris, sell, shown, upgrade } from './c
 import { takePerk } from './core/perks.ts';
 import { closeRadial, openRadial, radKey, renderRadial, setRadKey } from './ui/radial.ts';
 import { updInfo } from './ui/info.ts';
-import { togglePause } from './ui/hud.ts';
+import { cycleSpeed, togglePause } from './ui/hud.ts';
 import { END, SHEET, lobbyOn } from './ui/lobby/shared.ts';
 import { LBY, SUB } from './ui/lobby/state.ts';
 import { go } from './ui/lobby/nav.ts';
@@ -53,4 +53,5 @@ addEventListener('keydown',ev=>{
   else if((k==='s'||k==='ы')&&S.sel){sell(S.sel);closeRadial()}
   else if((k==='t'||k==='е')&&S.sel){S.sel.mode=(S.sel.mode+1)%4;setRadKey('');renderRadial();updInfo(true)}
   else if(k==='n'||k==='т'){initAudio();startWave()}
+  else if(k==='f'||k==='а')cycleSpeed();
 });
